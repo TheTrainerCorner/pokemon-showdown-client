@@ -49,7 +49,7 @@ function slash(path) {
 async function combineResults(fileResults, sourceMapOptions, opts) {
   let map = null;
   console.log(result);
-  if (fileResults.some(result => result?.map)) {
+  if (fileResults.some(result => result.map)) {
     map = new sourceMap.SourceMapGenerator(sourceMapOptions);
   }
 
