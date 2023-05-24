@@ -19,7 +19,7 @@ child_process.execSync('git pull', {cwd: 'data/pokemon-showdown'});
 child_process.execSync('npm run build', {cwd: 'data/pokemon-showdown'});
 console.log("DONE");
 
-const Dex = require('../data/pokemon-showdown/dist/sim/dex').Dex.mod('wintabura');
+const Dex = require('../data/pokemon-showdown/dist/sim/dex').Dex.mod('gen9wintabura');
 const toID = Dex.toID;
 process.stdout.write("Loading gen 6 data... ");
 Dex.includeData();
@@ -322,7 +322,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 	const LC = GENS.map(num => num + 0.7);
 	const STADIUM = [2.04, 1.04];
 	const NATDEX = [9.1, 8.1];
-	const OTHER = [9.69, 9.2, 8.6, 8.4, 8.2, 8.1, -8.4, -8.6, 7.1];
+	const OTHER = [9.2, 8.6, 8.4, 8.2, 8.1, -8.4, -8.6, 7.1];
 
 	// process.stdout.write("\n  ");
 	for (const genIdent of [...GENS, ...DOUBLES, ...VGC, ...NFE, ...STADIUM, ...OTHER, ...NATDEX, ...LC]) {
@@ -336,7 +336,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const isStadium = ('' + genIdent).endsWith('.04');
 		const isDoubles = (genIdent < 0);
 		const isVGC = ('' + genIdent).endsWith('.5');
-    const isWintabura = (genIdent === 9.69);
 		const genNum = Math.floor(isDoubles ? -genIdent : genIdent);
 		const gen = (() => {
 			let genStr = 'gen' + genNum;
@@ -344,9 +343,9 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			if (isLetsGo) genStr += 'letsgo';
 			if (isBDSP) genStr += 'bdsp';
 			if (isStadium) genStr += 'stadium' + (genNum > 1 ? genNum : '');
-      if(isWintabura) genStr += 'wintabura';
 			return genStr;
 		})();
+    const mod = gen === 'gen9' ? 'gen9wintabura' : gen;
 		// process.stdout.write("" + gen + (isDoubles ? " doubles" : "") + "... ");
 		const pokemon = Object.keys(Dex.data.Pokedex);
 		pokemon.sort();
@@ -356,8 +355,8 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const monotypeBans = {};
 		const nonstandardMoves = [];
 		for (const id of pokemon) {
-			const species = Dex.mod(gen).species.get(id);
-			const baseSpecies = Dex.mod(gen).species.get(species.baseSpecies);
+			const species = Dex.mod(mod).species.get(id);
+			const baseSpecies = Dex.mod(mod).species.get(species.baseSpecies);
 			if (species.gen > genNum) continue;
 			const tier = (() => {
 				if (isMetBattle) {
@@ -511,7 +510,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			BattleTeambuilderTable[gen + 'doubles'].tiers = tiers;
 			BattleTeambuilderTable[gen + 'doubles'].overrideTier = overrideTier;
 			BattleTeambuilderTable[gen + 'doubles'].formatSlices = formatSlices;
-		} else if (gen === 'gen9' || isWintabura) {
+		} else if (gen === 'gen9') {
 			BattleTeambuilderTable.tiers = tiers;
 			BattleTeambuilderTable.items = items;
 			BattleTeambuilderTable.overrideTier = overrideTier;
