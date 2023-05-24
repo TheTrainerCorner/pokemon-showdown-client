@@ -214,11 +214,10 @@ const Dex = new class implements ModdedDex {
 		if (avatar.charAt(0) === '#') {
 			return Dex.resourcePrefix + 'sprites/trainers-custom/' + toID(avatar.substr(1)) + '.png';
 		}
-		if (avatar.includes('.') && window.Config?.server?.registered) {
+		if (avatar.includes('.')) {
 			// custom avatar served by the server
 			let protocol = (Config.server.port === 443) ? 'https' : 'http';
-			return protocol + '://' + Config.server.host + ':' + Config.server.port +
-				'/avatars/' + encodeURIComponent(avatar).replace(/\%3F/g, '?');
+			return 'https://koreanpanda345.github.io/wintabura/avatars/' + encodeURIComponent(avatar).replace(/\%3F/g, '?');
 		}
 		return Dex.resourcePrefix + 'sprites/trainers/' + Dex.sanitizeName(avatar || 'unknown') + '.png';
 	}
