@@ -208,6 +208,7 @@ const Dex = new class implements ModdedDex {
 	}
 
 	resolveAvatar(avatar: string): string {
+    console.log(avatar);
 		if (window.BattleAvatarNumbers && avatar in BattleAvatarNumbers) {
 			avatar = BattleAvatarNumbers[avatar];
 		}
@@ -216,8 +217,7 @@ const Dex = new class implements ModdedDex {
 		}
 		if (avatar.includes('.')) {
 			// custom avatar served by the server
-			let protocol = (Config.server.port === 443) ? 'https' : 'http';
-			return 'https://koreanpanda345.github.io/wintabura/avatars/' + encodeURIComponent(avatar).replace(/\%3F/g, '?');
+			return 'http://34.125.114.43:8080/data/pokemon-showdown/config/avatars/' + encodeURIComponent(avatar).replace(/\%3F/g, '?');
 		}
 		return Dex.resourcePrefix + 'sprites/trainers/' + Dex.sanitizeName(avatar || 'unknown') + '.png';
 	}
