@@ -19,7 +19,7 @@ child_process.execSync('git pull', {cwd: 'data/pokemon-showdown'});
 child_process.execSync('npm run build', {cwd: 'data/pokemon-showdown'});
 console.log("DONE");
 
-const Dex = require('../data/pokemon-showdown/dist/sim/dex').Dex.mod('gen9wintabura');
+const Dex = require('../data/pokemon-showdown/dist/sim/dex').Dex.mod('gen9ttc');
 const toID = Dex.toID;
 process.stdout.write("Loading gen 6 data... ");
 Dex.includeData();
@@ -847,6 +847,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				learnsets[id][moveid] += 'g';
 			}
 			if (gens.indexOf(9) >= 0 && learnset[moveid].some(x => x[0] === '9' && x !== '9V')) {
+        
 				learnsets[id][moveid] += 'a';
 			}
 		}
