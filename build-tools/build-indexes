@@ -345,7 +345,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			if (isStadium) genStr += 'stadium' + (genNum > 1 ? genNum : '');
 			return genStr;
 		})();
-    const mod = gen === 'gen9' ? 'gen9ttc' : gen;
+		const mod = gen === 'gen9' ? 'gen9ttc' : gen;
 		// process.stdout.write("" + gen + (isDoubles ? " doubles" : "") + "... ");
 		const pokemon = Object.keys(Dex.data.Pokedex);
 		pokemon.sort();
@@ -847,7 +847,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				learnsets[id][moveid] += 'g';
 			}
 			if (gens.indexOf(9) >= 0 && learnset[moveid].some(x => x[0] === '9' && x !== '9V')) {
-        
 				learnsets[id][moveid] += 'a';
 			}
 		}
@@ -1082,7 +1081,7 @@ process.stdout.write("Building `data/pokedex.js`... ");
 
 {
 	// const Pokedex = requireNoCache('../data/pokemon-showdown/dist/data/pokedex.js').Pokedex;
-  const Pokedex = Dex.data.Pokedex;
+	const Pokedex = Dex.data.Pokedex;
 	for (const id in Pokedex) {
 		const entry = Pokedex[id];
 		if (Dex.data.FormatsData[id]) {
@@ -1108,7 +1107,7 @@ process.stdout.write("Building `data/moves,items,abilities,typechart,learnsets.j
 
 {
 	// const Moves = requireNoCache('../data/pokemon-showdown/dist/data/moves.js').Moves;
-  const Moves = Dex.data.Moves;
+	const Moves = Dex.data.Moves;
 	for (const id in Moves) {
 		const move = Dex.moves.get(Moves[id].name);
 		if (move.desc) Moves[id].desc = move.desc;
@@ -1125,7 +1124,7 @@ process.stdout.write("Building `data/moves,items,abilities,typechart,learnsets.j
 
 {
 	// const Items = requireNoCache('../data/pokemon-showdown/dist/data/items.js').Items;
-  const Items = Dex.data.Items;
+	const Items = Dex.data.Items;
 	for (const id in Items) {
 		const item = Dex.items.get(Items[id].name);
 		if (item.desc) Items[id].desc = item.desc;
@@ -1141,7 +1140,7 @@ process.stdout.write("Building `data/moves,items,abilities,typechart,learnsets.j
 
 {
 	// const Abilities = requireNoCache('../data/pokemon-showdown/dist/data/abilities.js').Abilities;
-  const Abilities = Dex.data.Abilities;
+	const Abilities = Dex.data.Abilities;
 	for (const id in Abilities) {
 		const ability = Dex.abilities.get(Abilities[id].name);
 		if (ability.desc) Abilities[id].desc = ability.desc;
@@ -1177,7 +1176,7 @@ process.stdout.write("Building `data/moves,items,abilities,typechart,learnsets.j
 
 {
 	// const FormatsData = requireNoCache('../data/pokemon-showdown/dist/data/formats-data.js').FormatsData;
-  const FormatsData = Dex.data.FormatsData;
+	const FormatsData = Dex.data.FormatsData;
 	const buf = 'exports.BattleFormatsData = ' + es3stringify(FormatsData) + ';';
 	fs.writeFileSync('data/formats-data.js', buf);
 }
@@ -1198,7 +1197,7 @@ process.stdout.write("Building `data/moves,items,abilities,typechart,learnsets.j
 
 {
 	// const Learnsets = requireNoCache('../data/pokemon-showdown/dist/data/learnsets.js').Learnsets;
-  const Learnsets = Dex.data.Learnsets;
+	const Learnsets = Dex.data.Learnsets;
 	const buf = 'exports.BattleLearnsets = ' + es3stringify(Learnsets) + ';';
 	fs.writeFileSync('data/learnsets.js', buf);
 	fs.writeFileSync('data/learnsets.json', JSON.stringify(Learnsets));
