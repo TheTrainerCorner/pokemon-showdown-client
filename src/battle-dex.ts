@@ -217,7 +217,7 @@ const Dex = new class implements ModdedDex {
 		}
 		if (avatar.includes('.')) {
 			// custom avatar served by the server
-			return 'http://34.125.114.43:8080/data/pokemon-showdown/config/avatars/' + encodeURIComponent(avatar).replace(/\%3F/g, '?');
+			return 'http://15.204.240.10:8080/data/pokemon-showdown/config/avatars/' + encodeURIComponent(avatar).replace(/\%3F/g, '?');
 		}
 		return Dex.resourcePrefix + 'sprites/trainers/' + Dex.sanitizeName(avatar || 'unknown') + '.png';
 	}
