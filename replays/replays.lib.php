@@ -24,6 +24,7 @@ class Replays {
 			);
 		} catch (PDOException $e) {
 			// this error message contains the database password for some reason :|
+      die($e);
 			die("Could not connect");
 		}
 		$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
