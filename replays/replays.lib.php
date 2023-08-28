@@ -18,7 +18,7 @@ class Replays {
 		if ($this->db) return;
 		try {
 			$this->db = new PDO(
-				'mysql:dbname='.$this->config['database'].';host='.$this->config['server'].';charset='.$this->config['charset'],
+				'sudo mysql:dbname='.$this->config['database'].';host='.$this->config['server'].';charset='.$this->config['charset'],
 				$this->config['username'],
 				$this->config['password']
 			);
