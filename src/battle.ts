@@ -91,6 +91,7 @@ export class Pokemon implements PokemonDetails, PokemonHealth {
 	prevItem = '';
 	prevItemEffect = '';
 	terastallized: string | '' = '';
+	teraType = '';
 
 	boosts: {[stat: string]: number} = {};
 	status: StatusName | 'tox' | '' | '???' = '';
@@ -856,15 +857,19 @@ export class Side {
 			pokemon.maxhp = oldpokemon.maxhp;
 			pokemon.hpcolor = oldpokemon.hpcolor;
 			pokemon.status = oldpokemon.status;
-			pokemon.terastallized = oldpokemon.terastallized;
 			pokemon.copyVolatileFrom(oldpokemon, true);
 			pokemon.statusData = {...oldpokemon.statusData};
+			if (oldpokemon.terastallized) {
+				pokemon.terastallized = oldpokemon.terastallized;
+				pokemon.teraType = oldpokemon.terastallized;
+				oldpokemon.terastallized = '';
+				oldpokemon.teraType = '';
+			}
 			// we don't know anything about the illusioned pokemon except that it's not fainted
 			// technically we also know its status but only at the end of the turn, not here
 			oldpokemon.fainted = false;
 			oldpokemon.hp = oldpokemon.maxhp;
 			oldpokemon.status = '???';
-			oldpokemon.terastallized = '';
 		}
 		this.active[slot] = pokemon;
 		pokemon.slot = slot;
@@ -1728,7 +1733,7 @@ export class Battle {
 			break;
 		}
 		case '-heal': {
-			let poke = this.getPokemon(args[1])!;
+			let poke = this.getPokemon(args[1], Dex.getEffect(kwArgs.from).id === 'revivalblessing')!;
 			let damage = poke.healthParse(args[2], true, true);
 			if (damage === null) break;
 			let range = poke.getDamageRange(damage);
@@ -2419,6 +2424,14 @@ export class Battle {
 				newSpeciesForme = args[2].substr(0, commaIndex);
 			}
 			let species = this.dex.species.get(newSpeciesForme);
+			if (nextArgs) {
+				if (nextArgs[0] === '-mega') {
+					species = this.dex.species.get(this.dex.items.get(nextArgs[3]).megaStone);
+				} else if (nextArgs[0] === '-primal' && nextArgs.length > 2) {
+					if (nextArgs[2] === 'Red Orb') species = this.dex.species.get('Groudon-Primal');
+					if (nextArgs[2] === 'Blue Orb') species = this.dex.species.get('Kyogre-Primal');
+				}
+			}
 
 			poke.speciesForme = newSpeciesForme;
 			poke.ability = poke.baseAbility = (species.abilities ? species.abilities['0'] : '');
@@ -2497,6 +2510,7 @@ export class Battle {
 			let poke = this.getPokemon(args[1])!;
 			let type = Dex.types.get(args[2]).name;
 			poke.removeVolatile('typeadd' as ID);
+			poke.teraType = type;
 			poke.terastallized = type;
 			poke.details += `, tera:${type}`;
 			poke.searchid += `, tera:${type}`;
@@ -3265,7 +3279,7 @@ export class Battle {
 		}
 		return null;
 	}
-	getPokemon(pokemonid: string | undefined) {
+	getPokemon(pokemonid: string | undefined, faintedOnly = false) {
 		if (!pokemonid || pokemonid === '??' || pokemonid === 'null' || pokemonid === 'false') {
 			return null;
 		}
@@ -3281,6 +3295,7 @@ export class Battle {
 
 		for (const pokemon of side.pokemon) {
 			if (isInactive && side.active.includes(pokemon)) continue;
+			if (faintedOnly && pokemon.hp) continue;
 			if (pokemon.ident === pokemonid) { // name matched, good enough
 				if (slot >= 0) pokemon.slot = slot;
 				return pokemon;
