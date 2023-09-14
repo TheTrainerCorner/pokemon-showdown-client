@@ -452,7 +452,8 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				if (
 					[
 						'Aegislash', 'Castform', 'Cherrim', 'Cramorant', 'Eiscue', 'Meloetta', 'Mimikyu', 'Minior', 'Morpeko', 'Wishiwashi',
-					].includes(species.baseSpecies) || species.forme.includes('Totem') || species.forme.includes('Zen')
+					].includes(species.baseSpecies) || species.forme.includes('Totem') || species.forme.includes('Zen') ||
+					(species.baseSpecies === 'Ogerpon' && species.forme.includes('Tera'))
 				) {
 					continue;
 				}
@@ -957,7 +958,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 	}
 	const PreDLCLearnsets = require('../data/pokemon-showdown/dist/sim/dex').Dex.mod('gen9predlc').data.Learnsets;
 	for (const id in PreDLCLearnsets) {
-		const learnset = SSDLC1Learnsets[id].learnset;
+		const learnset = PreDLCLearnsets[id].learnset;
 		if (!learnset) continue;
 		BattleTeambuilderTable['gen9predlc'].learnsets[id] = {};
 		for (const moveid in learnset) {
@@ -984,12 +985,12 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 					...gens.filter(gen => gen > 4)
 				);
 				legalGens += '0123456789'.slice(minUpperGen);
-				learnsets[id][moveid] = legalGens;
+				BattleTeambuilderTable['gen9predlc'].learnsets[id][moveid] = legalGens;
 			} else {
-				learnsets[id][moveid] = '0123456789'.slice(minGen);
+				BattleTeambuilderTable['gen9predlc'].learnsets[id][moveid] = '0123456789'.slice(minGen);
 			}
 
-			if (gens.indexOf(6) >= 0) learnsets[id][moveid] += 'p';
+			if (gens.indexOf(6) >= 0) BattleTeambuilderTable['gen9predlc'].learnsets[id][moveid] += 'p';
 			if (gens.indexOf(7) >= 0 && learnset[moveid].some(x => x[0] === '7' && x !== '7V')) {
 				BattleTeambuilderTable['gen9predlc'].learnsets[id][moveid] += 'q';
 			}
