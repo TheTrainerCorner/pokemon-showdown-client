@@ -348,7 +348,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			if (isStadium) genStr += 'stadium' + (genNum > 1 ? genNum : '');
 			return genStr;
 		})();
-		const mod = gen === 'gen9' ? 'gen9ttc' : gen;
+		const mod = gen === 'gen9' ? 'ttc_current' : gen;
 		// process.stdout.write("" + gen + (isDoubles ? " doubles" : "") + "... ");
 		const pokemon = Object.keys(Dex.data.Pokedex);
 		pokemon.sort();

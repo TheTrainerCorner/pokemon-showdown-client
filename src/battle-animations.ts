@@ -1746,6 +1746,9 @@ export class Sprite {
 export class PokemonSprite extends Sprite {
 	// HTML strings are constructed from this table and stored back in it to cache them
 	protected static statusTable: {[id: string]: [string, 'good' | 'bad' | 'neutral'] | null | string} = {
+    //#region Modified
+    cottondown: ['Cotton Down', 'bad'],
+    //#endregion
 		formechange: null,
 		typechange: null,
 		typeadd: null,
