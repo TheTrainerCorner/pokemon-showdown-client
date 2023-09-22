@@ -713,10 +713,9 @@ const Dex = new class implements ModdedDex {
 		} else if (pokemon === 'pokeball-none') {
 			return `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-pokeball-sheet.png) no-repeat scroll -80px 4px`;
 		}
-
+    
 		let id = toID(pokemon);
-		console.log(id);
-    if (!pokemon || typeof pokemon === 'string') pokemon = null;
+		if (!pokemon || typeof pokemon === 'string') pokemon = null;
 		// @ts-ignore
 		if (pokemon?.speciesForme) id = toID(pokemon.speciesForme);
 		// @ts-ignore
