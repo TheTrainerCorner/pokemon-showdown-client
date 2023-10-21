@@ -615,6 +615,7 @@ const Dex = new class implements ModdedDex {
 				spriteData.h *= 0.5;
 				spriteData.y += -11;
 			}
+
 			return spriteData;
 		}
 
@@ -732,7 +733,11 @@ const Dex = new class implements ModdedDex {
 		let fainted = ((pokemon as Pokemon | ServerPokemon)?.fainted ? `;opacity:.3;filter:grayscale(100%) brightness(.5)` : ``);
 		return `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-sheet.png?v14) no-repeat scroll -${left}px -${top}px${fainted}`;
 	}
-
+  fakemons = [
+    'bulbick',
+    'lampoct',
+    'octolure',
+  ];
 	getTeambuilderSpriteData(pokemon: any, gen: number = 0): TeambuilderSpriteData {
 		let id = toID(pokemon.species);
 		let spriteid = pokemon.spriteid;
@@ -768,6 +773,10 @@ const Dex = new class implements ModdedDex {
 				spriteData.x = -2;
 				spriteData.y = 0;
 			}
+      if(this.fakemons.includes(id)) {
+        spriteData.x = -3;
+        spriteData.y = -2;
+      }
 			return spriteData;
 		}
 		spriteData.spriteDir = 'sprites/gen5';
@@ -784,6 +793,8 @@ const Dex = new class implements ModdedDex {
 		if (!pokemon) return '';
 		const data = this.getTeambuilderSpriteData(pokemon, gen);
 		const shiny = (data.shiny ? '-shiny' : '');
+    
+    if(this.fakemons.includes(data.spriteid)) return 'background-image:url(' + 'http://localhost:8080/sprites/fakemons/' + data.spriteid + '.png);background-position:' + data.x + 'px ' + data.y + 'px;background-repeat:no-repeat';
 		return 'background-image:url(' + Dex.resourcePrefix + data.spriteDir + shiny + '/' + data.spriteid + '.png);background-position:' + data.x + 'px ' + data.y + 'px;background-repeat:no-repeat';
 	}
 
