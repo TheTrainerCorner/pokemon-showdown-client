@@ -358,7 +358,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const monotypeBans = {};
 		const nonstandardMoves = [];
 		for (const id of pokemon) {
-			console.log(Dex.mod(mod));
 			const species = Dex.mod(mod).species.get(id);
 			const baseSpecies = Dex.mod(mod).species.get(species.baseSpecies);
 			if (species.gen > genNum) continue;
