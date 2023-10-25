@@ -80,6 +80,7 @@ function requireNoCache(pathSpec) {
 	// generate aliases
 	function generateAlias(id, name, type) {
 		console.log(name);
+		if (name === undefined) return;
 		let i = name.lastIndexOf(' ');
 		if (i < 0) i = name.lastIndexOf('-');
 		if (name.endsWith('-Mega-X') || name.endsWith('-Mega-Y')) {
