@@ -471,6 +471,14 @@ const Dex = new class implements ModdedDex {
 		el.src = path + 'data/pokedex-mini-bw.js' + qs;
 		document.getElementsByTagName('body')[0].appendChild(el);
 	}
+
+	fakemons = [
+		'bulbick',
+		'lampoct',
+		'octolure',
+		'gourgeist-mega',
+	];
+
 	getSpriteData(pokemon: Pokemon | Species | string, isFront: boolean, options: {
 		gen?: number,
 		shiny?: boolean,
@@ -614,6 +622,9 @@ const Dex = new class implements ModdedDex {
 				spriteData.h *= 0.5;
 				spriteData.y += -11;
 			}
+			if (this.fakemons.includes(species.id)) {
+				spriteData.url = 'http://play.thetrainercorner.net/sprites/fakemons/' + name + '.png';
+			}
 
 			return spriteData;
 		}
@@ -732,12 +743,7 @@ const Dex = new class implements ModdedDex {
 		let fainted = ((pokemon as Pokemon | ServerPokemon)?.fainted ? `;opacity:.3;filter:grayscale(100%) brightness(.5)` : ``);
 		return `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-sheet.png?v14) no-repeat scroll -${left}px -${top}px${fainted}`;
 	}
-  fakemons = [
-    'bulbick',
-    'lampoct',
-    'octolure',
-	'gourgeist-mega',
-  ];
+
 	getTeambuilderSpriteData(pokemon: any, gen: number = 0): TeambuilderSpriteData {
 		let id = toID(pokemon.species);
 		let spriteid = pokemon.spriteid;
@@ -780,6 +786,9 @@ const Dex = new class implements ModdedDex {
 			return spriteData;
 		}
 		spriteData.spriteDir = 'sprites/gen5';
+		if (this.fakemons.includes(id)) {
+			spriteData.spriteDir = 'sprites/fakemons';
+		}
 		if (gen <= 1 && species.gen <= 1) spriteData.spriteDir = 'sprites/gen1';
 		else if (gen <= 2 && species.gen <= 2) spriteData.spriteDir = 'sprites/gen2';
 		else if (gen <= 3 && species.gen <= 3) spriteData.spriteDir = 'sprites/gen3';
