@@ -736,6 +736,7 @@ const Dex = new class implements ModdedDex {
     'bulbick',
     'lampoct',
     'octolure',
+	'gourgeist-mega',
   ];
 	getTeambuilderSpriteData(pokemon: any, gen: number = 0): TeambuilderSpriteData {
 		let id = toID(pokemon.species);
