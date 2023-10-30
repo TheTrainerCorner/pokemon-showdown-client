@@ -794,7 +794,7 @@ const Dex = new class implements ModdedDex {
 		const data = this.getTeambuilderSpriteData(pokemon, gen);
 		const shiny = (data.shiny ? '-shiny' : '');
     
-    if(this.fakemons.includes(data.spriteid)) return 'background-image:url(' + 'http://51.81.223.202:8080/sprites/fakemons/' + data.spriteid + '.png);background-position:' + data.x + 'px ' + data.y + 'px;background-repeat:no-repeat';
+    if(this.fakemons.includes(data.spriteid)) return 'background-image:url(' + 'http://play.thetrainercorner.net/sprites/fakemons/' + data.spriteid + '.png);background-position:' + data.x + 'px ' + data.y + 'px;background-repeat:no-repeat';
 		return 'background-image:url(' + Dex.resourcePrefix + data.spriteDir + shiny + '/' + data.spriteid + '.png);background-position:' + data.x + 'px ' + data.y + 'px;background-repeat:no-repeat';
 	}
 
