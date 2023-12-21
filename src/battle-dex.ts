@@ -479,6 +479,7 @@ const Dex = new class implements ModdedDex {
 		'gourgeist-mega',
     'inteleon-mega',
     'trevenant-autumn',
+    'sotanaht',
 	];
 
 	getSpriteData(pokemon: Pokemon | Species | string, isFront: boolean, options: {
