@@ -746,7 +746,7 @@ const Dex = new class implements ModdedDex {
 		let left = (num % 12) * 40;
 		let fainted = ((pokemon as Pokemon | ServerPokemon)?.fainted ? `;opacity:.3;filter:grayscale(100%) brightness(.5)` : ``);
     if (this.fakemons.includes(id)) {
-      return `background:transparent url(http://play.thetrainercorner.net/sprites/fakemons/${id}.png) no-repeat scroll;background-size:contain;background-position:2px 3px${fainted}`
+      return `background:transparent url(http://play.thetrainercorner.net/sprites/fakemons/${id}.png) no-repeat scroll;background-size:contain;background-position:center${fainted}`
     }
 		return `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-sheet.png?v14) no-repeat scroll -${left}px -${top}px${fainted}`;
 	}
@@ -810,7 +810,7 @@ const Dex = new class implements ModdedDex {
 		const data = this.getTeambuilderSpriteData(pokemon, gen);
 		const shiny = (data.shiny ? '-shiny' : '');
     
-    if(this.fakemons.includes(data.spriteid)) return 'background-image:url(' + 'http://play.thetrainercorner.net/sprites/fakemons/' + data.spriteid + '.png);background-position:' + data.x + 'px ' + data.y + 'px;background-repeat:no-repeat';
+    if(this.fakemons.includes(data.spriteid)) return 'background-image:url(' + 'http://play.thetrainercorner.net/sprites/fakemons/' + data.spriteid + '.png);background-position:center;background-repeat:no-repeat';
 		return 'background-image:url(' + Dex.resourcePrefix + data.spriteDir + shiny + '/' + data.spriteid + '.png);background-position:' + data.x + 'px ' + data.y + 'px;background-repeat:no-repeat';
 	}
 
