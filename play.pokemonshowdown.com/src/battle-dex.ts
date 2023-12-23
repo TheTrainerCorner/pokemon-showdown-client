@@ -480,6 +480,11 @@ const Dex = new class implements ModdedDex {
     'inteleon-mega',
     'trevenant-autumn',
     'sotanaht',
+    'tindraco',
+    'devdraco',
+    'metadraco',
+    'acudraco',
+    'thundraco',
 	];
 
 	getSpriteData(pokemon: Pokemon | Species | string, isFront: boolean, options: {
