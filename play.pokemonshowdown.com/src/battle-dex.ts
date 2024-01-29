@@ -486,7 +486,8 @@ const Dex = new class implements ModdedDex {
     'acudraco',
     'thundraco',
     'granbull-mega',
-    'volcarona-faerie'
+    'volcarona-faerie',
+    'farfetchd-mega',
 	];
 
 	getSpriteData(pokemon: Pokemon | Species | string, isFront: boolean, options: {
