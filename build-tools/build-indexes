@@ -360,8 +360,8 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const monotypeBans = {};
 		const nonstandardMoves = [];
 		for (const id of pokemon) {
-			const species = Dex.mod(gen).species.get(id);
-			const baseSpecies = Dex.mod(gen).species.get(species.baseSpecies);
+			const species = Dex.mod('ttc_current').species.get(id) || Dex.mod(gen).species.get(id);
+			const baseSpecies = Dex.mod('ttc_current').species.get(species.baseSpecies) || Dex.mod(gen).species.get(species.baseSpecies);
 			if (species.gen > genNum) continue;
 			const tier = (() => {
 				if (isMetBattle) {
