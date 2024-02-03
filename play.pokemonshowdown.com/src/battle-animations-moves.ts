@@ -12,123 +12,6 @@
 import { AnimTable, BattleOtherAnims } from './battle-animations';
 
 export const BattleMoveAnims: AnimTable = {
-  glacier: {
-    anim(scene, [attacker, defender]) {
-			defender.delay(200);
-			defender.anim({
-				y: defender.y - 7,
-				yscale: 0.9,
-				time: 100,
-			}, 'decel');
-			defender.anim({
-				time: 200,
-			});
-			defender.delay(200);
-			defender.anim({
-				y: defender.y - 7,
-				yscale: 0.9,
-				time: 100,
-			}, 'decel');
-			defender.anim({
-				time: 200,
-			});
-
-			scene.showEffect('wisp', {
-				x: defender.x + 15,
-				y: defender.y + 100,
-				z: defender.z,
-				opacity: 0,
-				scale: 0.8,
-			}, {
-				y: defender.y - 30,
-				opacity: 1,
-				time: 300,
-			}, 'accel', 'explode');
-			scene.showEffect('wisp', {
-				x: defender.x + 30,
-				y: defender.y + 100,
-				z: defender.z,
-				opacity: 0,
-				scale: 0.8,
-				time: 100,
-			}, {
-				y: defender.y - 30,
-				opacity: 1,
-				time: 400,
-			}, 'accel', 'explode');
-			scene.showEffect('wisp', {
-				x: defender.x - 30,
-				y: defender.y + 100,
-				z: defender.z,
-				opacity: 0,
-				scale: 0.8,
-				time: 200,
-			}, {
-				y: defender.y - 30,
-				opacity: 1,
-				time: 500,
-			}, 'accel', 'explode');
-			scene.showEffect('wisp', {
-				x: defender.x,
-				y: defender.y + 100,
-				z: defender.z,
-				opacity: 0,
-				scale: 0.8,
-				time: 300,
-			}, {
-				y: defender.y - 30,
-				opacity: 1,
-				time: 600,
-			}, 'accel', 'explode');
-			scene.showEffect('wisp', {
-				x: defender.x - 15,
-				y: defender.y + 100,
-				z: defender.z,
-				opacity: 0,
-				scale: 0.8,
-				time: 400,
-			}, {
-				y: defender.y - 30,
-				opacity: 1,
-				time: 700,
-			}, 'accel', 'explode');
-
-			scene.showEffect('wisp', {
-				x: defender.x + 40,
-				y: defender.y - 40,
-				z: defender.z,
-				scale: 0,
-				opacity: 0.4,
-				time: 300,
-			}, {
-				scale: 2,
-				opacity: 0,
-			}, 'decel');
-			scene.showEffect('wisp', {
-				x: defender.x - 40,
-				y: defender.y - 40,
-				z: defender.z,
-				scale: 0,
-				opacity: 0.4,
-				time: 450,
-			}, {
-				scale: 2,
-				opacity: 0,
-			}, 'decel');
-			scene.showEffect('wisp', {
-				x: defender.x + 10,
-				y: defender.y - 40,
-				z: defender.z,
-				scale: 0,
-				opacity: 0.4,
-				time: 600,
-			}, {
-				scale: 2,
-				opacity: 0,
-			}, 'decel');
-		},
-    prepareAnim: BattleOtherAnims.chargesstatus.anim,
-  },
 	taunt: {
 		anim(scene, [attacker, defender]) {
 			BattleOtherAnims.dance.anim(scene, [attacker, defender]);
@@ -35606,6 +35489,7 @@ export const BattleMoveAnims: AnimTable = {
 };
 
 // placeholder animations
+BattleMoveAnims['glacier'] = {anim: BattleMoveAnims['avalanche'].anim, prepareAnim: BattleOtherAnims.chargestatus.anim}
 BattleMoveAnims['torment'] = {anim: BattleMoveAnims['swagger'].anim};
 
 BattleMoveAnims['mefirst'] = {anim: BattleMoveAnims['mimic'].anim};
