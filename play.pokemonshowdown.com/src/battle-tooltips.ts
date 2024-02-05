@@ -1177,9 +1177,18 @@ class BattleTooltips {
 			stats.def = Math.floor(stats.def * 1.5);
 			stats.spd = Math.floor(stats.spd * 1.5);
 		}
-		if (ability === 'grasspelt' && this.battle.hasPseudoWeather('Grassy Terrain')) {
-			stats.def = Math.floor(stats.def * 1.5);
-		}
+    if (ability === "grasspelt") {
+      if (this.battle.hasPseudoWeather('Grassy Terrain')) {
+        stats.def = Math.floor(stats.def * 1.5);
+        stats.spd = Math.floor(stats.spd * 1.5);
+      } else {
+        stats.def = Math.floor(stats.def * 1.25);
+        stats.spd = Math.floor(stats.spd * 1.25);
+      }
+    }
+		// if (ability === 'grasspelt' && this.battle.hasPseudoWeather('Grassy Terrain')) {
+		// 	stats.def = Math.floor(stats.def * 1.5);
+		// }
 		if (this.battle.hasPseudoWeather('Electric Terrain')) {
 			if (ability === 'surgesurfer') {
 				speedModifiers.push(2);
