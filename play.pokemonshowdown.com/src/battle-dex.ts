@@ -488,6 +488,9 @@ const Dex = new class implements ModdedDex {
     'granbull-mega',
     'volcarona-faerie',
     'farfetchd-mega',
+    'jirachi-northstar',
+    'meloetta-aurora',
+    'meloetta-caroler',
 	];
 
 	getSpriteData(pokemon: Pokemon | Species | string, isFront: boolean, options: {
