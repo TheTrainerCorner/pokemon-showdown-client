@@ -1142,10 +1142,14 @@ class BattleTooltips {
 				}
 			}
 		}
-		if (ability === 'defeatist' && serverPokemon.hp <= serverPokemon.maxhp / 2) {
-			stats.atk = Math.floor(stats.atk * 0.5);
-			stats.spa = Math.floor(stats.spa * 0.5);
-		}
+    if (ability === 'defeatist' && serverPokemon.hp <= serverPokemon.maxhp / 4) {
+      stats.atk = Math.floor(stats.atk * 0.5);
+      stats.spa = Math.floor(stats.spa * 0.5);
+    }
+		// if (ability === 'defeatist' && serverPokemon.hp <= serverPokemon.maxhp / 2) {
+		// 	stats.atk = Math.floor(stats.atk * 0.5);
+		// 	stats.spa = Math.floor(stats.spa * 0.5);
+		// }
 		if (clientPokemon) {
 			if (clientPokemon.volatiles['slowstart']) {
 				stats.atk = Math.floor(stats.atk * 0.5);
