@@ -1129,7 +1129,8 @@ class BattleTooltips {
 							let allyAbility = this.getAllyAbility(ally);
 							if (allyAbility === 'Flower Gift' && (ally.getSpecies().baseSpecies === 'Cherrim' || this.battle.gen <= 4)) {
 								stats.atk = Math.floor(stats.atk * 1.5);
-								stats.spd = Math.floor(stats.spd * 1.5);
+                stats.spa = Math.floor(stats.spa * 1.5);
+                stats.spe = Math.floor(stats.spe * 1.5)
 							}
 						}
 					}
@@ -1186,6 +1187,7 @@ class BattleTooltips {
         stats.spd = Math.floor(stats.spd * 1.25);
       }
     }
+    
 		// if (ability === 'grasspelt' && this.battle.hasPseudoWeather('Grassy Terrain')) {
 		// 	stats.def = Math.floor(stats.def * 1.5);
 		// }
