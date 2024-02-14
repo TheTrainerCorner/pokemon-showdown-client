@@ -1616,10 +1616,12 @@ class BattleTooltips {
 			}
 		}
 
-		if (value.tryAbility('Hustle') && move.category === 'Physical') {
-			accuracyModifiers.push(3277);
-			value.abilityModify(0.8, "Hustle");
-		} else if (value.tryAbility('Compound Eyes')) {
+    // Removed since Hustle now doesn't lower accuracy
+		// if (value.tryAbility('Hustle') && move.category === 'Physical') {
+		// 	accuracyModifiers.push(3277);
+		// 	value.abilityModify(0.8, "Hustle");
+    // }
+    if (value.tryAbility('Compound Eyes')) {
 			accuracyModifiers.push(5325);
 			value.abilityModify(1.3, "Compound Eyes");
 		}
@@ -1689,6 +1691,11 @@ class BattleTooltips {
 				'approximate'
 			);
 		}
+    if (pokemon.ability === 'Hustle' && (move.accuracy === 100 || move.accuracy === true)) {
+      value.modify(1.1, 'Hustle + 100% Accurate Move')
+    } else if (pokemon.ability === 'Hustle' && move.accuracy !== 100) {
+      value.modify(1.5, 'Hustle + Not 100% Accurate Move');
+    }
 		if (['terablast'].includes(move.id) && pokemon.terastallized === 'Stellar') {
 			value.set(100, 'Tera Stellar boost');
 		}
