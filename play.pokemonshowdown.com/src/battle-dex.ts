@@ -491,6 +491,11 @@ const Dex = new class implements ModdedDex {
     'jirachi-northstar',
     'meloetta-aurora',
     'meloetta-caroler',
+    'ralts-olympios',
+    'kirlia-olympios',
+    'gardevoir-olympios',
+    'gallade-olympios',
+    'gigachelonian',
 	];
 
 	getSpriteData(pokemon: Pokemon | Species | string, isFront: boolean, options: {
@@ -669,8 +674,8 @@ const Dex = new class implements ModdedDex {
 			if (spriteData.gen >= 4 && miscData['frontf'] && options.gender === 'F') {
 				name += '-f';
 			}
-
-			spriteData.url += dir + '/' + name + '.png';
+      if (this.fakemons.includes(name)) spriteData.url = 'http://play.thetrainercorner.net/sprites/fakemons/' + name + '.png';
+			else spriteData.url += dir + '/' + name + '.png';
 		}
 
 		if (!options.noScale) {
