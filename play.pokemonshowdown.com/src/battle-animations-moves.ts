@@ -35490,6 +35490,7 @@ export const BattleMoveAnims: AnimTable = {
 
 // placeholder animations
 BattleMoveAnims['glacier'] = {anim: BattleMoveAnims['avalanche'].anim, prepareAnim: BattleOtherAnims.chargestatus.anim}
+BattleMoveAnims['coldsnap'] = {anim: BattleMoveAnims['sheercold'].anim, prepareAnim: BattleOtherAnims.chargestatus.anim}
 BattleMoveAnims['torment'] = {anim: BattleMoveAnims['swagger'].anim};
 
 BattleMoveAnims['mefirst'] = {anim: BattleMoveAnims['mimic'].anim};
