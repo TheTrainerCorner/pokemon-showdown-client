@@ -380,7 +380,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const genNum = Math.floor(isDoubles ? -genIdent : genIdent);
 		const gen = (() => {
 			let genStr = 'gen' + genNum;
-			if (isNatDexTTC || isTTC) genStr += 'ttc';
 			if (isSSDLC1) genStr += 'dlc1';
 			if (isLetsGo) genStr += 'letsgo';
 			if (isBDSP) genStr += 'bdsp';
@@ -483,7 +482,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				if (isTTC) {
 					let tier = isDoubles ? species.doublesTier : species.tier;
 					if (species.num <= 0 || species.isNonstandard === "Unobtainable") tier = "Illegal";
-					return tier;
+          return tier;
 				}
 				if (species.tier === 'CAP' || species.tier === 'CAP NFE' || species.tier === 'CAP LC') {
 					return species.tier;
@@ -1100,56 +1099,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		}
 	}
 
-	for (let learnsetmod of ['gen9ttc']) {
-		let modlearnsets = {};
-		BattleTeambuilderTable[learnsetmod].learnsets = modlearnsets;
-		for (const id in Dex.mod(learnsetmod).Learnsets) {
-			const learnset = Dex.mod(learnsetmod).data.Learnsets[id].learnset;
-			if (!learnset) continue;
-			modlearnsets[id] = {};
-			for (const moveid in learnset) {
-				const gens = learnset[moveid].map(x => Number(x[0]));
-				const minGen = Math.min(...gens);
-
-				if (minGen <= 4 && (gen3HMs.has(moveid) || gen4HMs.has(moveid))) {
-					let legalGens = '';
-					let available = false;
-
-					if (minGen === 3) {
-						legalGens += '3';
-						available = true;
-					}
-
-					if (available) available = !gen3HMs.has(moveid);
-
-					if (available || gens.includes(4)) {
-						legalGens += '4';
-						available = true;
-					}
-					if (available) available = !gen4HMs.has(moveid);
-
-					let minUpperGen = available ? 5 : Math.min(
-						...gens.filter(gen => gen > 4)
-					);
-					legalGens += '0123456789'.slice(minUpperGen);
-					modlearnsets[id][moveid] = legalGens;
-				} else {
-					modlearnsets[id][moveid] = '0123456789'.slice(minGen);
-				}
-				if (gens.indexOf(6) >= 0) modlearnsets[id][moveid] += 'p';
-				if (gens.indexOf(7) >= 0 && learnset[moveid].some(x => x[0] === '7' && x !== '7V')) {
-					modlearnsets[id][moveid] += 'q';
-				}
-				if (gens.indexOf(8) >= 0 && learnset[moveid].some(x => x[0] === '8' && x !== '8V')) {
-					modlearnsets[id][moveid] += 'g';
-				}
-				if (gens.indexOf(9) >= 0 && learnset[moveid].some(x => x[0] === '9' && x !== '9V')) {
-					modlearnsets[id][moveid] += 'a';
-				}
-			}
-		}
-	}
-
 	// Client relevant data that should be overriden by past gens and mods
 	const overrideSpeciesKeys = ['abilities', 'baseStats', 'cosmeticFormes', 'isNonstandard', 'requiredItems', 'types', 'unreleasedHidden'];
 	const overrideMoveKeys = ['accuracy', 'basePower', 'category', 'desc', 'flags', 'isNonstandard', 'noSketch', 'pp', 'priority', 'shortDesc', 'target', 'type'];
@@ -1238,7 +1187,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 	// Mods
 	//
 
-	for (const mod of ['gen7letsgo', 'gen8bdsp', 'gen9ttc']) {
+	for (const mod of ['gen7letsgo', 'gen8bdsp']) {
 		const modDex = Dex.mod(mod);
 		const modData = modDex.data;
 		const parentDex = Dex.forGen(modDex.gen);
