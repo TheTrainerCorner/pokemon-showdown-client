@@ -17,12 +17,47 @@ if (!fs.existsSync('caches/pokemon-showdown')) {
 process.stdout.write("Syncing data from Git repository... ");
 child_process.execSync('git pull', {cwd: 'caches/pokemon-showdown'});
 child_process.execSync('npm run build', {cwd: 'caches/pokemon-showdown'});
+
+if (!fs.existsSync('play.pokemonshowdown.com/sprites/fakemons')) {
+	child_process.execSync('git clone https://github.com/TheTrainerCorner/fakemon-sprites.git fakemons', {
+		cwd: 'play.pokemonshowdown.com/sprites',
+	});
+}
+
+process.stdout.write("Syncing TTC sprites...\n");
+child_process.execSync('git pull', {cwd: 'play.pokemonshowdown.com/sprites/fakemons'});
+
 console.log("DONE");
 
-const Dex = require('../caches/pokemon-showdown/dist/sim/dex').Dex.mod('ttc_current');
+// const Dex = require('../caches/pokemon-showdown/dist/sim/dex').Dex.mod('ttc_current');
+const Dex = require('../caches/pokemon-showdown/dist/sim/dex').Dex;
 const toID = Dex.toID;
 process.stdout.write("Loading gen 6 data... ");
 Dex.includeData();
+
+for (const mod in Dex.dexes) {
+	const modData = Dex.dexes[mod];
+	for (const dataType in modData.data) {
+		if (['Pokedex', 'Moves', 'Items', 'Abilities', 'Learnsets'].includes(dataType)) {
+			let counter = 0;
+			for (const entry in modData.data[dataType]) {
+				if (!(entry in Dex.data[dataType]) && !modData.data[dataType][entry].inherit) {
+					counter++;
+					Dex.data[dataType][entry] = Dex.deepClone(modData.data[dataType][entry]);
+					if (dataType !== 'Learnsets') Dex.data[dataType][entry].isNonstandard = "Custom";
+					if (dataType === 'Pokedex') {
+						Dex.data[dataType][entry].tier = "Illegal";
+						Dex.data[dataType][entry].natDexTier = "Illegal";
+						Dex.data[dataType][entry].doublesTier = "Illegal";
+					}
+				}
+			}
+			if (counter > 0) console.log(dataType + ' received ' + counter + ' objects from ' + mod);
+		}
+	}
+}
+
+
 console.log("DONE");
 
 function es3stringify(obj) {
@@ -323,7 +358,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 	const LC = GENS.map(num => num + 0.7);
 	const STADIUM = [2.04, 1.04];
 	const NATDEX = [9.1, 8.1];
-	const OTHER = [9.9, 9.411, 9.41, 9.401, 9.4, 9.2, -9.4, -9.401, 8.6, 8.4, 8.2, 8.1, -8.4, -8.6, 7.1];
+	const OTHER = [9.9, 9.82, 9.822, 9.411, 9.41, 9.401, 9.4, 9.2, -9.4, -9.401, 8.6, 8.4, 8.2, 8.1, -8.4, -8.6, 7.1];
 
 	// process.stdout.write("\n  ");
 	for (const genIdent of [...GENS, ...DOUBLES, ...VGC, ...NFE, ...STADIUM, ...OTHER, ...NATDEX, ...LC]) {
@@ -340,6 +375,8 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const isDoubles = (genIdent < 0);
 		const isVGC = ('' + genIdent).endsWith('.5');
 		const isGen9BH = genIdent === 9.9;
+		const isNatDexTTC = ('' + genIdent).endsWith('.82');
+		const isTTC = ('' + genIdent).endsWith('.822');
 		const genNum = Math.floor(isDoubles ? -genIdent : genIdent);
 		const gen = (() => {
 			let genStr = 'gen' + genNum;
@@ -437,6 +474,15 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 					return species.tags.includes('Mythical') ? 'Mythical' :
 						species.tags.includes('Restricted Legendary') ? 'Restricted Legendary' :
 							species.nfe ? (species.prevo ? 'NFE' : 'LC') : 'Regular';
+				}
+				if (isNatDexTTC) {
+					let tier = isDoubles ? species.doublesTier : species.natDexTier;
+					return tier;
+				}
+				if (isTTC) {
+					let tier = isDoubles ? species.doublesTier : species.tier;
+					if (species.num <= 0 || species.isNonstandard === "Unobtainable") tier = "Illegal";
+          return tier;
 				}
 				if (species.tier === 'CAP' || species.tier === 'CAP NFE' || species.tier === 'CAP LC') {
 					return species.tier;
@@ -1201,7 +1247,7 @@ console.log("DONE");
 process.stdout.write("Building `data/pokedex.js`... ");
 
 {
-  const Pokedex = Dex.data.Pokedex;
+	const Pokedex = Dex.data.Pokedex;
 	// const Pokedex = requireNoCache('../caches/pokemon-showdown/dist/data/pokedex.js').Pokedex;
 	for (const id in Pokedex) {
 		const entry = Pokedex[id];
@@ -1229,7 +1275,7 @@ console.log("DONE");
 process.stdout.write("Building `data/moves,items,abilities,typechart,learnsets.js`...");
 
 {
-  const Moves = Dex.data.Moves;
+	const Moves = Dex.data.Moves;
 	// const Moves = requireNoCache('../caches/pokemon-showdown/dist/data/moves.js').Moves;
 	for (const id in Moves) {
 		const move = Dex.moves.get(Moves[id].name);
@@ -1246,7 +1292,7 @@ process.stdout.write("Building `data/moves,items,abilities,typechart,learnsets.j
  *********************************************************/
 
 {
-  const Items = Dex.data.Items;
+	const Items = Dex.data.Items;
 	// const Items = requireNoCache('../caches/pokemon-showdown/dist/data/items.js').Items;
 	for (const id in Items) {
 		const item = Dex.items.get(Items[id].name);
@@ -1262,7 +1308,7 @@ process.stdout.write("Building `data/moves,items,abilities,typechart,learnsets.j
  *********************************************************/
 
 {
-  const Abilities = Dex.data.Abilities;
+	const Abilities = Dex.data.Abilities;
 	// const Abilities = requireNoCache('../caches/pokemon-showdown/dist/data/abilities.js').Abilities;
 	for (const id in Abilities) {
 		const ability = Dex.abilities.get(Abilities[id].name);
@@ -1298,7 +1344,7 @@ process.stdout.write("Building `data/moves,items,abilities,typechart,learnsets.j
  *********************************************************/
 
 {
-  const FormatsData = Dex.data.FormatsData;
+	const FormatsData = Dex.data.FormatsData;
 	// const FormatsData = requireNoCache('../caches/pokemon-showdown/dist/data/formats-data.js').FormatsData;
 	const buf = 'exports.BattleFormatsData = ' + es3stringify(FormatsData) + ';';
 	fs.writeFileSync('play.pokemonshowdown.com/data/formats-data.js', buf);
@@ -1319,7 +1365,7 @@ process.stdout.write("Building `data/moves,items,abilities,typechart,learnsets.j
  *********************************************************/
 
 {
-  const Learnsets = Dex.data.Learnsets;
+	const Learnsets = Dex.data.Learnsets;
 	// const Learnsets = requireNoCache('../caches/pokemon-showdown/dist/data/learnsets.js').Learnsets;
 	const buf = 'exports.BattleLearnsets = ' + es3stringify(Learnsets) + ';';
 	fs.writeFileSync('play.pokemonshowdown.com/data/learnsets.js', buf);
