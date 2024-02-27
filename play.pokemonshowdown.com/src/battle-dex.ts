@@ -472,32 +472,6 @@ const Dex = new class implements ModdedDex {
 		document.getElementsByTagName('body')[0].appendChild(el);
 	}
 
-	fakemons = [
-		'bulbick',
-		'lampoct',
-		'octolure',
-		'gourgeist-mega',
-    'inteleon-mega',
-    'trevenant-autumn',
-    'sotanaht',
-    'tindraco',
-    'devdraco',
-    'metadraco',
-    'acudraco',
-    'thundraco',
-    'granbull-mega',
-    'volcarona-faerie',
-    'farfetchd-mega',
-    'jirachi-northstar',
-    'meloetta-aurora',
-    'meloetta-caroler',
-    'ralts-olympios',
-    'kirlia-olympios',
-    'gardevoir-olympios',
-    'gallade-olympios',
-    'gigachelonian',
-	];
-
 	getSpriteData(pokemon: Pokemon | Species | string, isFront: boolean, options: {
 		gen?: number,
 		shiny?: boolean,
@@ -564,6 +538,14 @@ const Dex = new class implements ModdedDex {
 		//     This defaults to graphicsGen, but if the graphicsGen doesn't have a sprite for the Pokemon
 		//     (eg. Darmanitan in graphicsGen 2) then we go up gens until it exists.
 		//
+
+		if (species.tags.includes("Fakemon")) {
+			spriteData.url = `https://play.thetrainercorner.net/sprites/fakemons/${species.id}.png`;
+			spriteData.pixelated = true;
+			spriteData.gen = 5;
+			return spriteData;
+		}
+
 		let graphicsGen = mechanicsGen;
 		if (Dex.prefs('nopastgens')) graphicsGen = 6;
 		if (Dex.prefs('bwgfx') && graphicsGen >= 6) graphicsGen = 5;
@@ -641,9 +623,6 @@ const Dex = new class implements ModdedDex {
 				spriteData.h *= 0.5;
 				spriteData.y += -11;
 			}
-			if (this.fakemons.includes(species.id)) {
-				spriteData.url = 'http://play.thetrainercorner.net/sprites/fakemons/' + name + '.png';
-			}
 
 			return spriteData;
 		}
@@ -674,8 +653,6 @@ const Dex = new class implements ModdedDex {
 			if (spriteData.gen >= 4 && miscData['frontf'] && options.gender === 'F') {
 				name += '-f';
 			}
-      if (this.fakemons.includes(name)) spriteData.url = 'http://play.thetrainercorner.net/sprites/fakemons/' + name + '.png';
-			else spriteData.url += dir + '/' + name + '.png';
 		}
 
 		if (!options.noScale) {
@@ -761,9 +738,10 @@ const Dex = new class implements ModdedDex {
 		let top = Math.floor(num / 12) * 30;
 		let left = (num % 12) * 40;
 		let fainted = ((pokemon as Pokemon | ServerPokemon)?.fainted ? `;opacity:.3;filter:grayscale(100%) brightness(.5)` : ``);
-    if (this.fakemons.includes(id)) {
-      return `background:transparent url(http://play.thetrainercorner.net/sprites/fakemons/${id}.png) no-repeat scroll;background-size:contain;background-position:center${fainted}`
-    }
+		let species = Dex.species.get(id);
+    	if (species.tags.includes("Fakemon")) {
+      		return `background:transparent url(http://play.thetrainercorner.net/sprites/fakemons/${id}.png) no-repeat scroll;background-size:contain;width:40px;background-position:center${fainted}`
+    	}
 		return `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-sheet.png?v16) no-repeat scroll -${left}px -${top}px${fainted}`;
 	}
 
@@ -811,16 +789,13 @@ const Dex = new class implements ModdedDex {
 				spriteData.x = -2;
 				spriteData.y = 0;
 			}
-      if(this.fakemons.includes(id)) {
-        spriteData.x = -3;
-        spriteData.y = -2;
-      }
+      		if(Dex.species.get(pokemon.species).tags.includes("Fakemon")) {
+        		spriteData.x = -3;
+        		spriteData.y = -2;
+      		}
 			return spriteData;
 		}
 		spriteData.spriteDir = 'sprites/gen5';
-		if (this.fakemons.includes(id)) {
-			spriteData.spriteDir = 'sprites/fakemons';
-		}
 		if (gen <= 1 && species.gen <= 1) spriteData.spriteDir = 'sprites/gen1';
 		else if (gen <= 2 && species.gen <= 2) spriteData.spriteDir = 'sprites/gen2';
 		else if (gen <= 3 && species.gen <= 3) spriteData.spriteDir = 'sprites/gen3';
@@ -834,11 +809,12 @@ const Dex = new class implements ModdedDex {
 		if (!pokemon) return '';
 		const data = this.getTeambuilderSpriteData(pokemon, gen);
 		const shiny = (data.shiny ? '-shiny' : '');
-    
-    if(this.fakemons.includes(data.spriteid)) return 'background-image:url(' + 'http://play.thetrainercorner.net/sprites/fakemons/' + data.spriteid + '.png);background-position:left 20%;background-repeat:no-repeat';
+		if (Dex.species.get(pokemon.species).tags.includes("Fakemon")) {
+			let url = `https://play.thetrainercorner.net/sprites/fakemons/${toID(pokemon.species)}.png`;
+			return `background-image:url(${url});background-position:${data.x}px ${data.y}px;background-repeat:no-repeat;background-size:100px;`;
+		}
 		return 'background-image:url(' + Dex.resourcePrefix + data.spriteDir + shiny + '/' + data.spriteid + '.png);background-position:' + data.x + 'px ' + data.y + 'px;background-repeat:no-repeat';
 	}
-
 	getItemIcon(item: any) {
 		let num = 0;
 		if (typeof item === 'string' && exports.BattleItems) item = exports.BattleItems[toID(item)];
