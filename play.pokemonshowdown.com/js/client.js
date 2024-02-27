@@ -219,7 +219,7 @@ function toId() {
 			var ret = '/~~' + Config.server.id + '/action.php';
 			if (Config.testclient) {
 				//ret = 'https://' + Config.routes.client + ret;
-        ret = 'https://play.pokemonshowdown.com' + ret;
+				ret = 'https://play.pokemonshowdown.com' + ret;
 			}
 			return (this.getActionPHP = function () {
 				return ret;
@@ -2015,7 +2015,7 @@ function toId() {
 			if (room.id === this.fragment) this.updateTitle(room);
 		},
 		updateTitle: function (room) {
-			document.title = room.title ? room.title + " - Showdown!" : "Showdown!";
+			document.title = room.title ? room.title + " - The Trainer's Corner" : "The Trainer's Corner";
 		},
 		updateAutojoin: function () {
 			if (!Config.server.registered) return;

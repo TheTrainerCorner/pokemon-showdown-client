@@ -4,5 +4,7 @@
   "showdown.clientUrl": "http://localhost:8080",
   "tslint.configFile": "tslint.json",
   "typescript.tsdk": "node_modules/typescript/lib",
-  "nuxt.isNuxtApp": false
+  "nuxt.isNuxtApp": false,
+  "editor.tabSize": 4,
+  "editor.insertSpaces": false,
 }

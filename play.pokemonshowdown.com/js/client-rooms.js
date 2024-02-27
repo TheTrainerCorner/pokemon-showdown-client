@@ -173,10 +173,7 @@
 				)
 			);
 			this.$('.roomlist').last().html(
-				(otherRooms.length ?
-					'<h2 class="rooms-chatrooms">Chat rooms</h2>' + otherRooms.sort(this.compareRooms).map(this.renderRoomBtn).join("") : '') +
-				(hiddenRooms.length && this.showMoreRooms ?
-					'<h2 class="rooms-chatrooms">Hidden rooms</h2>' + hiddenRooms.sort(this.compareRooms).map(this.renderRoomBtn).join("") : '')
+				`<div><a href="https://discord.com/invite/p97VW8ZNcJ" target="_blank" class="blocklink"><small style="float:right">(400+ users)</small><strong><i class="fa fa-comments-o"></i> Discord<br></strong><small>The Trainer's Corner Discord.</small></a></div>`
 			);
 		},
 		roomlist: function () {
