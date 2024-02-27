@@ -14,7 +14,7 @@ body {
 	font-family: Verdana, Helvetica, Arial, sans-serif;
 
 	/* see https://pokemonshowdown.com/credits */
-	background: #344b6c url(../fx/client-bg-charizards.jpg) no-repeat left center fixed;
+	background: #344b6c url(../fx/client-bg-shaymin.jpg) no-repeat left center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -62,6 +62,7 @@ select {
 .header {
 	position: relative;
 	height: 50px;
+	background-color: #111111;
 	background: url(../fx/client-topbar-bg.png) repeat-x left top scroll;
 }
 .header h1 {
