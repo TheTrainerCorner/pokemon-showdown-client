@@ -423,10 +423,10 @@ span.header-username:hover {
 }
 .ps-room.ps-room-light {
 	background: rgba(29, 29, 29, 0.85);
-	color: black;
+	color: whitesmoke;
 }
 .ps-room.ps-room-opaque {
-	background: #3e3e3f;
+	background: #EEF2F5;
 	color: black;
 }
 
