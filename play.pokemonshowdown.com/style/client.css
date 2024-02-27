@@ -1034,6 +1034,8 @@ p.or:after {
 	display: inline-block;
 	margin: 0;
 	vertical-align: middle;
+	background-color: #A9A9A9;
+	color: #0D151E;
 	font-size: 8pt;
 }
 
