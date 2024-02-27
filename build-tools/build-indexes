@@ -14,9 +14,18 @@ if (!fs.existsSync('caches/pokemon-showdown')) {
 	});
 }
 
-process.stdout.write("Syncing data from Git repository... ");
+process.stdout.write("Syncing data from Git repository...\n");
 child_process.execSync('git pull', {cwd: 'caches/pokemon-showdown'});
 child_process.execSync('npm run build', {cwd: 'caches/pokemon-showdown'});
+
+if (!fs.existsSync('play.pokemonshowdown.com/sprites/fakemons')) {
+	child_process.execSync('git clone https://github.com/TheTrainerCorner/fakemon-sprites.git', {
+		cwd: 'play.pokemonshowdown.com/sprites',
+	});
+}
+process.stdout.write("Syncing ttc sprites....\n");
+child_process.execSync("git pull", {cwd: "play.pokemonshowdown.com/sprites/fakemons"});
+
 console.log("DONE");
 
 const Dex = require('../caches/pokemon-showdown/dist/sim/dex').Dex.mod('ttc_current');
