@@ -63,7 +63,7 @@ select {
 	position: relative;
 	height: 50px;
 	background-color: #111111;
-	background: url(../fx/client-topbar-bg.png) repeat-x left top scroll;
+	/* background: url(../fx/client-topbar-bg.png) repeat-x left top scroll; */
 }
 .header h1 {
 	margin: 0;
