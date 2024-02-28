@@ -1050,8 +1050,8 @@ p.or:after {
 	right: 0;
 	bottom: 40px;
 	font-size: 10pt;
-	background: rgba(242,247,250,.5);
-	color: black;
+	background: rgba(37, 37, 37, 0.5);
+	color: whitesmoke;
 
 	overflow: auto;
 	overflow-x: hidden;
