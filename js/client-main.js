@@ -61,7 +61,7 @@ PSPrefs=function(_PSStreamModel){_inheritsLoose(PSPrefs,_PSStreamModel);
 
 
 function PSPrefs(){var _this;
-_this=_PSStreamModel.call(this)||this;_this.theme='light';_this.nogif=null;_this.showjoins=null;_this.onepanel=false;_this.mute=false;_this.effectvolume=50;_this.musicvolume=50;_this.notifvolume=50;_this.storageEngine='';_this.storage={};_this.origin="https://"+Config.routes.client;
+_this=_PSStreamModel.call(this)||this;_this.theme='dark';_this.nogif=null;_this.showjoins=null;_this.onepanel=false;_this.mute=false;_this.effectvolume=50;_this.musicvolume=50;_this.notifvolume=50;_this.storageEngine='';_this.storage={};_this.origin="https://"+Config.routes.client;
 
 for(var _key in _assertThisInitialized(_this)){
 var value=_assertThisInitialized(_this)[_key];
