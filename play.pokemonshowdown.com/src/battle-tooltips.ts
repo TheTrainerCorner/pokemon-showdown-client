@@ -1220,6 +1220,23 @@ class BattleTooltips {
 			stats.spa = Math.floor(stats.spa * 1.5);
 			stats.spd = Math.floor(stats.spd * 1.5);
 		}
+		if ([
+			'lifeorb',
+			'wikiberry',
+			'adrenalineorb',
+			'flameorb',
+			'liechiberry',
+			'snowball',
+			'toxicorb',
+			'yacheberry',
+			'aspearberry',
+			'destinyknot',
+			'ironball',
+			'oranberry',
+			'ovalstone',
+		].includes(item) && ability === 'ballfetch') {
+			speedModifiers.push(1.5);
+		}
 		if (clientPokemon && (ability === 'plus' || ability === 'minus')) {
 			let allyActive = clientPokemon.side.active;
 			if (allyActive.length > 1) {
