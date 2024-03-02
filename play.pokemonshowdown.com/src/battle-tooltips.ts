@@ -1143,9 +1143,9 @@ class BattleTooltips {
 					if (ability === 'swiftswim') {
 						speedModifiers.push(2);
 					}
-					if (ability === 'waterveil') {
-						stats.spd = Math.floor(stats.spd * 1.5);
-					}
+					// if (ability === 'waterveil') {
+					// 	stats.spd = Math.floor(stats.spd * 1.5);
+					// }
 				}
 			}
 		}
@@ -1198,6 +1198,10 @@ class BattleTooltips {
         	stats.spd = Math.floor(stats.spd * 1.25);
     	  	}
     	}
+
+		if (weather && (weather === 'raindance' || weather === 'primordialsea') && ability === 'waterveil') {
+			stats.spd = Math.floor(stats.spd * 1.5);
+		}
     
 		// if (ability === 'grasspelt' && this.battle.hasPseudoWeather('Grassy Terrain')) {
 		// 	stats.def = Math.floor(stats.def * 1.5);
