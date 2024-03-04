@@ -1,4 +1,3 @@
-import { Formats } from '../../caches/pokemon-showdown/config/formats';
 /**
  * Search
  *
@@ -554,7 +553,6 @@ abstract class BattleTypedSearch<T extends SearchType> {
 	'ssdlc1' | 'ssdlc1doubles' | 'predlc' | 'predlcdoubles' | 'predlcnatdex' | 'svdlc1' | 'svdlc1doubles' |
 	'svdlc1natdex' | 'stadium' | 'lc' | null = null;
 
-	table: string | null = null;
 	/**
 	 * Cached copy of what the results list would be with only base filters
 	 * (i.e. with an empty `query` and `filters`)
@@ -575,35 +573,13 @@ abstract class BattleTypedSearch<T extends SearchType> {
 
 		this.baseResults = null;
 		this.baseIllegalResults = null;
-		const formatName = format;
+
 		if (format.slice(0, 3) === 'gen') {
 			const gen = (Number(format.charAt(3)) || 6);
 			format = (format.slice(4) || 'customgame') as ID;
 			this.dex = Dex.forGen(gen);
 		} else if (!format) {
 			this.dex = Dex;
-		}
-		
-		if (formatName in window.Formats) {
-			let info = window.Formats[formatName];
-			if ('mod' in info) {
-				this.dex = Dex.mod(info.mod);
-				if (info.mod.includes('infinitefusion') || info.mod.includes('ttc')) {
-					this.formatType = 'natdex';
-					if (info.gameType === 'doubles') {
-						format = 'doublesubers' as ID;
-						if (info.banlist.includes('DUber')) format = 'doublesou' as ID;
-						this.table = info.mod + (info.mod.includes('ttc') && info.ruleTable.includes('standardnatdex') ? 'natdex' : '') + 'doubles';
-					} else {
-						format = 'ag' as ID;
-						if (info.banlist.includes('ND AG') || info.banlist.includes('AG')) format = 'ubers' as ID;
-						if (info.banlist.includes('ND Uber') || info.banlist.includes('Uber')) format = 'ou' as ID;
-						if (info.banlist.includes('ND OU') || info.banlist.includes('OU')) format = 'uu' as ID;
-						if (info.ruleset.includes('Little Cup')) format = 'lc' as ID;
-						this.table = info.mod + (info.mod.includes('ttc') && info.ruleTable.includes('standardnatdex') ? 'natdex' : '');
-					}
-				}
-			}
 		}
 
 		if (format.startsWith('dlc1') && this.dex.gen === 8) {
@@ -769,7 +745,6 @@ abstract class BattleTypedSearch<T extends SearchType> {
 		let table = BattleTeambuilderTable;
 		if (this.formatType?.startsWith('bdsp')) table = table['gen8bdsp'];
 		if (this.formatType === 'letsgo') table = table['gen7letsgo'];
-		if (this.formatType === 'gen9ttc') table = table[this.dex.modid];
 		if (speciesid in table.learnsets) return speciesid;
 		const species = this.dex.species.get(speciesid);
 		if (!species.exists) return '' as ID;
@@ -828,7 +803,6 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			let table = BattleTeambuilderTable;
 			if (this.formatType?.startsWith('bdsp')) table = table['gen8bdsp'];
 			if (this.formatType === 'letsgo') table = table['gen7letsgo'];
-			if (this.formatType === 'gen9ttc') table = table[this.dex.modid];
 			let learnset = table.learnsets[learnsetid];
 			if (learnset && (moveid in learnset) && (!this.format.startsWith('tradebacks') ? learnset[moveid].includes(genChar) :
 				learnset[moveid].includes(genChar) ||
@@ -1567,7 +1541,6 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 		if (this.formatType?.startsWith('ssdlc1')) lsetTable = lsetTable['gen8dlc1'];
 		if (this.formatType?.startsWith('predlc')) lsetTable = lsetTable['gen9predlc'];
 		if (this.formatType?.startsWith('svdlc1')) lsetTable = lsetTable['gen9dlc1'];
-		if (this.dex.modid === 'gen9ttc') lsetTable = lsetTable[this.dex.modid];
 		while (learnsetid) {
 			let learnset = lsetTable.learnsets[learnsetid];
 			if (learnset) {
