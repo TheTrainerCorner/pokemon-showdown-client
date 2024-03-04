@@ -382,7 +382,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			if (isPreDLC) genStr += 'predlc';
 			if (isSVDLC1) genStr += 'dlc1';
 			if (isStadium) genStr += 'stadium' + (genNum > 1 ? genNum : '');
-			if (isNatdexTTC || isTTC) genStr += 'ttc_current';
+			if (isNatdexTTC || isTTC) genStr += 'ttc';
 			return genStr;
 		})();
 		// process.stdout.write("" + gen + (isDoubles ? " doubles" : "") + "... ");
@@ -478,6 +478,8 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 				}
 				if (isTTC) {
 					let tier = isDoubles ? species.doublesTier : species.tier;
+					if (species.tags.includes('Fakemon'))
+						console.log(species, tier);
 					if (species.num <= 0 || species.isNonstandard === "Unobtainable") tier = 'Illegal';
 					return tier;
 				}
