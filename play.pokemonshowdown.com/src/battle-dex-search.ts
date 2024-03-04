@@ -588,8 +588,8 @@ abstract class BattleTypedSearch<T extends SearchType> {
 		if (formatName in window.Formats) {
 			let info = window.Formats[formatName];
 			if ('mod' in info) {
-				this.dex = Dex.mod(info.mod);
-				if (info.mod.includes('infinitefusion') || info.mod.includes('ttc')) {
+				this.dex = Dex.mod(info.mod as ID);
+				if (info.mod.includes('ttc')) {
 					this.formatType = 'natdex';
 					if (info.gameType === 'doubles') {
 						format = 'doublesubers' as ID;
