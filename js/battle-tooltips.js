@@ -1886,11 +1886,11 @@ value.abilityModify(1.3,"Tough Claws");
 if(move.flags['sound']){
 value.abilityModify(1.3,"Punk Rock");
 }
-if(move.flags['slicing']){
-value.abilityModify(1.5,"Sharpness");
-}
 if(move.flags['bullet']){
 value.abilityModify(1.3,"Baller")
+}
+if(move.flags['slicing']){
+value.abilityModify(1.5,"Sharpness");
 }
 for(var i=1;i<=5&&i<=pokemon.side.faintCounter;i++){
 if(pokemon.volatiles["fallen"+i]){
