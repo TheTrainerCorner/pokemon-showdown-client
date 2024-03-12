@@ -756,6 +756,12 @@ class BattleTooltips {
 			if (move.accuracy==100 && ability === 'hustle'){
 				text += `<p class="movetag">&#x2713; Accurate <small>(boosted by Hustle)</small></p>`;
 			}
+			if (move.flags.weight && ability === 'heavymetal'){
+				text += `<p class="movetag">&#x2713; Weight <small>(boosted by Heavy Metal)</small></p>`;
+			}
+			if (move.flags.light && ability === 'illuminate'){
+				text += `<p class="movetag">&#x2713; Light <small>(boosted by Illuminate)</small></p>`;
+			}
 			if (move.flags.pulse && ability === 'megalauncher') {
 				text += `<p class="movetag">&#x2713; Pulse <small>(boosted by Mega Launcher)</small></p>`;
 			}
@@ -1973,6 +1979,13 @@ class BattleTooltips {
 		} 
 		if (move.accuracy !== 100) {
 			value.abilityModify(1.5, 'Hustle');
+		}
+		if (move.flags['weight']){
+			value.abilityModify(1.3, "Heavy Metal")
+		}
+		if (move.flags['light']){
+			value.abilityModify(1.3, "Illuminate")
+			move.accuracy===true;
 		}
 		for (let i = 1; i <= 5 && i <= pokemon.side.faintCounter; i++) {
 			if (pokemon.volatiles[`fallen${i}`]) {
