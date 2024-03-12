@@ -762,7 +762,7 @@ class BattleTooltips {
 			if (move.flags.light && ability === 'illuminate'){
 				text += `<p class="movetag">&#x2713; Light <small>(boosted by Illuminate)</small></p>`;
 			}
-			if (move.type === 'Electric' || move.type === 'Fire' || move.type === 'Water' && ability === 'powerofalchemy'){
+			if (move.type === 'Electric' || move.type === 'Fire' || move.type === 'Ice' && ability === 'powerofalchemy'){
 				text += `<p class="movetag">&#x2713; Alchemy Boosted <small>(boosted by Power of Alchemy)</small></p>`
 			}
 			if (move.flags.blast && ability === 'quickdraw'){
@@ -1996,8 +1996,8 @@ class BattleTooltips {
 			value.abilityModify(1.3, "Illuminate")
 			move.accuracy===true;
 		}
-		if (move.type === 'Electric' || move.type === 'Fire' || move.type === 'Water'){
-			value.abilityModify(1.2, "Power Of Alchemy")
+		if (move.type === 'Electric' || move.type === 'Fire' || move.type === 'Ice'){
+			value.abilityModify(1.2, "Power of Alchemy")
 		}
 		if (move.flags['blast']){
 			value.abilityModify(1.3, "Quick Draw")
