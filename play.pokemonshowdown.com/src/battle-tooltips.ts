@@ -747,6 +747,14 @@ class BattleTooltips {
 			if (move.flags.Kick && ability === 'legday'){
 				text += `<p class="movetag">&#x2713; Kick <small>(boosted by Leg Day)</small></p>`;
 			}
+			if (move.flags.peck && ability === 'bigpecks'){
+				text += `<p class="movetag">&#x2713; Peck <small>(boosted by Big Pecks)</small></p>`;
+			}
+			if (move.accuracy!==100 && ability === 'hustle'){
+				text += `<p class="movetag">&#x2713; Not Accurate <small>(boosted by Hustle)</small></p>`;
+			}
+			else
+			text += `<p class="movetag">&#x2713; Accurate <small>(boosted by Hustle)</small></p>`;
 			if (move.flags.pulse && ability === 'megalauncher') {
 				text += `<p class="movetag">&#x2713; Pulse <small>(boosted by Mega Launcher)</small></p>`;
 			}
@@ -1961,6 +1969,11 @@ class BattleTooltips {
 		if (move.flags['kick']){
 			value.abilityModify(1.3, "Leg Day")
 		}
+		if (move.accuracy!==100){
+			value.abilityModify(1.5, "hustle")
+		}
+		else
+			value.abilityModify(1.1, "hustle")
 		for (let i = 1; i <= 5 && i <= pokemon.side.faintCounter; i++) {
 			if (pokemon.volatiles[`fallen${i}`]) {
 				value.abilityModify(1 + 0.1 * i, "Supreme Overlord");
