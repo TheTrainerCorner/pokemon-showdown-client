@@ -741,31 +741,31 @@ class BattleTooltips {
 			if (move.flags.punch && ability === 'ironfist') {
 				text += `<p class="movetag">&#x2713; Fist <small>(boosted by Iron Fist)</small></p>`;
 			}
-			if (move.flags.bullet && ability === 'baller'){
+			if (move.flags.bullet && ability === 'baller') {
 				text += `<p class="movetag">&#x2713; Bullet-like <small>(boosted by Baller)</small></p>`;
 			}
-			if (move.flags.kick && ability === 'legday'){
+			if (move.flags.kick && ability === 'legday') {
 				text += `<p class="movetag">&#x2713; Kick <small>(boosted by Leg Day)</small></p>`;
 			}
-			if (move.flags.peck && ability === 'bigpecks'){
+			if (move.flags.peck && ability === 'bigpecks') {
 				text += `<p class="movetag">&#x2713; Peck <small>(boosted by Big Pecks)</small></p>`;
 			}
-			if (move.accuracy!==100 && ability === 'hustle'){
+			if (move.accuracy!==100 && ability === 'hustle') {
 				text += `<p class="movetag">&#x2713; Not Accurate <small>(boosted by Hustle)</small></p>`;
 			}
-			if (move.accuracy==100 && ability === 'hustle'){
+			if (move.accuracy==100 && ability === 'hustle') {
 				text += `<p class="movetag">&#x2713; Accurate <small>(boosted by Hustle)</small></p>`;
 			}
-			if (move.flags.weight && ability === 'heavymetal'){
+			if (move.flags.weight && ability === 'heavymetal') {
 				text += `<p class="movetag">&#x2713; Weight <small>(boosted by Heavy Metal)</small></p>`;
 			}
-			if (move.flags.light && ability === 'illuminate'){
+			if (move.flags.light && ability === 'illuminate') {
 				text += `<p class="movetag">&#x2713; Light <small>(boosted by Illuminate)</small></p>`;
 			}
 			if (move.type === 'Electric' || move.type === 'Fire' || move.type === 'Ice' && ability === 'powerofalchemy'){
 				text += `<p class="movetag">&#x2713; Alchemy Boosted <small>(boosted by Power of Alchemy)</small></p>`
 			}
-			if (move.flags.blast && ability === 'quickdraw'){
+			if (move.flags.blast && ability === 'quickdraw') {
 				text += `<p class="movetag">&#x2713; Blast <small>(boosted by Quick Draw)</small></p>`;
 			}
 			if (move.flags.slicing && ability === 'sharpenedleek') {
