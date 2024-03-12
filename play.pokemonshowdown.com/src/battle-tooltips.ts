@@ -1969,10 +1969,10 @@ class BattleTooltips {
 			value.abilityModify(1.5, "Big Pecks")
 		}
 		if (pokemon.ability === 'Hustle' && (move.accuracy === 100 || move.accuracy === true)) {
-			value.modify(1.1, 'Hustle')
+			value.abilityModify(1.1, 'Hustle')
 		} 
 		if (pokemon.ability === 'Hustle' && move.accuracy !== 100) {
-			value.modify(1.5, 'Hustle');
+			value.abilityModify(1.5, 'Hustle');
 		}
 		for (let i = 1; i <= 5 && i <= pokemon.side.faintCounter; i++) {
 			if (pokemon.volatiles[`fallen${i}`]) {
