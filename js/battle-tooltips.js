@@ -747,14 +747,11 @@ text+="<p class=\"movetag\">&#x2713; Bullet-like <small>(boosted by Baller)</sma
 if (move.flags.Kick&& ability === 'legday'){
 text+="<p class=\"movetag\">&#x2713; Kick <small>(boosted by Leg Day)</small></p>";
 }
-if (move.flags.peck&& ability === 'bigpecks'){
-	text+="<p class=\"movetag\">&#x2713; Peck <small>(boosted by Big Pecks)</small></p>";
-}
 if (move.accuracy!==100 && ability === 'hustle'){
 	text+="<p class=\"movetag\">&#x2713; Not Accurate <small>(boosted by Hustle)</small></p>";
 }
-else
-text+="<p class=\"movetag\">&#x2713; Accurate <small>(boosted by Hustle)</small></p>";
+if(move.accuracy==100 && ability === 'hustle')
+	text+="<p class=\"movetag\">&#x2713; Accurate <small>(boosted by Hustle)</small></p>";
 if(move.flags.pulse&&ability==='megalauncher'){
 text+="<p class=\"movetag\">&#x2713; Pulse <small>(boosted by Mega Launcher)</small></p>";
 }

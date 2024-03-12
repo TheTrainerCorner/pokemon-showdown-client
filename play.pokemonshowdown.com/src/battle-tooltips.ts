@@ -753,8 +753,9 @@ class BattleTooltips {
 			if (move.accuracy!==100 && ability === 'hustle'){
 				text += `<p class="movetag">&#x2713; Not Accurate <small>(boosted by Hustle)</small></p>`;
 			}
-			else
-			text += `<p class="movetag">&#x2713; Accurate <small>(boosted by Hustle)</small></p>`;
+			if (move.accuracy==100 && ability === 'hustle'){
+				text += `<p class="movetag">&#x2713; Accurate <small>(boosted by Hustle)</small></p>`;
+			}
 			if (move.flags.pulse && ability === 'megalauncher') {
 				text += `<p class="movetag">&#x2713; Pulse <small>(boosted by Mega Launcher)</small></p>`;
 			}
@@ -1737,11 +1738,6 @@ class BattleTooltips {
 				'approximate'
 			);
 		}
-    if (pokemon.ability === 'Hustle' && (move.accuracy === 100 || move.accuracy === true)) {
-      value.modify(1.1, 'Hustle + 100% Accurate Move')
-    } else if (pokemon.ability === 'Hustle' && move.accuracy !== 100) {
-      value.modify(1.5, 'Hustle + Not 100% Accurate Move');
-    }
 		if (['terablast'].includes(move.id) && pokemon.terastallized === 'Stellar') {
 			value.set(100, 'Tera Stellar boost');
 		}
@@ -1969,11 +1965,14 @@ class BattleTooltips {
 		if (move.flags['kick']){
 			value.abilityModify(1.3, "Leg Day")
 		}
-		if (move.accuracy!==100){
-			value.abilityModify(1.5, "hustle")
+		if (move.flags['peck']){
+			value.abilityModify(1.5, "Big Pecks")
 		}
-		else
-			value.abilityModify(1.1, "hustle")
+		if (pokemon.ability === 'Hustle' && (move.accuracy === 100 || move.accuracy === true)) {
+			value.modify(1.1, 'Hustle + 100% Accurate Move')
+		  } else if (pokemon.ability === 'Hustle' && move.accuracy !== 100) {
+			value.modify(1.5, 'Hustle + Not 100% Accurate Move');
+		  }
 		for (let i = 1; i <= 5 && i <= pokemon.side.faintCounter; i++) {
 			if (pokemon.volatiles[`fallen${i}`]) {
 				value.abilityModify(1 + 0.1 * i, "Supreme Overlord");
