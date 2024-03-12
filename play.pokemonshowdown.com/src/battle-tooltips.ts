@@ -762,6 +762,15 @@ class BattleTooltips {
 			if (move.flags.light && ability === 'illuminate'){
 				text += `<p class="movetag">&#x2713; Light <small>(boosted by Illuminate)</small></p>`;
 			}
+			if (move.type === 'Ice' || move.type === 'Fire' || move.type === 'Water' && ability === 'powerofalchemy'){
+				text += `<p class="movetag">&#x2713; Alchemy Boosted <small>(boosted by Power of Alchemy)</small></p>`
+			}
+			if (move.flags.blast && ability === 'quickdraw'){
+				text += `<p class="movetag">&#x2713; Blast <small>(boosted by Quick Draw)</small></p>`;
+			}
+			if (move.flags.slicing && ability === 'sharpenedleek') {
+				text += `<p class="movetag">&#x2713; Slicing <small>(boosted by Sharpened Leek)</small></p>`;
+			}
 			if (move.flags.pulse && ability === 'megalauncher') {
 				text += `<p class="movetag">&#x2713; Pulse <small>(boosted by Mega Launcher)</small></p>`;
 			}
@@ -1987,6 +1996,19 @@ class BattleTooltips {
 			value.abilityModify(1.3, "Illuminate")
 			move.accuracy===true;
 		}
+		if (move.type === 'Ice' || move.type === 'Fire' || move.type === 'Water' ){
+			value.abilityModify(1.2, "Power Of Alchemy")
+		}
+		if (move.flags['blast']){
+			value.abilityModify(1.3, "Quick Draw")
+		}
+		if (move.flags['slicing']){
+			value.abilityModify(1.5, "Sharpened Leek")
+		}	
+		if (move.category === "Physical" && pokemon === 'meloettacaroler')
+			value.abilityModify(1.3, "Frigid Inspiration")
+		if (move.category === "Special" && pokemon === 'meloettapirouette')
+			value.abilityModify(1.3, "Frigid Inspiration")
 		for (let i = 1; i <= 5 && i <= pokemon.side.faintCounter; i++) {
 			if (pokemon.volatiles[`fallen${i}`]) {
 				value.abilityModify(1 + 0.1 * i, "Supreme Overlord");
