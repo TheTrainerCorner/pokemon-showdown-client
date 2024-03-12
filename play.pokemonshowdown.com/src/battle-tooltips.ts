@@ -1996,7 +1996,7 @@ class BattleTooltips {
 			value.abilityModify(1.3, "Illuminate")
 			move.accuracy===true;
 		}
-		if (move.type === 'Ice' || move.type === 'Fire' || move.type === 'Water' ){
+		if (['ICe', 'Fire', 'Water'].includes(moveType)){
 			value.abilityModify(1.2, "Power Of Alchemy")
 		}
 		if (move.flags['blast']){
