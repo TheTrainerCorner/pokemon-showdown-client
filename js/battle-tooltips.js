@@ -741,6 +741,9 @@ text+="<p class=\"movetag\">&#x2713; Powder <small>(doesn't affect Grass, Overco
 if(move.flags.punch&&ability==='ironfist'){
 text+="<p class=\"movetag\">&#x2713; Fist <small>(boosted by Iron Fist)</small></p>";
 }
+if (move.flags.bullet&& ability === 'baller'){
+text += '<p class=\"movetag\">&#x2713; Bullet-like <small>(boosted by Baller)</small></p>';
+}
 if(move.flags.pulse&&ability==='megalauncher'){
 text+="<p class=\"movetag\">&#x2713; Pulse <small>(boosted by Mega Launcher)</small></p>";
 }
