@@ -742,7 +742,7 @@ class BattleTooltips {
 				text += `<p class="movetag">&#x2713; Fist <small>(boosted by Iron Fist)</small></p>`;
 			}
 			if (move.flags.bullet && ability === 'baller'){
-				text += `<p class="movetag">&#x2713; Bullet-like <small>(boosted by Baller)</small></p>`;
+				text += `<p class="movetag">&#x2713; Bullet-like <small>(boosted by Baller)</small></p`;
 			}
 			if (move.flags.pulse && ability === 'megalauncher') {
 				text += `<p class="movetag">&#x2713; Pulse <small>(boosted by Mega Launcher)</small></p>`;
@@ -1951,6 +1951,9 @@ class BattleTooltips {
 		}
 		if (move.flags['slicing']) {
 			value.abilityModify(1.5, "Sharpness");
+		}
+		if (move.flags['bullet']){
+			value.abilityModify(1.3, "Baller")
 		}
 		for (let i = 1; i <= 5 && i <= pokemon.side.faintCounter; i++) {
 			if (pokemon.volatiles[`fallen${i}`]) {
