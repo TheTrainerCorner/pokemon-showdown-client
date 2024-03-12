@@ -1970,9 +1970,10 @@ class BattleTooltips {
 		}
 		if (pokemon.ability === 'Hustle' && (move.accuracy === 100 || move.accuracy === true)) {
 			value.modify(1.1, 'Hustle + 100% Accurate Move')
-		  } else if (pokemon.ability === 'Hustle' && move.accuracy !== 100) {
+		} 
+		if (pokemon.ability === 'Hustle' && move.accuracy !== 100) {
 			value.modify(1.5, 'Hustle + Not 100% Accurate Move');
-		  }
+		}
 		for (let i = 1; i <= 5 && i <= pokemon.side.faintCounter; i++) {
 			if (pokemon.volatiles[`fallen${i}`]) {
 				value.abilityModify(1 + 0.1 * i, "Supreme Overlord");
