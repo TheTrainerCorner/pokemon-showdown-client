@@ -1674,7 +1674,7 @@ class BattleTooltips {
 			accuracyModifiers.push(5325);
 			value.abilityModify(1.3, "Compound Eyes");
 		}
-		if (value.tryAbility('Elemental') && pokemon.types.includes(move.type)) {
+		if (value.tryAbility('Elemental') && species.types.includes(move.type)) {
 			accuracyModifiers.push(4915);
 			value.abilityModify(1.2, "Elemental");
 		}
@@ -1986,6 +1986,11 @@ class BattleTooltips {
 		if (move.flags['light']){
 			value.abilityModify(1.3, "Illuminate")
 			move.accuracy===true;
+		}
+		if(target){
+			if(target.species.types.includes('water')){
+			value.abilityModify(1.2, 'Mold Breaker')
+			}
 		}
 		for (let i = 1; i <= 5 && i <= pokemon.side.faintCounter; i++) {
 			if (pokemon.volatiles[`fallen${i}`]) {
