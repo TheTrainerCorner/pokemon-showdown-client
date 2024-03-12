@@ -1889,6 +1889,9 @@ value.abilityModify(1.3,"Punk Rock");
 if(move.flags['slicing']){
 value.abilityModify(1.5,"Sharpness");
 }
+if(move.flags['bullet']){
+value.abilityModify(1.3,"Baller")
+}
 for(var i=1;i<=5&&i<=pokemon.side.faintCounter;i++){
 if(pokemon.volatiles["fallen"+i]){
 value.abilityModify(1+0.1*i,"Supreme Overlord");
