@@ -744,6 +744,9 @@ class BattleTooltips {
 			if (move.flags.bullet && ability === 'baller'){
 				text += `<p class="movetag">&#x2713; Bullet-like <small>(boosted by Baller)</small></p>`;
 			}
+			if (move.flags.Kick && ability === 'legday'){
+				text += `<p class="movetag">&#x2713; Kick <small>(boosted by Leg Day)</small></p>`;
+			}
 			if (move.flags.pulse && ability === 'megalauncher') {
 				text += `<p class="movetag">&#x2713; Pulse <small>(boosted by Mega Launcher)</small></p>`;
 			}
@@ -1954,6 +1957,9 @@ class BattleTooltips {
 		}
 		if (move.flags['bullet']){
 			value.abilityModify(1.3, "Baller")
+		}
+		if (move.flags['kick']){
+			value.abilityModify(1.3, "Leg Day")
 		}
 		for (let i = 1; i <= 5 && i <= pokemon.side.faintCounter; i++) {
 			if (pokemon.volatiles[`fallen${i}`]) {
