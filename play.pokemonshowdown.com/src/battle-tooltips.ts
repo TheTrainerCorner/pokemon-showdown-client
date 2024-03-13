@@ -1974,13 +1974,13 @@ class BattleTooltips {
 		if (move.flags['slicing']) {
 			value.abilityModify(1.5, "Sharpness");
 		}
-		if (move.flags['bullet']){
+		if (move.flags['bullet']) {
 			value.abilityModify(1.3, "Baller")
 		}
-		if (move.flags['kick']){
+		if (move.flags['kick']) {
 			value.abilityModify(1.3, "Leg Day")
 		}
-		if (move.flags['peck']){
+		if (move.flags['peck']) {
 			value.abilityModify(1.5, "Big Pecks")
 		}
 		if ((move.accuracy === 100 || move.accuracy === true)) {
@@ -1989,20 +1989,20 @@ class BattleTooltips {
 		if (move.accuracy !== 100) {
 			value.abilityModify(1.5, 'Hustle');
 		}
-		if (move.flags['weight']){
+		if (move.flags['weight']) {
 			value.abilityModify(1.3, "Heavy Metal")
 		}
-		if (move.flags['light']){
+		if (move.flags['light']) {
 			value.abilityModify(1.3, "Illuminate")
 			move.accuracy===true;
 		}
-		if (move.type === 'Electric' || move.type === 'Fire' || move.type === 'Ice'){
+		if (move.type === 'Electric' || move.type === 'Fire' || move.type === 'Ice') {
 			value.abilityModify(1.2, "Power of Alchemy")
 		}
-		if (move.flags['blast']){
+		if (move.flags['blast']) {
 			value.abilityModify(1.3, "Quick Draw")
 		}
-		if (move.flags['slicing']){
+		if (move.flags['slicing']) {
 			value.abilityModify(1.5, "Sharpened Leek")
 		}	
 		if (move.category === "Physical" && pokemon === 'meloettacaroler')
