@@ -670,7 +670,7 @@ export class Side {
 			if (this.foe && this.avatar === this.foe.avatar) this.rollTrainerSprites();
 		}
 	}
-	addSideCondition(effect: Effect, persist: boolean) {
+	addSideCondition(effect: Effect, persist: boolean, fieldsupport: boolean) {
 		let condition = effect.id;
 		if (this.sideConditions[condition]) {
 			if (condition === 'spikes' || condition === 'toxicspikes') {
@@ -688,7 +688,7 @@ export class Side {
 			this.sideConditions[condition] = [effect.name, 1, 5, this.battle.gen >= 4 ? 8 : 0];
 			break;
 		case 'safeguard':
-			this.sideConditions[condition] = [effect.name, 1, persist ? 7 : 5, 0];
+			this.sideConditions[condition] = [effect.name, 1, persist ? 7 : fieldsupport ? 8 : 5, 0];
 			break;
 		case 'lightscreen':
 			this.sideConditions[condition] = [effect.name, 1, 5, this.battle.gen >= 4 ? 8 : 0];
@@ -697,7 +697,7 @@ export class Side {
 			this.sideConditions[condition] = [effect.name, 1, 5, 0];
 			break;
 		case 'tailwind':
-			this.sideConditions[condition] = [effect.name, 1, this.battle.gen >= 5 ? persist ? 6 : 4 : persist ? 5 : 3, 0];
+			this.sideConditions[condition] = [effect.name, 1, this.battle.gen >= 5 ? persist ? 6 : fieldsupport ? 8 : 4 : persist ? 5 : fieldsupport ? 8 : 3, 0];
 			break;
 		case 'luckychant':
 			this.sideConditions[condition] = [effect.name, 1, 5, 0];
@@ -3000,7 +3000,7 @@ export class Battle {
 		case '-sidestart': {
 			let side = this.getSide(args[1]);
 			let effect = Dex.getEffect(args[2]);
-			side.addSideCondition(effect, !!kwArgs.persistent);
+			side.addSideCondition(effect, !!kwArgs.persistent, !!kwArgs.fieldsupport);
 
 			switch (effect.id) {
 			case 'tailwind':
@@ -3066,6 +3066,7 @@ export class Battle {
 				if (this.gen > 6) maxTimeLeft = 8;
 			}
 			if (kwArgs.persistent) minTimeLeft += 2;
+			if (kwArgs.fieldsupport) minTimeLeft + 2;
 			this.addPseudoWeather(effect.name, minTimeLeft, maxTimeLeft);
 
 			switch (effect.id) {
