@@ -2016,7 +2016,8 @@ class BattleTooltips {
 		}
 		// New Rivalry
 		if (target) {
-			if (this.getPokemonTypes(target).includes(move.type)) {
+			const Rivalrytypes = this.pokemonHasType(pokemon)
+			if (this.getPokemonTypes(target).includes(this.pokemonHasType())) {
 				value.abilityModify(1.2, "Rivalry");
 			}
 		}
