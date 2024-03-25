@@ -2016,8 +2016,12 @@ class BattleTooltips {
 		}
 		// New Rivalry
 		if (target) {
-			const Rivalrytypes = this.pokemonHasType(pokemon)
-			if (this.getPokemonTypes(target).includes(this.pokemonHasType())) {
+			let tTypes = this.getPokemonTypes(target);
+			let pTypes = this.getPokemonTypes(pokemon);
+			// Logic:
+			// IF tTypes' length is 2 AND pTypes has tTypes' 1 OR pTypes has tTypes' 2
+			// OR pTypes has tTypes 1
+			if ((tTypes.length === 2 && (pTypes.includes(tTypes[0]) || pTypes.includes(tTypes[1]))) || (pTypes.includes(tTypes[0]))) {
 				value.abilityModify(1.2, "Rivalry");
 			}
 		}
