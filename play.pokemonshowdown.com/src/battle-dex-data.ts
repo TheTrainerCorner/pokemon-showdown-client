@@ -1194,6 +1194,13 @@ interface MoveFlags {
 	sound?: 1 | 0;
 	/** Activates the effects of the Wind Power and Wind Rider Abilities. */
 	wind?: 1 | 0;
+
+	// Custom Flags
+	kick?: 1 | 0;
+	peck?: 1 | 0;
+	weight?: 1 | 0;
+	light?: 1 | 0;
+	blast?: 1 | 0;
 }
 
 type MoveTarget = 'normal' | 'any' | 'adjacentAlly' | 'adjacentFoe' | 'adjacentAllyOrSelf' | // single-target

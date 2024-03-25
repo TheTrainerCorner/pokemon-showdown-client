@@ -2004,23 +2004,30 @@ class BattleTooltips {
 		}
 		if (move.flags['slicing']) {
 			value.abilityModify(1.5, "Sharpened Leek")
-		}	
-		if (move.category === "Physical" && pokemon === 'meloettacaroler')
+		}
+		if (move.category === "Physical" && pokemon.searchid === 'meloettacaroler')
 			value.abilityModify(1.3, "Frigid Inspiration")
-		if (move.category === "Special" && pokemon === 'meloettapirouette')
+		if (move.category === "Special" && pokemon.searchid === 'meloettapirouette')
 			value.abilityModify(1.3, "Frigid Inspiration")
 		for (let i = 1; i <= 5 && i <= pokemon.side.faintCounter; i++) {
 			if (pokemon.volatiles[`fallen${i}`]) {
 				value.abilityModify(1 + 0.1 * i, "Supreme Overlord");
 			}
 		}
+		// New Rivalry
 		if (target) {
-			if (["MF", "FM"].includes(pokemon.gender + target.gender)) {
-				value.abilityModify(0.75, "Rivalry");
-			} else if (["MM", "FF"].includes(pokemon.gender + target.gender)) {
-				value.abilityModify(1.25, "Rivalry");
+			if (this.getPokemonTypes(target).includes(move.type)) {
+				value.abilityModify(1.2, "Rivalry");
 			}
 		}
+		// Old Rivalry Tooltip
+		// if (target) {
+		// 	if (["MF", "FM"].includes(pokemon.gender + target.gender)) {
+		// 		value.abilityModify(0.75, "Rivalry");
+		// 	} else if (["MM", "FF"].includes(pokemon.gender + target.gender)) {
+		// 		value.abilityModify(1.25, "Rivalry");
+		// 	}
+		// }
 		const noTypeOverride = [
 			'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'struggle', 'technoblast', 'terrainpulse', 'weatherball',
 		];
