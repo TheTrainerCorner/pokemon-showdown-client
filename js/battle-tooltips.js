@@ -1547,7 +1547,7 @@ moveType='Water'
 break;
 }
 }
-}
+
 
 
 var noTypeOverride=[
