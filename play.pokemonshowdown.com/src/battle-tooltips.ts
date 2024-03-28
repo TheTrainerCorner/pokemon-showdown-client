@@ -1268,6 +1268,7 @@ class BattleTooltips {
 			'ironball',
 			'oranberry',
 			'ovalstone',
+			'houndoominite'
 		].includes(item) && ability === 'ballfetch') {
 			speedModifiers.push(1.5);
 		}
