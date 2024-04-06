@@ -1739,10 +1739,6 @@ class BattleTooltips {
 			accuracyModifiers.push(5325);
 			value.abilityModify(1.3, "Compound Eyes");
 		}
-		if (value.tryAbility('Elemental') && pokemon.types.includes(move.type)) {
-			accuracyModifiers.push(4915);
-			value.abilityModify(1.2, "Elemental");
-		}
 
 		if (value.tryItem('Wide Lens')) {
 			accuracyModifiers.push(4505);
