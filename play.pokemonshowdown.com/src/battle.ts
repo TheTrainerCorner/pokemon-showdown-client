@@ -2234,8 +2234,6 @@ export class Battle {
 
 			if (effect.id) {
 				switch (effect.id) {
-				case 'pickup':
-					this.activateAbility(poke, "Pickup");
 					// falls through
 				case 'recycle':
 					poke.itemEffect = 'found';

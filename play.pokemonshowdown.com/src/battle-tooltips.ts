@@ -1744,7 +1744,6 @@ class BattleTooltips {
 			accuracyModifiers.push(4505);
 			value.itemModify(1.1, "Wide Lens");
 		}
-
 		// Chaining modifiers
 		let chain = 4096;
 		for (const mod of accuracyModifiers) {
