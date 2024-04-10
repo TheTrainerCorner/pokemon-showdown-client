@@ -2231,6 +2231,8 @@ if(item.id==='airballoon')_poke23.addVolatile('airballoon');
 
 if(_effect11.id){
 switch(_effect11.id){
+case'pickup':
+this.activateAbility(_poke23,"Pickup");
 
 case'recycle':
 _poke23.itemEffect='found';
