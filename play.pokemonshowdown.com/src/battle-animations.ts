@@ -1755,7 +1755,17 @@ export class PokemonSprite extends Sprite {
 	// HTML strings are constructed from this table and stored back in it to cache them
 	protected static statusTable: {[id: string]: [string, 'good' | 'bad' | 'neutral'] | null | string} = {
     //#region Modified
-    cottondown: ['Cotton Down', 'bad'],
+    	cottondown: ['Cotton Down', 'bad'],
+		hailthecoinx1: ['Hail The Coin x 1', 'good'],
+		hailthecoinx2: ['Hail The Coin x 2', 'good'],
+		hailthecoinx3: ['Hail The Coin x 3', 'good'],
+		hailthecoinx4: ['Hail The Coin x 4', 'good'],
+		hailthecoinx5: ['Hail The Coin x 5', 'good'],
+		hailthecoinx6: ['Hail The Coin x 6', 'good'],
+		hailthecoinx7: ['Hail The Coin x 7', 'good'],
+		hailthecoinx8: ['Hail The Coin x 8', 'good'],
+		hailthecoinx9: ['Hail The Coin x 9', 'good'],
+		hailthecoinx10: ['Hail The Coin x 10', 'good'],
     //#endregion
 		formechange: null,
 		typechange: null,
