@@ -1756,6 +1756,7 @@ export class PokemonSprite extends Sprite {
 	protected static statusTable: {[id: string]: [string, 'good' | 'bad' | 'neutral'] | null | string} = {
     //#region Modified
     	cottondown: ['Cotton Down', 'bad'],
+		// Hail The Coin
 		hailthecoinx1: ['Hail The Coin x 1', 'good'],
 		hailthecoinx2: ['Hail The Coin x 2', 'good'],
 		hailthecoinx3: ['Hail The Coin x 3', 'good'],
@@ -1766,6 +1767,26 @@ export class PokemonSprite extends Sprite {
 		hailthecoinx8: ['Hail The Coin x 8', 'good'],
 		hailthecoinx9: ['Hail The Coin x 9', 'good'],
 		hailthecoinx10: ['Hail The Coin x 10', 'good'],
+		// Gambler's Luck
+		gamblerslucknormal: ["Gambler's Luck: Normal", "good"],
+		gamblersluckbug: ["Gambler's Luck: Bug", "good"],
+		gamblersluckdark: ["Gambler's Luck: Dark", "good"],
+		gamblersluckdragon: ["Gambler's Luck: Dragon", "good"],
+		gamblersluckelectric: ["Gambler's Luck: Electric", "good"],
+		gamblersluckfairy: ["Gambler's Luck: Fairy", "good"],
+		gamblersluckfighting: ["Gambler's Luck: Fighting", "good"],
+		gamblersluckfire: ["Gambler's Luck: Fire", "good"],
+		gamblersluckflying: ["Gambler's Luck: Flying", "good"],
+		gamblersluckghost: ["Gambler's Luck: Ghost", "good"],
+		gamblersluckgrass: ["Gambler's Luck: Grass", "good"],
+		gamblersluckground: ["Gambler's Luck: Ground", "good"],
+		gamblersluckice: ["Gambler's Luck: Ice", "good"],
+		gamblersluckpoison: ["Gambler's Luck: Poison", "good"],
+		gamblersluckpsychic: ["Gambler's Luck: Psychic", "good"],
+		gamblersluckrock: ["Gambler's Luck: Rock", "good"],
+		gamblerslucksteel: ["Gambler's Luck: Steel", "good"],
+		gamblersluckstellar: ["Gambler's Luck: Stellar", "good"],
+		gamblersluckwater: ["Gambler's Luck: Water", "good"],
     //#endregion
 		formechange: null,
 		typechange: null,
