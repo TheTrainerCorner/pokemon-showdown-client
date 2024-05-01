@@ -1757,6 +1757,7 @@ export class PokemonSprite extends Sprite {
     //#region Modified
     	cottondown: ['Cotton Down', 'bad'],
 		// Hail The Coin
+		hailthecoin: ['Hail The Coin', "good"],
 		hailthecoinx1: ['Hail The Coin x 1', 'good'],
 		hailthecoinx2: ['Hail The Coin x 2', 'good'],
 		hailthecoinx3: ['Hail The Coin x 3', 'good'],
