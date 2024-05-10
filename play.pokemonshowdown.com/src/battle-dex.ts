@@ -541,7 +541,7 @@ const Dex = new class implements ModdedDex {
 
 		if (species.tags.includes("Fakemon")) {
 			if (isFront) spriteData.url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/${options.shiny ? 'shiny-' : ''}front/${species.id}.png`;
-			else if (!isFront && species.tags.includes("HasBackSprite")) spriteData.url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/${options.shiny ? 'shiny-' : ''}back/${species.id}.png`;
+			else if (!isFront && species.tags.includes("Has Back Sprite")) spriteData.url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/${options.shiny ? 'shiny-' : ''}back/${species.id}.png`;
 			else spriteData.url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/${options.shiny ? 'shiny-' : ''}front/${species.id}.png`
 			spriteData.pixelated = true;
 			spriteData.gen = 5;
