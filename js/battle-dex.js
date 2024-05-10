@@ -629,7 +629,7 @@ spriteData.h*=0.5;
 spriteData.y+=-11;
 }
 if(this.fakemons.includes(species.id)){
-spriteData.url='http://play.thetrainercorner.net/sprites/fakemons/'+name+'.png';
+spriteData.url='https://github.com/TheTrainerCorner/fakemon-sprites/blob/main/'+name+'.png';
 }
 
 return spriteData;
