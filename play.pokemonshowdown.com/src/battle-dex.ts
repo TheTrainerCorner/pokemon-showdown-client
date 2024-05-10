@@ -540,7 +540,9 @@ const Dex = new class implements ModdedDex {
 		//
 
 		if (species.tags.includes("Fakemon")) {
-			spriteData.url = `https://play.thetrainercorner.net/sprites/fakemons/${species.id}.png`;
+			if (isFront) spriteData.url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/${options.shiny ? 'shiny-' : ''}front/${species.id}.png`;
+			else if (!isFront && species.tags.includes("HasBackSprite")) spriteData.url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/${options.shiny ? 'shiny-' : ''}back/${species.id}.png`;
+			else spriteData.url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/${options.shiny ? 'shiny-' : ''}front/${species.id}.png`
 			spriteData.pixelated = true;
 			spriteData.gen = 5;
 			return spriteData;
@@ -740,7 +742,7 @@ const Dex = new class implements ModdedDex {
 		let fainted = ((pokemon as Pokemon | ServerPokemon)?.fainted ? `;opacity:.3;filter:grayscale(100%) brightness(.5)` : ``);
 		let species = Dex.species.get(id);
     	if (species.tags.includes("Fakemon")) {
-      		return `background:transparent url(http://play.thetrainercorner.net/sprites/fakemons/${id}.png) no-repeat scroll;background-size:contain;width:40px;background-position:center${fainted}`
+      		return `background:transparent url(https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/front/${id}.png) no-repeat scroll;background-size:contain;width:40px;background-position:center${fainted}`
     	}
 		return `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-sheet.png?v16) no-repeat scroll -${left}px -${top}px${fainted}`;
 	}
@@ -810,7 +812,7 @@ const Dex = new class implements ModdedDex {
 		const data = this.getTeambuilderSpriteData(pokemon, gen);
 		const shiny = (data.shiny ? '-shiny' : '');
 		if (Dex.species.get(pokemon.species).tags.includes("Fakemon")) {
-			let url = `https://play.thetrainercorner.net/sprites/fakemons/${toID(pokemon.species)}.png`;
+			let url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/front/${toID(pokemon.species)}.png`
 			return `background-image:url(${url});background-position:${data.x}px ${data.y}px;background-repeat:no-repeat;background-size:100px;`;
 		}
 		return 'background-image:url(' + Dex.resourcePrefix + data.spriteDir + shiny + '/' + data.spriteid + '.png);background-position:' + data.x + 'px ' + data.y + 'px;background-repeat:no-repeat';

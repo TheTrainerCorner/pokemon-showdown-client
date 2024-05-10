@@ -18,15 +18,16 @@ process.stdout.write("Syncing data from Git repository...\n");
 child_process.execSync('git pull', {cwd: 'caches/pokemon-showdown'});
 child_process.execSync('npm run build', {cwd: 'caches/pokemon-showdown'});
 
-if (!fs.existsSync('play.pokemonshowdown.com/sprites/fakemons')) {
-	child_process.execSync('git clone https://github.com/TheTrainerCorner/fakemon-sprites.git fakemons', {
-		cwd: 'play.pokemonshowdown.com/sprites',
-	});
-}
-process.stdout.write("Syncing ttc sprites....\n");
-child_process.execSync("git pull", {cwd: "play.pokemonshowdown.com/sprites/fakemons"});
+// We don't need this any more since we are going to be pulling from github.
+// if (!fs.existsSync('play.pokemonshowdown.com/sprites/fakemons')) {
+// 	child_process.execSync('git clone https://github.com/TheTrainerCorner/fakemon-sprites.git fakemons', {
+// 		cwd: 'play.pokemonshowdown.com/sprites',
+// 	});
+// }
+// process.stdout.write("Syncing ttc sprites....\n");
+// child_process.execSync("git pull", {cwd: "play.pokemonshowdown.com/sprites/fakemons"});
 
-console.log("DONE");
+// console.log("DONE");
 
 const Dex = require('../caches/pokemon-showdown/dist/sim/dex').Dex.mod('ttc_current');
 const toID = Dex.toID;
