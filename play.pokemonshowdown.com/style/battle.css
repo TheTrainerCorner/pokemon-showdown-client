@@ -249,6 +249,7 @@ License: GPLv2
 	border-radius: 3px;
 }
 .statbar span.brn,
+.statbar span.frb,
 .statbar span.psn,
 .statbar span.slp,
 .statbar span.par,
@@ -259,6 +260,10 @@ License: GPLv2
 }
 .statbar span.brn {
 	background: #EE5533;
+	color: #FFFFFF;
+}
+.statbar span.frb {
+	background: #009AA4;
 	color: #FFFFFF;
 }
 .statbar span.psn {

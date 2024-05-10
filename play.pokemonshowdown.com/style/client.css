@@ -1794,6 +1794,9 @@ a.ilink.yours {
 .status.brn {
 	background: #EE5533;
 }
+.status.frb {
+	background: #009AA4;
+}
 .status.psn, .status.tox {
 	background: #A4009A;
 }
