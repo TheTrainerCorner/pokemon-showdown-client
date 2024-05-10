@@ -630,6 +630,8 @@ spriteData.y+=-11;
 }
 if(this.fakemons.includes(species.id)){
 spriteData.url='https://github.com/TheTrainerCorner/fakemon-sprites/blob/main/'+name+'.png';
+	if(this.fakemons.speciesid==crustocean)
+		spriteData.url="https://github.com/TheTrainerCorner/fakemon-sprites/blob/main/crustocean.png"
 }
 
 return spriteData;
