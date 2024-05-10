@@ -17,9 +17,7 @@ if (!fs.existsSync('caches/pokemon-showdown')) {
 process.stdout.write("Syncing data from Git repository...\n");
 child_process.execSync('git pull', {cwd: 'caches/pokemon-showdown'});
 child_process.execSync('npm run build', {cwd: 'caches/pokemon-showdown'});
-child_process.execSync('git clone https://github.com/TheTrainerCorner/fakemon-sprites.git fakemons', {
-		cwd: 'play.pokemonshowdown.com/sprites',
-	});
+
 if (!fs.existsSync('play.pokemonshowdown.com/sprites/fakemons')) {
 	child_process.execSync('git clone https://github.com/TheTrainerCorner/fakemon-sprites.git fakemons', {
 		cwd: 'play.pokemonshowdown.com/sprites',
