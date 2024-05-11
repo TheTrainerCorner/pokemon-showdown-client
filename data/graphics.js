@@ -2769,7 +2769,6 @@ status+='<span class="slp">SLP</span> ';
 status+='<span class="par">PAR</span> ';
 }else if(pokemon.status==='frb'){
 status+='<span class="frb">FRB</span> ';
-}
 }else if(pokemon.status==='frz'){
 status+='<span class="frz">FRZ</span> ';
 }
