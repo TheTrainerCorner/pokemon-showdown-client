@@ -2767,6 +2767,9 @@ status+='<span class="psn">TOX</span> ';
 status+='<span class="slp">SLP</span> ';
 }else if(pokemon.status==='par'){
 status+='<span class="par">PAR</span> ';
+}else if(pokemon.status==='frb'){
+status+='<span class="frb">FRB</span> ';
+}
 }else if(pokemon.status==='frz'){
 status+='<span class="frz">FRZ</span> ';
 }
@@ -5907,6 +5910,57 @@ time:75
 attacker.anim({
 time:100
 },'accel');
+}
+},
+frb:{
+anim:function(scene,_ref51){var attacker=_ref51[0];
+scene.showEffect('icicle',{
+x:attacker.x-30,
+y:attacker.y,
+z:attacker.z,
+scale:0.5,
+opacity:0.5,
+time:200
+},{
+scale:0.9,
+opacity:0,
+time:600
+},'linear','fade');
+scene.showEffect('icicle',{
+x:attacker.x,
+y:attacker.y-30,
+z:attacker.z,
+scale:0.5,
+opacity:0.5,
+time:300
+},{
+scale:0.9,
+opacity:0,
+time:650
+},'linear','fade');
+scene.showEffect('icicle',{
+x:attacker.x+15,
+y:attacker.y,
+z:attacker.z,
+scale:0.5,
+opacity:0.5,
+time:400
+},{
+scale:0.9,
+opacity:0,
+time:700
+},'linear','fade');
+scene.showEffect('wisp',{
+x:attacker.x,
+y:attacker.y,
+z:attacker.z,
+scale:1,
+opacity:0.5
+},{
+scale:3,
+opacity:0,
+time:600
+},'linear','fade');
 }
 },
 frz:{

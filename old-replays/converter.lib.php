@@ -608,6 +608,10 @@ function pokeConvertInner($text)
 		{
 			$out[] = '  r-status '.resolvePokemon(substr($line, 1)).' brn already';
 		}
+		else if (endsRemove($line, ' is already frostbitten.>'))
+		{
+			$out[] = '  r-status '.resolvePokemon(substr($line, 1)).' frb already';
+		}
 		else if (endsRemove($line, ' is already paralyzed.>'))
 		{
 			$out[] = '  r-status '.resolvePokemon(substr($line, 1)).' par already';
@@ -670,9 +674,18 @@ function pokeConvertInner($text)
 			$out[] = 'residual '.resolvePokemon(substr($line, 1)).' burn ??';
 			markLastDamage($out);
 		}
+		else if (endsRemove($line, ' is hurt by its frostbite!>'))
+		{
+			$out[] = 'residual '.resolvePokemon(substr($line, 1)).' frostbite ??';
+			markLastDamage($out);
+		}
 		else if (endsRemove($line, ' was burned!>'))
 		{
 			$out[] = '  r-status '.resolvePokemon(substr($line, 1)).' brn';
+		}
+		else if (endsRemove($line, ' was frostbitten!>'))
+		{
+			$out[] = '  r-status '.resolvePokemon(substr($line, 1)).' frb';
 		}
 		else if (endsRemove($line, ' is paralyzed! It may be unable to move!>'))
 		{

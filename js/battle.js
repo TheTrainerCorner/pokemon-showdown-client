@@ -1697,6 +1697,9 @@ switch(effect.id){
 case'brn':
 this.scene.runStatusAnim('brn',[poke]);
 break;
+case'frb':
+this.scene.runStatusAnim('frb',[poke]);
+break;
 case'psn':
 this.scene.runStatusAnim('psn',[poke]);
 break;
@@ -2040,6 +2043,9 @@ break;
 case'par':
 this.scene.resultAnim(_poke15,'Already paralyzed','neutral');
 break;
+case'frb':
+this.scene.resultAnim(_poke15,'Already frostbitten','neutral');
+break;
 case'frz':
 this.scene.resultAnim(_poke15,'Already frozen','neutral');
 break;
@@ -2151,6 +2157,10 @@ case'par':
 this.scene.resultAnim(_poke20,'Paralyzed','par');
 this.scene.runStatusAnim('par',[_poke20]);
 break;
+case'frb':
+this.scene.resultAnim(_poke20,'Frostbite','frb');
+this.scene.runStatusAnim('frb',[_poke20]);
+break;
 case'frz':
 this.scene.resultAnim(_poke20,'Frozen','frz');
 this.scene.runStatusAnim('frz',[_poke20]);
@@ -2195,6 +2205,9 @@ _poke21.statusData.sleepTurns=0;
 break;
 case'par':
 this.scene.resultAnim(_poke21,'Paralysis cured','good');
+break;
+case'frb':
+this.scene.resultAnim(_poke21,'Frostbite cured','good');
 break;
 case'frz':
 this.scene.resultAnim(_poke21,'Thawed','good');
@@ -3208,7 +3221,7 @@ output.hp=output.maxhp*parseFloat(hp)/100;
 
 if(!status){
 output.status='';
-}else if(status==='par'||status==='brn'||status==='slp'||status==='frz'||status==='tox'){
+}else if(status==='par'||status==='brn'||status==='slp'||status==='frz'||status==='tox'||status==='frb'){
 output.status=status;
 }else if(status==='psn'&&output.status!=='tox'){
 output.status=status;
