@@ -6,7 +6,7 @@ const path = require('path');
 const child_process = require("child_process");
 
 const rootDir = path.resolve(__dirname, '..');
-process.chdir(rootDir);
+process.chdir(rootDir); 
 
 if (!fs.existsSync('caches/pokemon-showdown')) {
 	child_process.execSync('git clone https://github.com/Trial-Of-Wintabura/pokemon-showdown.git', {
