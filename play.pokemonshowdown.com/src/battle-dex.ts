@@ -821,7 +821,7 @@ const Dex = new class implements ModdedDex {
 		let num = 0;
 		if (typeof item === 'string' && exports.BattleItems) item = exports.BattleItems[toID(item)];
 		if (item?.spritenum) num = item.spritenum;
-		if (item.tags.include('Custom')) {
+		if (item.tags && item.tags.include('Custom')) {
 			let url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/items/${toID(item.name)}.png`
 			return `background:transparent url(${url}) no-repeat`;
 		}
