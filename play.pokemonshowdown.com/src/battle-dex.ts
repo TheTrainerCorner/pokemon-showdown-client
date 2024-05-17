@@ -821,7 +821,10 @@ const Dex = new class implements ModdedDex {
 		let num = 0;
 		if (typeof item === 'string' && exports.BattleItems) item = exports.BattleItems[toID(item)];
 		if (item?.spritenum) num = item.spritenum;
-
+		if (item.tags.include('Custom')) {
+			let url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/items/${toID(item.name)}.png`
+			return `background:transparent url(${url}) no-repeat`;
+		}
 		let top = Math.floor(num / 16) * 24;
 		let left = (num % 16) * 24;
 		return 'background:transparent url(' + Dex.resourcePrefix + 'sprites/itemicons-sheet.png?v1) no-repeat scroll -' + left + 'px -' + top + 'px';
