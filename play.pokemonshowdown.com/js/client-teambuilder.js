@@ -27,6 +27,15 @@
 				if (this.curTeam.format.includes('letsgo')) {
 					this.curTeam.dex = Dex.mod('gen7letsgo');
 				}
+				if (this.curTeam.format.includes('ttc_current')) {
+					this.curTeam.dex = Dex.mod('ttc_current');
+				}
+				if (this.curTeam.format.includes('ttc_season_1')) {
+					this.curTeam.dex = Dex.mod('ttc_season_1');
+				}
+				if (this.curTeam.format.includes('ttc_season_2')) {
+					this.curTeam.dex = Dex.mod('ttc_season_2');
+				}
 				if (this.curTeam.format.includes('bdsp')) {
 					this.curTeam.dex = Dex.mod('gen8bdsp');
 				}
@@ -724,6 +733,15 @@
 			this.curTeam.dex = Dex.forGen(this.curTeam.gen);
 			if (this.curTeam.format.includes('letsgo')) {
 				this.curTeam.dex = Dex.mod('gen7letsgo');
+			}
+			if (this.curTeam.format.includes('ttc_current')) {
+				this.curTeam.dex = Dex.mod('ttc_current');
+			}
+			if (this.curTeam.format.includes('ttc_season_1')) {
+				this.curTeam.dex = Dex.mod('ttc_season_1');
+			}
+			if (this.curTeam.format.includes('ttc_season_2')) {
+				this.curTeam.dex = Dex.mod('ttc_season_2');
 			}
 			if (this.curTeam.format.includes('bdsp')) {
 				this.curTeam.dex = Dex.mod('gen8bdsp');
@@ -1563,6 +1581,15 @@
 			this.curTeam.dex = Dex.forGen(this.curTeam.gen);
 			if (this.curTeam.format.includes('letsgo')) {
 				this.curTeam.dex = Dex.mod('gen7letsgo');
+			}
+			if (this.curTeam.format.includes('ttc_current')) {
+				this.curTeam.dex = Dex.mod('ttc_current');
+			}
+			if (this.curTeam.format.includes('ttc_season_1')) {
+				this.curTeam.dex = Dex.mod('ttc_season_1');
+			}
+			if (this.curTeam.format.includes('ttc_season_2')) {
+				this.curTeam.dex = Dex.mod('ttc_season_2');
 			}
 			if (this.curTeam.format.includes('bdsp')) {
 				this.curTeam.dex = Dex.mod('gen8bdsp');
