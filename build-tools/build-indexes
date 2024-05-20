@@ -6,7 +6,7 @@ const path = require('path');
 const child_process = require("child_process");
 
 const rootDir = path.resolve(__dirname, '..');
-process.chdir(rootDir);
+process.chdir(rootDir); 
 
 if (!fs.existsSync('caches/pokemon-showdown')) {
 	child_process.execSync('git clone https://github.com/Trial-Of-Wintabura/pokemon-showdown.git', {
@@ -18,35 +18,21 @@ process.stdout.write("Syncing data from Git repository...\n");
 child_process.execSync('git pull', {cwd: 'caches/pokemon-showdown'});
 child_process.execSync('npm run build', {cwd: 'caches/pokemon-showdown'});
 
-const Dex = require('../caches/pokemon-showdown/dist/sim/dex').Dex;
+// We don't need this any more since we are going to be pulling from github.
+// if (!fs.existsSync('play.pokemonshowdown.com/sprites/fakemons')) {
+// 	child_process.execSync('git clone https://github.com/TheTrainerCorner/fakemon-sprites.git fakemons', {
+// 		cwd: 'play.pokemonshowdown.com/sprites',
+// 	});
+// }
+// process.stdout.write("Syncing ttc sprites....\n");
+// child_process.execSync("git pull", {cwd: "play.pokemonshowdown.com/sprites/fakemons"});
+
+// console.log("DONE");
+
+const Dex = require('../caches/pokemon-showdown/dist/sim/dex').Dex.mod('ttc_current');
 const toID = Dex.toID;
 process.stdout.write("Loading gen 6 data... ");
 Dex.includeData();
-Dex.includeModData();
-
-for (const mod in Dex.dexes) {
-	if (!mod.includes('ttc_current') && !mod.includes('ttc_season_1') && !mod.includes('ttc_season_2')) continue;
-	const modData = Dex.dexes[mod];
-	const genDex = Dex.mod(mod).gen !== 9 ? Dex.dexes[`gen${Dex.mod(mod).gen}`] : Dex;
-	for (const dataType in modData.data) {
-		if (['Pokedex', 'Moves', 'Items', 'Abilities', 'Learnsets'].includes(dataType)) {
-			let counter = 0;
-			for (const entry in modData.data[dataType]) {
-				if (!(entry in genDex.data[dataType]) && !modData.data[dataType][entry].inherit) {
-					counter++;
-					genDex.data[dataType][entry] = Dex.deepClone(modData.data[dataType][entry]);
-					if (dataType !== 'Learnsets') genDex.data[dataType][entry].isNonstandard = "Custom";
-					if (dataType === 'Pokedex') {
-						genDex.data[dataType][entry].tier = "Illegal";
-						genDex.data[dataType][entry].natDexTier = "Illegal";
-						genDex.data[dataType][entry].doublesTier = "Illegal";
-					}
-				}
-			}
-			if (counter > 0) console.log(dataType + ' received ' + counter + ' objects from ' + mod);
-		}
-	}
-}
 console.log("DONE");
 
 function es3stringify(obj) {
@@ -347,7 +333,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 	const LC = GENS.map(num => num + 0.7);
 	const STADIUM = [2.04, 1.04];
 	const NATDEX = [9.1, 8.1];
-	const OTHER = [9.9, 9.81, -9.81, 9.82, -9.82, 9.83, -9.83, 9.411, 9.41, 9.401, 9.4, 9.2, -9.4, -9.401, 8.6, 8.4, 8.2, 8.1, -8.4, -8.6, 7.1];
+	const OTHER = [9.9, 9.411, 9.41, 9.401, 9.4, 9.2, -9.4, -9.401, 8.6, 8.4, 8.2, 8.1, -8.4, -8.6, 7.1];
 
 	// process.stdout.write("\n  ");
 	for (const genIdent of [...GENS, ...DOUBLES, ...VGC, ...NFE, ...STADIUM, ...OTHER, ...NATDEX, ...LC]) {
@@ -364,12 +350,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const isDoubles = (genIdent < 0);
 		const isVGC = ('' + genIdent).endsWith('.5');
 		const isGen9BH = genIdent === 9.9;
-		const isNatDexTC = (`${genIdent}`).endsWith('.81');
-		const isTC = (`${genIdent}`).endsWith('.811');
-		const isNatDexS1 = (`${genIdent}`).endsWith('.82');
-		const isS1 = (`${genIdent}`).endsWith('.822');
-		const isNatDexS2 = (`${genIdent}`).endsWith('.83');
-		const isS2 = (`${genIdent}`).endsWith('.833');
 		const genNum = Math.floor(isDoubles ? -genIdent : genIdent);
 		const gen = (() => {
 			let genStr = 'gen' + genNum;
@@ -379,9 +359,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			if (isPreDLC) genStr += 'predlc';
 			if (isSVDLC1) genStr += 'dlc1';
 			if (isStadium) genStr += 'stadium' + (genNum > 1 ? genNum : '');
-			if (isNatDexTC || isTC) genStr = "ttc_current";
-			if (isNatDexS1 || isS1) genStr = "ttc_season_1";
-			if (isNatDexS2 || isS2) genStr = "ttc_season_2";
 			return genStr;
 		})();
 		// process.stdout.write("" + gen + (isDoubles ? " doubles" : "") + "... ");
@@ -471,15 +448,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 						species.tags.includes('Restricted Legendary') ? 'Restricted Legendary' :
 							species.nfe ? (species.prevo ? 'NFE' : 'LC') : 'Regular';
 				}
-				if (isNatDexTC || isNatDexS1 || isNatDexS2) {
-					let tier = isDoubles ? species.doublesTier : species.natDexTier;
-					return tier;
-				}
-				if (isTC || isS1 || isS2) {
-					let tier = isDoubles ? species.doublesTier : species.tier;
-					if (species.num <= 0 || species.isNonstandard === "Unobtainable") tier = "Illegal";
-					return tier;
-				}
 				if (species.tier === 'CAP' || species.tier === 'CAP NFE' || species.tier === 'CAP LC') {
 					return species.tier;
 				}
@@ -535,13 +503,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			BattleTeambuilderTable['gen' + genNum + 'natdex'].items = items;
 			BattleTeambuilderTable['gen' + genNum + 'natdex'].monotypeBans = monotypeBans;
 			BattleTeambuilderTable['gen' + genNum + 'natdex'].formatSlices = formatSlices;
-		} else if ((isNatDexTC || isTC) || (isNatDexS1 || isS1) || (isNatDexS2 || isS2)) {
-			BattleTeambuilderTable[gen] = {};
-			BattleTeambuilderTable[gen].learnsets = {};
-			BattleTeambuilderTable[gen].tiers = tiers;
-			BattleTeambuilderTable[gen].overrideTier = overrideTier;
-			BattleTeambuilderTable[gen].formatSlices = formatSlices;
-			BattleTeambuilderTable[gen].items = items;
 		} else if (isMetBattle) {
 			BattleTeambuilderTable[gen + 'metronome'] = {};
 			BattleTeambuilderTable[gen + 'metronome'].tiers = tiers;
@@ -929,55 +890,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			}
 		}
 	}
-	for (let learnsetmod of ['ttc_current', 'ttc_season_1', 'ttc_season_2']) {
-		let modlearnsets = {};
-		BattleTeambuilderTable[learnsetmod].learnsets = modlearnsets;
-		for (const id in Dex.mod(learnsetmod).data.Learnsets) {
-			const learnset = Dex.mod(learnsetmod).data.Learnsets[id].learnset;
-			if (!learnset) continue;
-			modlearnsets[id] = {};
-			for (const moveid in learnset) {
-				const gens = learnset[moveid].map(x => Number(x[0]));
-				const minGen = Math.min(...gens);
-
-				if (minGen <= 4 && (gen3HMs.has(moveid) || gen4HMs.has(moveid))) {
-					let legalGens = '';
-					let available = false;
-
-					if (minGen === 3) {
-						legalGens += '3';
-						available = true;
-					}
-					if (available) available = !gen3HMs.has(moveid);
-
-					if (available || gens.includes(4)) {
-						legalGens += '4';
-						available = true;
-					}
-					if (available) available = !gen4HMs.has(moveid);
-
-					let minUpperGen = available ? 5 : Math.min(
-						...gens.filter(gen => gen > 4)
-					);
-					legalGens += '0123456789'.slice(minUpperGen);
-					modlearnsets[id][moveid] = legalGens;
-				} else {
-					modlearnsets[id][moveid] = '0123456789'.slice(minGen);
-				}
-
-				if (gens.indexOf(6) >= 0) modlearnsets[id][moveid] += 'p';
-				if (gens.indexOf(7) >= 0 && learnset[moveid].some(x => x[0] === '7' && x !== '7V')) {
-					modlearnsets[id][moveid] += 'q';
-				}
-				if (gens.indexOf(8) >= 0 && learnset[moveid].some(x => x[0] === '8' && x !== '8V')) {
-					modlearnsets[id][moveid] += 'g';
-				}
-				if (gens.indexOf(9) >= 0 && learnset[moveid].some(x => x[0] === '9' && x !== '9V')) {
-					modlearnsets[id][moveid] += 'a';
-				}
-			}
-		}
-	}
 	const G2Learnsets = Dex.mod('gen2').data.Learnsets;
 	for (const id in G2Learnsets) {
 		const learnset = G2Learnsets[id].learnset;
@@ -1239,7 +1151,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 	// Mods
 	//
 
-	for (const mod of ['gen7letsgo', 'gen8bdsp', 'ttc_current', 'ttc_season_1', 'ttc_season_2']) {
+	for (const mod of ['gen7letsgo', 'gen8bdsp']) {
 		const modDex = Dex.mod(mod);
 		const modData = modDex.data;
 		const parentDex = Dex.forGen(modDex.gen);

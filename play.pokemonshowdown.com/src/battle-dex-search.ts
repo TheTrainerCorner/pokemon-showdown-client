@@ -551,7 +551,7 @@ abstract class BattleTypedSearch<T extends SearchType> {
 
 	protected formatType: 'doubles' | 'bdsp' | 'bdspdoubles' | 'letsgo' | 'metronome' | 'natdex' | 'nfe' |
 	'ssdlc1' | 'ssdlc1doubles' | 'predlc' | 'predlcdoubles' | 'predlcnatdex' | 'svdlc1' | 'svdlc1doubles' |
-	'svdlc1natdex' | 'stadium' | 'lc' | 'ttc_current' | 'ttc_season_1'| 'ttc_season_2' | null = null;
+	'svdlc1natdex' | 'stadium' | 'lc' | null = null;
 
 	/**
 	 * Cached copy of what the results list would be with only base filters
@@ -581,7 +581,6 @@ abstract class BattleTypedSearch<T extends SearchType> {
 		} else if (!format) {
 			this.dex = Dex;
 		}
-
 
 		if (format.startsWith('dlc1') && this.dex.gen === 8) {
 			if (format.includes('doubles')) {
@@ -640,21 +639,6 @@ abstract class BattleTypedSearch<T extends SearchType> {
 				format.includes('natdex') ? format.slice(6) : format.slice(11)) as ID;
 			this.formatType = 'natdex';
 			if (!format) format = 'ou' as ID;
-		}
-		if (format === 'ttc_current') {
-			format = 'ou' as ID;
-			this.formatType = "ttc_current";
-			this.dex = Dex.mod('ttc_current' as ID);
-		}
-		if (format === 'ttc_season_1') {
-			format = 'ou' as ID;
-			this.formatType = 'ttc_season_1';
-			this.dex = Dex.mod('ttc_season_1' as ID);
-		}
-		if (format === 'ttc_season_2') {
-			format = 'ou' as ID;
-			this.formatType = 'ttc_season_2';
-			this.dex = Dex.mod('ttc_season_2' as ID);
 		}
 		if (format.includes('doubles') && this.dex.gen > 4 && !this.formatType) this.formatType = 'doubles';
 		if (this.formatType === 'letsgo') format = format.slice(6) as ID;
@@ -761,9 +745,6 @@ abstract class BattleTypedSearch<T extends SearchType> {
 		let table = BattleTeambuilderTable;
 		if (this.formatType?.startsWith('bdsp')) table = table['gen8bdsp'];
 		if (this.formatType === 'letsgo') table = table['gen7letsgo'];
-		if (this.formatType === 'ttc_current') table = table['ttc_current'];
-		if (this.formatType === 'ttc_season_1') table = table['ttc_season_1'];
-		if (this.formatType === 'ttc_season_2') table = table['ttc_season_2'];
 		if (speciesid in table.learnsets) return speciesid;
 		const species = this.dex.species.get(speciesid);
 		if (!species.exists) return '' as ID;
@@ -822,9 +803,6 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			let table = BattleTeambuilderTable;
 			if (this.formatType?.startsWith('bdsp')) table = table['gen8bdsp'];
 			if (this.formatType === 'letsgo') table = table['gen7letsgo'];
-			if (this.formatType === 'ttc_current') table = table['ttc_current'];
-			if (this.formatType === 'ttc_season_1') table = table['ttc_season_1'];
-			if (this.formatType === 'ttc_season_2') table = table['ttc_season_2'];
 			let learnset = table.learnsets[learnsetid];
 			if (learnset && (moveid in learnset) && (!this.format.startsWith('tradebacks') ? learnset[moveid].includes(genChar) :
 				learnset[moveid].includes(genChar) ||
@@ -844,9 +822,6 @@ abstract class BattleTypedSearch<T extends SearchType> {
 		const tableKey = this.formatType === 'doubles' ? `gen${gen}doubles` :
 			this.formatType === 'letsgo' ? 'gen7letsgo' :
 			this.formatType === 'bdsp' ? 'gen8bdsp' :
-			this.formatType === 'ttc_current' ? 'ttc_current' :
-			this.formatType === 'ttc_season_1' ? 'ttc_season_1' :
-			this.formatType === 'ttc_season_2' ? 'ttc_season_2' :
 			this.formatType === 'bdspdoubles' ? 'gen8bdspdoubles' :
 			this.formatType === 'nfe' ? `gen${gen}nfe` :
 			this.formatType === 'lc' ? `gen${gen}lc` :
@@ -971,12 +946,6 @@ class BattlePokemonSearch extends BattleTypedSearch<'pokemon'> {
 			table = table['gen8' + this.formatType];
 		} else if (this.formatType === 'letsgo') {
 			table = table['gen7letsgo'];
-		} else if (this.formatType === 'ttc_current') {
-			table = table['ttc_current'];	
-		} else if (this.formatType === 'ttc_season_1') {
-			table = table['ttc_season_1'];
-		} else if (this.formatType === 'ttc_season_2') {
-			table = table['ttc_season_2'];
 		} else if (this.formatType === 'natdex') {
 			table = table['gen' + dex.gen + 'natdex'];
 		} else if (this.formatType === 'metronome') {
@@ -1569,9 +1538,6 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 		let lsetTable = BattleTeambuilderTable;
 		if (this.formatType?.startsWith('bdsp')) lsetTable = lsetTable['gen8bdsp'];
 		if (this.formatType === 'letsgo') lsetTable = lsetTable['gen7letsgo'];
-		if (this.formatType === 'ttc_current') lsetTable = lsetTable['ttc_current'];
-		if (this.formatType === 'ttc_season_1') lsetTable = lsetTable['ttc_season_1'];
-		if (this.formatType === 'ttc_season_2') lsetTable = lsetTable['ttc_season_2'];
 		if (this.formatType?.startsWith('ssdlc1')) lsetTable = lsetTable['gen8dlc1'];
 		if (this.formatType?.startsWith('predlc')) lsetTable = lsetTable['gen9predlc'];
 		if (this.formatType?.startsWith('svdlc1')) lsetTable = lsetTable['gen9dlc1'];
