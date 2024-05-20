@@ -1241,7 +1241,14 @@ class BattleItemSearch extends BattleTypedSearch<'item'> {
 		let table = BattleTeambuilderTable;
 		if (this.formatType?.startsWith('bdsp')) {
 			table = table['gen8bdsp'];
-		} else if (this.formatType === 'natdex') {
+		} else if (this.formatType === 'ttc_current') {
+			table = table['ttc_current'];
+		} else if (this.formatType === 'ttc_season_1') {
+			table = table['ttc_season_1'];
+		} else if (this.formatType === 'ttc_season_2') {
+			table = table['ttc_season_2'];
+		}
+		else if (this.formatType === 'natdex') {
 			table = table['gen' + this.dex.gen + 'natdex'];
 		} else if (this.formatType === 'metronome') {
 			table = table['gen' + this.dex.gen + 'metronome'];
