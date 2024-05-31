@@ -812,7 +812,7 @@ const Dex = new class implements ModdedDex {
 		const data = this.getTeambuilderSpriteData(pokemon, gen);
 		const shiny = (data.shiny ? '-shiny' : '');
 		if (Dex.species.get(pokemon.species).tags.includes("Fakemon")) {
-			let url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/front/${toID(pokemon.species)}.png`
+			let url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/${data.shiny ? 'shiny-' : ''}front/${toID(pokemon.species)}.png`
 			return `background-image:url(${url});background-position:${data.x}px ${data.y}px;background-repeat:no-repeat;background-size:100px;`;
 		}
 		return 'background-image:url(' + Dex.resourcePrefix + data.spriteDir + shiny + '/' + data.spriteid + '.png);background-position:' + data.x + 'px ' + data.y + 'px;background-repeat:no-repeat';
