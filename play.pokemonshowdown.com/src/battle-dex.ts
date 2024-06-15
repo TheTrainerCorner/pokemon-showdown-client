@@ -538,7 +538,14 @@ const Dex = new class implements ModdedDex {
 		//     This defaults to graphicsGen, but if the graphicsGen doesn't have a sprite for the Pokemon
 		//     (eg. Darmanitan in graphicsGen 2) then we go up gens until it exists.
 		//
-
+		if (species.tags.includes("Use Gen 5")) {
+			if (isFront) spriteData.url = `https://play.pokemonshowdown.com/sprites/gen5${options.shiny ? '-shiny' : ''}/${species.id}.png`;
+			else if (!isFront) spriteData.url = `https://play.pokemonshowdown.com/sprites/gen5-back${options.shiny ? '-shiny' : ''}/${species.id}.png`;
+			else spriteData.url = `https://play.pokemonshowdown.com/sprites/dex${options.shiny ? '-shiny' : ''}/${species.id}.png`;
+			spriteData.pixelated = true;
+			spriteData.gen = 5;
+			return spriteData;
+		}
 		if (species.tags.includes("Fakemon")) {
 			if (isFront) spriteData.url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/${options.shiny ? 'shiny-' : ''}front/${species.id}.png`;
 			else if (!isFront && species.tags.includes("Has Back Sprite")) spriteData.url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/${options.shiny ? 'shiny-' : ''}back/${species.id}.png`;
@@ -811,6 +818,10 @@ const Dex = new class implements ModdedDex {
 		if (!pokemon) return '';
 		const data = this.getTeambuilderSpriteData(pokemon, gen);
 		const shiny = (data.shiny ? '-shiny' : '');
+		if (Dex.species.get(pokemon.species).tags.includes("Use Gen 5")) {
+			let url = `https://play.pokemonshowdown.com/sprites/gen5/${toID(pokemon.species)}.png`;
+			return `background-image:url(${url});background-position:${data.x}px ${data.y}px;background-repeat:no-repeat;background-size:100px;`;
+		}
 		if (Dex.species.get(pokemon.species).tags.includes("Fakemon")) {
 			let url = `https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/${data.shiny ? 'shiny-' : ''}front/${toID(pokemon.species)}.png`
 			return `background-image:url(${url});background-position:${data.x}px ${data.y}px;background-repeat:no-repeat;background-size:100px;`;
