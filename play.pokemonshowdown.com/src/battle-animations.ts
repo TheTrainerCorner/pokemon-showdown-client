@@ -1756,6 +1756,11 @@ export class PokemonSprite extends Sprite {
 	protected static statusTable: {[id: string]: [string, 'good' | 'bad' | 'neutral'] | null | string} = {
     //#region Modified
     	cottondown: ['Cotton Down', 'bad'],
+		// Armor Plate
+		armorplatex3: ['Armor Plate', "good"],
+		armorplatex2: ['Armor Plate Damaged', "good"],
+		armorplatex1: ['Armor Plate Very Damaged', "good"],
+		armorplatexend: ['Armor Plate Broken', "bad"],
 		// Hail The Coin
 		hailthecoin: ['Hail The Coin', "good"],
 		hailthecoinx1: ['Hail The Coin x 1', 'good'],
