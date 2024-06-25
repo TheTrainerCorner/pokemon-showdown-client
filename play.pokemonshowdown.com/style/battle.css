@@ -515,6 +515,10 @@ License: GPLv2
 	color: #FFFFFF;
 	background: #EE5533;
 }
+.battle .frbresult strong {
+	color: #FFFFFF;
+	background: #33b3ee;
+}
 .battle .psnresult strong {
 	color: #FFFFFF;
 	background: #A4009A;

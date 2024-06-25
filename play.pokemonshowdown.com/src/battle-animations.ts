@@ -2888,6 +2888,7 @@ export class PokemonSprite extends Sprite {
 //      -webkit-filter:  sepia(100%) hue-rotate(22deg) saturate(820%) brightness(29%);
 // psn: -webkit-filter:  sepia(100%) hue-rotate(618deg) saturate(285%);
 // brn: -webkit-filter:  sepia(100%) hue-rotate(311deg) saturate(469%);
+// frb: -webkit-filter:  sepia(100%) hue-rotate(311deg) saturate(469%);
 // slp: -webkit-filter:  grayscale(100%);
 // frz: -webkit-filter:  sepia(100%) hue-rotate(154deg) saturate(759%) brightness(23%);
 
