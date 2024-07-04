@@ -2521,6 +2521,9 @@ opacity:0
 auroraveil:{
 anim:function(){}
 },
+flowerveil:{
+anim:function(){}
+},
 reflect:{
 anim:function(){}
 },

@@ -547,6 +547,12 @@ License: GPLv2
 	display: none;
 	position: absolute;
 }
+.sidecondition-flowerveil {
+	background: #ff9e88;
+	border: 1px solid #ff9e88;
+	display: none;
+	position: absolute;
+}
 .sidecondition-reflect {
 	background: #EEEEEE;
 	border: 1px solid #888888;

@@ -2423,6 +2423,9 @@ export const BattleMoveAnims: AnimTable = {
 	auroraveil: {
 		anim() {},
 	},
+	flowerveil: {
+		anim() {},
+	},
 	reflect: {
 		anim() {},
 	},

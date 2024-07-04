@@ -1105,6 +1105,26 @@ opacity:0.3,
 time:instant?0:300
 });
 break;
+case'flowerveil':
+var flowerveil=new Sprite(BattleEffects.flowerveil,{
+display:'block',
+x:x,
+y:y,
+z:side.behind(-14),
+xscale:1,
+yscale:0,
+opacity:0.1
+},this);
+this.$spritesFront[spriteIndex].append(flowerveil.$el);
+this.sideConditions[siden][id]=[flowerveil];
+flowerveil.anim({
+opacity:0.7,
+time:instant?0:400
+}).anim({
+opacity:0.3,
+time:instant?0:300
+});
+break;
 case'reflect':
 var reflect=new Sprite(BattleEffects.reflect,{
 display:'block',
@@ -3110,6 +3130,10 @@ w:100,h:70
 },
 auroraveil:{
 rawHTML:'<div class="sidecondition-auroraveil" style="display:none;position:absolute" />',
+w:100,h:50
+},
+flowerveil: {
+	rawHTML:'<div class="sidecondition-auroraveil" style="display:none;position:absolute" />',
 w:100,h:50
 },
 reflect:{
@@ -8694,6 +8718,9 @@ opacity:0
 }
 },
 auroraveil:{
+anim:function(){}
+},
+flowerveil:{
 anim:function(){}
 },
 reflect:{

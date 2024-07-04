@@ -684,6 +684,9 @@ export class Side {
 		case 'auroraveil':
 			this.sideConditions[condition] = [effect.name, 1, 5, 8];
 			break;
+		case 'flowerveil':
+			this.sideConditions[condition] = [effect.name, 1, 5, 8];
+			break;
 		case 'reflect':
 			this.sideConditions[condition] = [effect.name, 1, 5, this.battle.gen >= 4 ? 8 : 0];
 			break;
@@ -3018,6 +3021,7 @@ export class Battle {
 			switch (effect.id) {
 			case 'tailwind':
 			case 'auroraveil':
+			case 'flowerveil':
 			case 'reflect':
 			case 'lightscreen':
 			case 'safeguard':

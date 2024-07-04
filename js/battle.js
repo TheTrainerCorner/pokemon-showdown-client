@@ -684,6 +684,9 @@ switch(condition){
 case'auroraveil':
 this.sideConditions[condition]=[effect.name,1,5,8];
 break;
+case'flowerveil':
+this.sideConditions[condition]=[effect.name,1,5,8];
+break;
 case'reflect':
 this.sideConditions[condition]=[effect.name,1,5,this.battle.gen>=4?8:0];
 break;
@@ -1418,7 +1421,7 @@ this.scene.updateWeather();
 };_proto3.
 swapSideConditions=function swapSideConditions(){
 var sideConditions=[
-'mist','lightscreen','reflect','spikes','safeguard','tailwind','toxicspikes','stealthrock','waterpledge','firepledge','grasspledge','stickyweb','auroraveil','gmaxsteelsurge','gmaxcannonade','gmaxvinelash','gmaxwildfire'];
+'mist','lightscreen','reflect','spikes','safeguard','tailwind','toxicspikes','stealthrock','waterpledge','firepledge','grasspledge','stickyweb','auroraveil','flowerveil', 'gmaxsteelsurge','gmaxcannonade','gmaxvinelash','gmaxwildfire'];
 
 if(this.gameType==='freeforall'){
 
@@ -3015,6 +3018,7 @@ _side.addSideCondition(_effect20,!!kwArgs.persistent);
 switch(_effect20.id){
 case'tailwind':
 case'auroraveil':
+case'flowerveil':
 case'reflect':
 case'lightscreen':
 case'safeguard':
