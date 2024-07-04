@@ -550,7 +550,7 @@ License: GPLv2
 .sidecondition-flowerveil {
 	background: #ff9e88;
 	border: 1px solid #ff9e88;
-	display: none;
+	display: block;
 	position: absolute;
 }
 .sidecondition-reflect {
