@@ -20,7 +20,7 @@
 			'click .spoiler': 'clickSpoiler',
 			'click button.formatselect': 'selectFormat',
 			'click button.teamselect': 'selectTeam',
-			'click button[name=partnersubmit]': 'selectTeammate'
+			'keyup input': 'selectTeammate'
 		},
 		initialize: function () {
 			this.$el.addClass('scrollable');
@@ -45,8 +45,7 @@
 				buf += '<p><label class="label">Format:</label>' + this.renderFormats() + '</p>';
 				buf += '<p><label class="label">Team:</label>' + this.renderTeams() + '</p>';
 				buf += '<p><label class="label" name="partner" style="display:none">';
-				buf += 'Partner:<br />';
-				buf += '<input class="partnerselect" /><button name="partnersubmit">Invite</button></label></p>';
+				buf += 'Partner: <input name="teammate" /></label></p>';
 				buf += '<p><label class="checkbox"><input type="checkbox" name="private" ' + (Storage.prefs('disallowspectators') ? 'checked' : '') + ' /> <abbr title="You can still invite spectators by giving them the URL or using the /invite command">Don\'t allow spectators</abbr></label></p>';
 				buf += '<p><button class="button mainmenu1 big" name="search"><strong>Battle!</strong><br /><small>Find a random opponent</small></button></p></form></div>';
 			}
@@ -284,13 +283,11 @@
 		},
 
 		selectTeammate: function (e) {
-			e.stopPropagation();
-			e.preventDefault();
-			var input = $('input.partnerselect').get(0);
-			var partner = toID(input.value);
+			if (e.currentTarget.name !== 'teammate' || e.keyCode !== 13) return;
+			var partner = toID(e.currentTarget.value);
 			if (!partner.length) return;
 			app.send('/requestpartner ' + partner + ',' + this.curFormat);
-			input.value = "";
+			e.currentTarget.value = '';
 		},
 
 		openPM: function (name, dontFocus) {
@@ -1196,9 +1193,6 @@
 			case 'error':
 				return '<div class="chat message-error">' + BattleLog.escapeHTML(target) + '</div>';
 			case 'html':
-				if (!name) {
-					return {message: '<div class="chat' + hlClass + '">' + timestamp + '<em>' + BattleLog.sanitizeHTML(target) + '</em></div>', noNotify: isNotPM};
-				}
 				return {message: '<div class="chat chatmessage-' + toID(name) + hlClass + mineClass + '">' + timestamp + '<strong style="' + color + '">' + clickableName + ':</strong> <em>' + BattleLog.sanitizeHTML(target) + '</em></div>', noNotify: isNotPM};
 			case 'uhtml':
 			case 'uhtmlchange':
@@ -1248,6 +1242,7 @@
 					"National Dex Draft": true,
 					// "S/V Singles": true, "S/V Doubles": true, "Unofficial Metagames": true, "National Dex": true, "OM of the Month": true,
 					// "Other Metagames": true, "Randomized Format Spotlight": true, "RoA Spotlight": true, 
+				};
 			}
 			if (!this.starred) this.starred = Storage.prefs('starredformats') || {};
 			if (!this.search) this.search = "";
