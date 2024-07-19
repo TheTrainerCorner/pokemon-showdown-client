@@ -476,7 +476,7 @@ export class Pokemon implements PokemonDetails, PokemonHealth {
 	}
 	getTypes(serverPokemon?: ServerPokemon, preterastallized = false): [ReadonlyArray<TypeName>, TypeName | ''] {
 		let types: ReadonlyArray<TypeName>;
-		if (this.terastallized && !preterastallized) {
+		if (!preterastallized && this.terastallized && this.terastallized !== 'Stellar') {
 			types = [this.terastallized as TypeName];
 		} else if (this.volatiles.typechange) {
 			types = this.volatiles.typechange[1].split('/');
@@ -521,11 +521,14 @@ export class Pokemon implements PokemonDetails, PokemonHealth {
 		return !this.getTypeList(serverPokemon).includes('Flying');
 	}
 	effectiveAbility(serverPokemon?: ServerPokemon) {
-		if (this.fainted || this.volatiles['gastroacid']) return '';
 		const ability = this.side.battle.dex.abilities.get(
 			serverPokemon?.ability || this.ability || serverPokemon?.baseAbility || ''
 		);
-		if (this.side.battle.ngasActive() && !ability.isPermanent) {
+		if (
+			this.fainted ||
+			(this.volatiles['transform'] && ability.flags['notransform']) ||
+			(!ability.flags['cantsuppress'] && (this.side.battle.ngasActive() || this.volatiles['gastroacid']))
+		) {
 			return '';
 		}
 		return ability.name;
@@ -604,6 +607,7 @@ export class Side {
 	foe: Side = null!;
 	ally: Side | null = null;
 	avatar: string = 'unknown';
+	badges: string[] = [];
 	rating: string = '';
 	totalPokemon = 6;
 	x = 0;
@@ -1227,6 +1231,7 @@ export class Battle {
 		}
 		return pokemonList;
 	}
+	// Used in Pokemon#effectiveAbility over abilityActive to prevent infinite recursion
 	ngasActive() {
 		for (const active of this.getAllActive()) {
 			if (active.ability === 'Neutralizing Gas' && !active.volatiles['gastroacid']) {
@@ -1237,12 +1242,9 @@ export class Battle {
 	}
 	abilityActive(abilities: string | string[]) {
 		if (typeof abilities === 'string') abilities = [abilities];
-		if (this.ngasActive()) {
-			abilities = abilities.filter(a => this.dex.abilities.get(a).isPermanent);
-			if (!abilities.length) return false;
-		}
+		abilities = abilities.map(toID);
 		for (const active of this.getAllActive()) {
-			if (abilities.includes(active.ability) && !active.volatiles['gastroacid']) {
+			if (abilities.includes(toID(active.effectiveAbility()))) {
 				return true;
 			}
 		}
@@ -2916,7 +2918,6 @@ export class Battle {
 				target!.side.removeSideCondition('Reflect');
 				target!.side.removeSideCondition('LightScreen');
 				break;
-			case 'hyperdrill':
 			case 'hyperspacefury':
 			case 'hyperspacehole':
 			case 'phantomforce':
@@ -3379,6 +3380,10 @@ export class Battle {
 		case 'upkeep': {
 			this.usesUpkeep = true;
 			this.updateTurnCounters();
+			// Prevents getSwitchedPokemon from skipping over a Pokemon that switched out mid turn (e.g. U-turn)
+			for (const side of this.sides) {
+				side.lastPokemon = null;
+			}
 			break;
 		}
 		case 'turn': {
@@ -3397,6 +3402,9 @@ export class Battle {
 			}
 			if (this.tier.includes(`Let's Go`)) {
 				this.dex = Dex.mod('gen7letsgo' as ID);
+			}
+			if (this.tier.includes('Super Staff Bros')) {
+				this.dex = Dex.mod('gen9ssb' as ID);
 			}
 			this.log(args);
 			break;
@@ -3553,6 +3561,15 @@ export class Battle {
 			this.scene.updateSidebar(side);
 			break;
 		}
+		case 'badge': {
+			let side = this.getSide(args[1]);
+			// handle all the rendering further down
+			const badge = args.slice(2).join('|');
+			// (don't allow duping)
+			if (!side.badges.includes(badge)) side.badges.push(badge);
+			this.scene.updateSidebar(side);
+			break;
+		}
 		case 'teamsize': {
 			let side = this.getSide(args[1]);
 			side.totalPokemon = parseInt(args[2], 10);
@@ -3701,6 +3718,21 @@ export class Battle {
 		}
 		case 'controlshtml': {
 			this.scene.setControlsHTML(BattleLog.sanitizeHTML(args[1]));
+			break;
+		}
+		case 'custom': {
+			// Style is always |custom|-subprotocol|pokemon|additional info
+			if (args[1] === '-endterastallize') {
+				let poke = this.getPokemon(args[2])!;
+				poke.removeVolatile('terastallize' as ID);
+				poke.teraType = '';
+				poke.terastallized = '';
+				poke.details = poke.details.replace(/, tera:[a-z]+/i, '');
+				poke.searchid = poke.searchid.replace(/, tera:[a-z]+/i, '');
+				this.scene.animTransform(poke);
+				this.scene.resetStatbar(poke);
+				this.log(args, kwArgs);
+			}
 			break;
 		}
 		default: {
