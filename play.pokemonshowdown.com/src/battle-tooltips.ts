@@ -1291,6 +1291,13 @@ class BattleTooltips {
 		if (item === 'assaultvest') {
 			stats.spd = Math.floor(stats.spd * 1.5);
 		}
+		if (item === 'bubbleddome') {
+			stats.def = Math.floor(stats.def * 1.5);
+		}
+		if (item === 'armorplate') {
+			stats.def = Math.floor(stats.def * 1.2);
+			stats.spd = Math.floor(stats.spd * 1.2);
+		}
 		if (item === 'deepseascale' && species === 'Clamperl') {
 			stats.spd *= 2;
 		}
@@ -2669,6 +2676,13 @@ class BattleStatGuesser {
 		}
 		if (itemid === 'assaultvest') {
 			specialBulk *= 1.5;
+		}
+		if (itemid === 'bubbleddome') {
+			physicalBulk *= 1.5;
+		}
+		if (itemid === 'armorplate') {
+			physicalBulk *= 1.2;
+			specialBulk *= 1.2;
 		}
 
 		let bulk = physicalBulk + specialBulk;
