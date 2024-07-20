@@ -28,8 +28,12 @@ child_process.execSync('npm run build', {cwd: 'caches/pokemon-showdown'});
 // child_process.execSync("git pull", {cwd: "play.pokemonshowdown.com/sprites/fakemons"});
 
 // console.log("DONE");
+const getCurrentSeason = (() => {
+	const config = require('../caches/pokemon-showdown/config/config');
+	return config.ttcseason;
+});
 
-const Dex = require('../caches/pokemon-showdown/dist/sim/dex').Dex.mod('ttc_current');
+const Dex = require('../caches/pokemon-showdown/dist/sim/dex').Dex.mod(getCurrentSeason());
 const toID = Dex.toID;
 process.stdout.write("Loading gen 6 data... ");
 Dex.includeData();
@@ -361,7 +365,6 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 			if (isStadium) genStr += 'stadium' + (genNum > 1 ? genNum : '');
 			return genStr;
 		})();
-		console.log(genIdent);
 		// process.stdout.write("" + gen + (isDoubles ? " doubles" : "") + "... ");
 		const pokemon = Object.keys(Dex.data.Pokedex);
 		pokemon.sort();
