@@ -1777,6 +1777,9 @@ export class Battle {
 				case 'wish':
 					this.scene.runResidualAnim('wish' as ID, poke);
 					break;
+				case 'guidingblessing':
+					this.scene.runResidualAnim('guidingblessing' as ID, poke);
+					break;	
 				case 'revivalblessing':
 					this.scene.runResidualAnim('wish' as ID, poke);
 					const {siden} = this.parsePokemonId(args[1]);

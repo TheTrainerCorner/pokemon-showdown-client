@@ -1538,7 +1538,7 @@ pokemon.rememberMove(callerMoveForPressure.name,pp-1);
 }
 pokemon.lastMove=move.id;
 this.lastMove=move.id;
-if(move.id==='wish'||move.id==='healingwish'){
+if(move.id==='wish'||move.id==='healingwish'|| move.id==='guidingblessing'){
 pokemon.side.wisher=pokemon;
 }
 };_proto3.
@@ -1773,6 +1773,9 @@ _poke.statusData.toxicTurns=0;
 break;
 case'wish':
 this.scene.runResidualAnim('wish',_poke);
+break;
+case 'guidingblessing': 
+this.scene.runResidualAnim('guidingblessing',_poke);
 break;
 case'revivalblessing':
 this.scene.runResidualAnim('wish',_poke);

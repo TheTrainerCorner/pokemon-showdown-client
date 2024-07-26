@@ -20023,6 +20023,40 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'decel', 'explode');
 		},
 	},
+	guidingblessing: {
+		anim(scene, [attacker]) {
+			scene.backgroundEffect(`url('https://${Config.routes.client}/fx/bg-space.jpg')`, 600, 0.4);
+
+			scene.showEffect('wisp', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 1,
+				opacity: 1,
+			}, {
+				y: attacker.y + 130,
+				opacity: 0,
+			}, 'accel');
+		},
+		residualAnim(scene, [attacker]) {
+			scene.backgroundEffect(`url('https://${Config.routes.client}/fx/bg-space.jpg')`, 600, 0.4);
+
+			scene.showEffect('wisp', {
+				x: attacker.x,
+				y: attacker.y + 130,
+				z: attacker.z,
+				scale: 1,
+				opacity: 0,
+			}, {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				opacity: 1,
+			}, 'decel', 'explode');
+
+			scene.timeOffset += 500;
+		},
+	},
 	stealthrock: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('rock1', {

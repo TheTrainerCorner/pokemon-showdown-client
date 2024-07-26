@@ -25507,6 +25507,40 @@ opacity:1
 },'decel','explode');
 }
 },
+guidingblessing:{
+anim:function(scene,_ref296){var attacker=_ref296[0];
+scene.backgroundEffect("url('https://"+Config.routes.client+"/fx/bg-space.jpg')",600,0.4);
+	
+scene.showEffect('wisp',{
+x:attacker.x,
+y:attacker.y,
+z:attacker.z,	
+scale:1,
+opacity:1
+},{
+y:attacker.y+130,
+opacity:0
+},'accel');
+},
+residualAnim:function(scene,_ref297){var attacker=_ref297[0];
+scene.backgroundEffect("url('https://"+Config.routes.client+"/fx/bg-space.jpg')",600,0.4);
+	
+scene.showEffect('wisp',{
+x:attacker.x,
+y:attacker.y+130,
+z:attacker.z,
+scale:1,
+opacity:0
+},{
+x:attacker.x,
+y:attacker.y,
+z:attacker.z,
+opacity:1
+},'decel','explode');
+	
+scene.timeOffset+=500;
+}
+},
 stealthrock:{
 anim:function(scene,_ref300){var attacker=_ref300[0],defender=_ref300[1];
 scene.showEffect('rock1',{
