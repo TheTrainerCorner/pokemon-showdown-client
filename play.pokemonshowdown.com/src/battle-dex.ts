@@ -844,6 +844,7 @@ const Dex = new class implements ModdedDex {
 	getTypeIcon(type: string | null, b?: boolean) { // b is just for utilichart.js
 		type = this.types.get(type).name;
 		if (!type) type = '???';
+		if (type === 'Cosmic') return `<img src="https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/types/${toID(type)}.png" alt="${type}" height="14" width="32" class="pixelated${b ? 'b' : ''}" />`;
 		let sanitizedType = type.replace(/\?/g, '%3f');
 		return `<img src="${Dex.resourcePrefix}sprites/types/${sanitizedType}.png" alt="${type}" height="14" width="32" class="pixelated${b ? ' b' : ''}" />`;
 	}
