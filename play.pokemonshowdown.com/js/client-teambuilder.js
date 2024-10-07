@@ -2538,7 +2538,7 @@
 				}
 			}
 			if (!hasHiddenPower) return;
-			var hpTypes = ['Fighting', 'Flying', 'Poison', 'Ground', 'Rock', 'Bug', 'Ghost', 'Steel', 'Fire', 'Water', 'Grass', 'Electric', 'Psychic', 'Ice', 'Dragon', 'Dark'];
+			var hpTypes = ['Fighting', 'Flying', 'Poison', 'Ground', 'Rock', 'Bug', 'Ghost', 'Steel', 'Fire', 'Water', 'Grass', 'Electric', 'Psychic', 'Ice', 'Dragon', 'Dark', 'Cosmic'];
 			var hpType;
 			if (this.curTeam.gen <= 2) {
 				var hpDV = Math.floor(set.ivs.hp / 2);
