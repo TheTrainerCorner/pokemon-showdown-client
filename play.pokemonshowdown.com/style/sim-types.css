@@ -64,6 +64,28 @@
 	border-color: hsl(255,20%,41%);
 }
 
+.movemenu button.type-Cosmic {
+	/* bg: 97 to 90, border: 70 */
+	background: hsl(340,30%,93%);
+	background: linear-gradient(to bottom,  hsl(340,30%,97%),  hsl(340,30%,84%));
+	border-color: hsl(340,30%,70%);
+}
+.movemenu button.type-Cosmic small {
+	color: hsl(340,30%,41%);
+}
+.movemenu button.type-Cosmic:hover {
+	/* bg: 95 to 83, border: 41 */
+	background: hsl(340,30%,87%);
+	background: linear-gradient(to bottom,  hsl(340,30%,94%),  hsl(340,30%,77%));
+	border-color: hsl(340,30%,41%);
+}
+.movemenu button.type-Cosmic:active, .movemenu button.type-Cosmic.pressed {
+	/* bg: 83 to 88, border: 41 */
+	background: hsl(340,30%,77%);
+	background: linear-gradient(to bottom,  hsl(340,30%,77%),  hsl(340,30%,83%));
+	border-color: hsl(340,30%,41%);
+}
+
 .movemenu button.type-Poison {
 	/* bg: 97 to 90, border: 70 */
 	background: hsl(300,30%,93%);
@@ -304,20 +326,6 @@
 	background: hsl(342,33%,77%);
 	background: linear-gradient(to bottom,  hsl(342,33%,77%),  hsl(342,33%,83%));
 	border-color: hsl(342,33%,41%);
-}
-
-.movemenu button.type-Cosmic small {
-	color: hsl(327, 42%, 41%);
-}
-.movemenu button.type-Cosmic:hover {
-	background: hsl(327, 42%, 70%);
-	background: linear-gradient(to bottom, hsl(327, 42%, 70%), hsl(327, 42%, 67%));
-	border-color: hsl(327, 42%, 41%);
-}
-.movemenu button.type-Cosmic:active, .movemenu button.type-Cosmic.pressed {
-	background: hsl(327, 42%, 70%);
-	background: linear-gradient(to bottom, hsl(327, 42%, 60%), hsl(327, 42%, 57%));
-	border-color: hsl(327, 42%, 41%);
 }
 
 .movemenu button.type-Ice {
