@@ -306,6 +306,20 @@
 	border-color: hsl(342,33%,41%);
 }
 
+.movemenu button.type-Cosmic small {
+	color: hsl(327, 42%, 41%);
+}
+.movemenu button.type-Cosmic:hover {
+	background: hsl(327, 42%, 70%);
+	background: linear-gradient(to bottom, hsl(327, 42%, 70%), hsl(327, 42%, 67%));
+	border-color: hsl(327, 42%, 41%);
+}
+.movemenu button.type-Cosmic:active, .movemenu button.type-Cosmic.pressed {
+	background: hsl(327, 42%, 70%);
+	background: linear-gradient(to bottom, hsl(327, 42%, 60%), hsl(327, 42%, 57%));
+	border-color: hsl(327, 42%, 41%);
+}
+
 .movemenu button.type-Ice {
 	/* bg: 97 to 90, border: 70 */
 	background: hsl(180,15%,93%);
