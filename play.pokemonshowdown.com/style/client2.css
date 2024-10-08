@@ -1694,6 +1694,9 @@ a.ilink.yours {
 .status.frz {
 	background: #009AA4;
 }
+.status.phc {
+	background: #cc7108;
+}
 
 .movemenu button {
 	float: left;

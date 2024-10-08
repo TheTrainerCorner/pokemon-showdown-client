@@ -1725,6 +1725,9 @@ export class Battle {
 				case 'wrap':
 					this.scene.runOtherAnim('bound' as ID, [poke]);
 					break;
+				case 'phc':
+					this.scene.runStatusAnim('phc' as ID, [poke]);
+					break;
 				}
 			} else {
 				if (this.dex.moves.get(this.lastMove).category !== 'Status') {
@@ -2061,6 +2064,8 @@ export class Battle {
 			case 'unboost':
 				this.scene.resultAnim(poke, 'Stat drop blocked', 'neutral');
 				break;
+			case 'phc':
+				this.scene.resultAnim(poke, "Already has Phoenix's Curse", 'neutral');
 			default:
 				if (poke) {
 					this.scene.resultAnim(poke, 'Failed', 'neutral');
@@ -2174,6 +2179,10 @@ export class Battle {
 				this.scene.resultAnim(poke, 'Frozen', 'frz');
 				this.scene.runStatusAnim('frz' as ID, [poke]);
 				break;
+			case 'phc':
+				this.scene.resultAnim(poke, "Phoenix's Curse", 'phc');
+				this.scene.runStatusAnim('phc' as ID, [poke]);
+				break;
 			default:
 				this.scene.updateStatbar(poke);
 				break;
@@ -2221,6 +2230,8 @@ export class Battle {
 				case 'frz':
 					this.scene.resultAnim(poke, 'Thawed', 'good');
 					break;
+				case 'phc':
+					this.scene.resultAnim(poke, "Phoenix's Curse cured", 'good');
 				default:
 					poke.removeVolatile('confusion' as ID);
 					this.scene.resultAnim(poke, 'Cured', 'good');
@@ -3232,7 +3243,7 @@ export class Battle {
 		// status parse
 		if (!status) {
 			output.status = '';
-		} else if (status === 'par' || status === 'brn' || status === 'frb' || status === 'slp' || status === 'frz' || status === 'tox') {
+		} else if (status === 'par' || status === 'brn' || status === 'frb' || status === 'slp' || status === 'frz' || status === 'tox' || status === 'phc') {
 			output.status = status;
 		} else if (status === 'psn' && output.status !== 'tox') {
 			output.status = status;

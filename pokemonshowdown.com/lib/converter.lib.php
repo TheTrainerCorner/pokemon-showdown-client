@@ -431,6 +431,8 @@ function pokeConvertInner($text) {
 			$out[] = '|-fail|'.resolvePokemon($line).'|brn';
 		} else if (endsRemove($line, ' is already frostbited.')) { 
 			$out[] = '|-fail|'.resolvePokemon($line).'|frb';
+		} else if (endsRemove($line, " already has Phoenix's Curse")) {
+			$out[] = '|-fail|'.resolvePokemon($line).'|phc';
 		} else if (endsRemove($line, ' is already paralyzed.')) {
 			$out[] = '|-fail|'.resolvePokemon($line).'|par';
 		} else if (endsRemove($line, ' calmed down!')) {
@@ -469,6 +471,8 @@ function pokeConvertInner($text) {
 			$out[] = '|-status|'.resolvePokemon($line).'|par';
 		} else if (endsRemove($line, 'was frostbited!')) {
 			$out[] = '|-status|'.resolvePokemon($line).'|frb';
+		} else if (endsRemove($line, " was inflicted with Phoenix's Curse")) {
+			$out[] = '|-status|'.resolvePokemon($line).'|phc';
 		} else if (endsRemove($line, ' is paralyzed! It can\'t move!')) {
 			$out[] = '|cant|'.resolvePokemon($line).'|par';
 		} else if (endsRemove($line, ' can\'t attack while in the air!')) {
