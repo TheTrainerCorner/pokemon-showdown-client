@@ -972,6 +972,12 @@ export const BattleMoveAnims: AnimTable = {
 			BattleOtherAnims.dance.anim(scene, [attacker]);
 		},
 	},
+	cosmicterrain: {
+		anim(scene, [attacker]) {
+			scene.backgroundEffect('#ff99ff', 1000, 0.3);
+			BattleOtherAnims.dance.anim(scene, [attacker]);
+		}
+	},
 	lifedew: {
 		anim(scene, [attacker, ...defenders]) {
 			for (const defender of defenders) {
@@ -35734,6 +35740,7 @@ BattleMoveAnims['stringshot'] = {anim: BattleMoveAnims['electroweb'].anim};
 BattleMoveAnims['toxicthread'] = {anim: BattleMoveAnims['electroweb'].anim};
 
 BattleMoveAnims['hyperfang'] = {anim: BattleMoveAnims['superfang'].anim};
+BattleMoveAnims['soulfang'] = {anim: BattleMoveAnims['leechlife'].anim};
 
 BattleMoveAnims['barrage'] = {anim: BattleMoveAnims['magnetbomb'].anim};
 BattleMoveAnims['eggbomb'] = {anim: BattleMoveAnims['magnetbomb'].anim};
