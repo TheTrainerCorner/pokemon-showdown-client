@@ -35740,7 +35740,6 @@ BattleMoveAnims['stringshot'] = {anim: BattleMoveAnims['electroweb'].anim};
 BattleMoveAnims['toxicthread'] = {anim: BattleMoveAnims['electroweb'].anim};
 
 BattleMoveAnims['hyperfang'] = {anim: BattleMoveAnims['superfang'].anim};
-BattleMoveAnims['soulfang'] = {anim: BattleMoveAnims['leechlife'].anim};
 
 BattleMoveAnims['barrage'] = {anim: BattleMoveAnims['magnetbomb'].anim};
 BattleMoveAnims['eggbomb'] = {anim: BattleMoveAnims['magnetbomb'].anim};
@@ -35942,4 +35941,57 @@ BattleMoveAnims['psyblade'] = {anim: BattleMoveAnims['psychocut'].anim};
 BattleMoveAnims['electroshot'] = {
 	anim: BattleMoveAnims['zapcannon'].anim,
 	prepareAnim: BattleOtherAnims.lightstatus.anim,
+};
+
+// New Moves
+BattleMoveAnims['soulfang'] = {anim: BattleMoveAnims['leechlife'].anim};
+BattleMoveAnims['warpath'] = {anim: BattleMoveAnims['sacredsword'].anim};
+BattleMoveAnims['knowledgepath'] = {anim: BattleMoveAnims['rest'].anim}; // Could change
+BattleMoveAnims['smitepath'] = {anim: BattleMoveAnims['thunder'].anim};
+BattleMoveAnims['synchronoise'] = {anim: BattleMoveAnims['psychic'].anim};
+BattleMoveAnims['leeklunge'] = {anim: BattleMoveAnims['megahorn'].anim};
+BattleMoveAnims['horrifyingshield'] = {anim: BattleOtherAnims.selfstatus.anim};
+BattleMoveAnims['guidingblessing'] = {anim: BattleMoveAnims['wish'].anim};
+BattleMoveAnims['snowtimesong'] = {
+	anim(scene, [attacker]) {
+		scene.backgroundEffect(`url('https://${Config.routes.client}/fx/weather-hail.png')`, 750, 1, 800);
+		scene.showEffect('iceball', {
+			x: attacker.x,
+			y: attacker.y,
+			z: attacker.z,
+			scale: 0,
+			opacity: 0.5,
+		}, {
+			z: attacker.behind(-50),
+			scale: 7,
+			opacity: 0,
+			time: 400,
+		}, 'linear');
+		scene.showEffect('iceball', {
+			x: attacker.x,
+			y: attacker.y,
+			z: attacker.z,
+			scale: 0,
+			opacity: 0.5,
+			time: 150,
+		}, {
+			z: attacker.behind(-50),
+			scale: 6,
+			opacity: 0,
+			time: 600,
+		}, 'linear');
+		scene.showEffect('iceball', {
+			x: attacker.x,
+			y: attacker.y,
+			z: attacker.z,
+			scale: 0,
+			opacity: 0.5,
+			time: 300,
+		}, {
+			z: attacker.behind(-50),
+			scale: 7,
+			opacity: 0,
+			time: 800,
+		}, 'linear');
+	}
 };
