@@ -35954,7 +35954,7 @@ BattleMoveAnims['horrifyingshield'] = {anim: BattleOtherAnims.selfstatus.anim};
 BattleMoveAnims['guidingblessing'] = {anim: BattleMoveAnims['wish'].anim};
 BattleMoveAnims['snowtimesong'] = {
 	anim(scene, [attacker]) {
-		scene.backgroundEffect(`url('https://${Config.routes.client}/fx/weather-hail.png')`, 750, 1, 200);
+		scene.backgroundEffect(`url('https://${Config.routes.client}/fx/weather-hail.png')`, 750, 1, 0.5);
 		scene.showEffect('iceball', {
 			x: attacker.x,
 			y: attacker.y,
