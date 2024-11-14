@@ -476,6 +476,9 @@ License: GPLv2
 	background: #CCAAEE url(../fx/weather-psychicterrain.png) no-repeat scroll left top;
 	color: #441155;
 }
+.cosmicterrainweather {
+	background: #AADDEE url(../fx/bg-space.jpg) no-repeat scroll left top;
+}
 .gravityweather {
 	background: #DDAAEE url(../fx/weather-gravity.png) no-repeat scroll left top;
 	color: #661155;
