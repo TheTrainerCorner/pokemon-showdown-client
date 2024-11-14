@@ -35961,3 +35961,7 @@ BattleMoveAnims['snowtimesong'] = {
 		}, 'linear');
 	}
 };
+BattleMoveAnims['cragblast'] = { anim: BattleMoveAnims['rockblast'].anim };
+BattleMoveAnims['glacier'] = {anim: BattleMoveAnims['iciclecrash'].anim, prepareAnim: BattleOtherAnims.chargestatus.anim};
+BattleMoveAnims['coldsnap'] = {anim: BattleMoveAnims['sheercold'].anim, prepareAnim: BattleOtherAnims.chargestatus.anim};
+BattleMoveAnims['healingaura'] = {anim: BattleMoveAnims['healpulse'].anim};
