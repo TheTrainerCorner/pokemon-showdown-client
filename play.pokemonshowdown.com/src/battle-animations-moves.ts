@@ -35965,3 +35965,39 @@ BattleMoveAnims['cragblast'] = { anim: BattleMoveAnims['rockblast'].anim };
 BattleMoveAnims['glacier'] = {anim: BattleMoveAnims['iciclecrash'].anim, prepareAnim: BattleOtherAnims.chargestatus.anim};
 BattleMoveAnims['coldsnap'] = {anim: BattleMoveAnims['sheercold'].anim, prepareAnim: BattleOtherAnims.chargestatus.anim};
 BattleMoveAnims['healingaura'] = {anim: BattleMoveAnims['healpulse'].anim};
+BattleMoveAnims['aquatickick'] = {
+	anim(scene, [attacker, defender]) {
+		scene.showEffect('waterwisp', {
+			x: defender.x,
+			y: defender.y,
+			z: defender.z,
+			scale: 0,
+			opacity: 1,
+			time: 400,
+		}, {
+			x: defender.leftof(-20),
+			y: defender.y,
+			z: defender.behind(20),
+			scale: 3,
+			opacity: 0,
+			time: 700,
+		}, 'linear');
+		scene.showEffect('waterwisp', {
+			x: defender.x,
+			y: defender.y,
+			z: defender.z,
+			scale: 0,
+			opacity: 1,
+			time: 500,
+		}, {
+			x: defender.leftof(-20),
+			y: defender.y,
+			z: defender.behind(20),
+			scale: 3,
+			opacity: 0,
+			time: 800,
+		}, 'linear');
+		BattleOtherAnims.kick.anim(scene, [attacker, defender]);
+		BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
+	},
+};
