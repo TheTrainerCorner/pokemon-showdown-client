@@ -36007,9 +36007,9 @@ BattleMoveAnims['resentfulscreech'] = {
 		scene.backgroundEffect('#AA0000', 250, 0.3);
 		scene.backgroundEffect('#000000', 250, 0.2, 400);
 		scene.showEffect('stare', {
-			x: defender.x,
-			y: defender.y,
-			z: defender.z,
+			x: attacker.x,
+			y: attacker.y,
+			z: attacker.z,
 			scale: 1,
 			yscale: 0,
 			opacity: 1,
