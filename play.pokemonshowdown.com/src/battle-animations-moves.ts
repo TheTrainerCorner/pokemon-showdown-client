@@ -36064,14 +36064,14 @@ BattleMoveAnims['steelspikes'] = { anim: BattleMoveAnims['spikes'].anim };
 BattleMoveAnims['eclipticpunishment'] = {
 	anim(scene, [attacker, defender]) {
 		// Starting of Moonlight
-		scene.backgroundEffect(`url('https://${Config.routes.client}/fx/bg-space.jpg)`, 800, 0.6);
+		scene.backgroundEffect(`url('https://${Config.routes.client}/fx/bg-space.jpg)`, 800, 0);
 		scene.showEffect('moon', {
 			x: attacker.x,
 			y: attacker.y + 150,
 			z: attacker.z,
 			scale: 1,
 			opacity: 0,
-			time: 200,
+			time: 0,
 		}, {
 			opacity: 0.8,
 			time: 900,
@@ -36089,7 +36089,7 @@ BattleMoveAnims['eclipticpunishment'] = {
 			scale: 1,
 			xscale: 5,
 			opacity: 0.8,
-			time: 0,
+			time: 200,
 		}, {
 			scale: 2,
 			xscale: 8,
@@ -36102,14 +36102,14 @@ BattleMoveAnims['eclipticpunishment'] = {
 			z: defender.z,
 			opacity: 0.3,
 			scale: 0,
-			time: 300,
+			time: 400,
 		}, {
 			x: defender.x,
 			y: defender.y,
 			z: defender.z,
 			scale: 2,
 			opacity: 0,
-			time: 600,
+			time: 700,
 		}, 'linear');
 		scene.showEffect('shadowball', {
 			x: defender.x,
@@ -36117,14 +36117,14 @@ BattleMoveAnims['eclipticpunishment'] = {
 			z: defender.z,
 			opacity: 0.3,
 			scale: 0,
-			time: 500,
+			time: 700,
 		}, {
 			x: defender.x,
 			y: defender.y,
 			z: defender.z,
 			scale: 2,
 			opacity: 0,
-			time: 800,
+			time: 1000,
 		}, 'linear');
 		for (let i = 0; i < 4; i++) {
 			scene.showEffect('poisonwisp', {
