@@ -36064,7 +36064,7 @@ BattleMoveAnims['steelspikes'] = { anim: BattleMoveAnims['spikes'].anim };
 BattleMoveAnims['eclipticpunishment'] = {
 	anim(scene, [attacker, defender]) {
 		// Starting of Moonlight
-		scene.backgroundEffect(`url('https://${Config.routes.client}/fx/bg-space.jpg)`, 800, 0);
+		scene.backgroundEffect(`url('https://${Config.routes.client}/fx/bg-space.jpg')`, 800, 0);
 		scene.showEffect('moon', {
 			x: attacker.x,
 			y: attacker.y + 150,
