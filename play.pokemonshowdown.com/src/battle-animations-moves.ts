@@ -36158,3 +36158,106 @@ BattleMoveAnims['eclipticpunishment'] = {
 		}
 	}
 };
+BattleMoveAnims['peekaboo'] = {anim: BattleMoveAnims['meanlook'].anim};
+BattleMoveAnims['geodudegatling'] = {anim: BattleMoveAnims['rockblast'].anim};
+BattleMoveAnims['blink'] = {anim: BattleMoveAnims['flash'].anim};
+BattleMoveAnims['rollingkick'] = {anim: BattleMoveAnims['lowkick'].anim};
+BattleMoveAnims['solarflare'] = {
+	anim(scene, [attacker, ...defenders]) {
+		// Morning Sun
+		scene.backgroundEffect(`url('https://${Config.routes.client}/fx/weather-sunnyday.jpg')`, 700, 0.5);
+		scene.showEffect('wisp', {
+			x: attacker.x + 40,
+			y: attacker.y - 40,
+			z: attacker.z,
+			scale: 0.2,
+			opacity: 0.8,
+			time: 200,
+		}, {
+			y: attacker.y + 130,
+			opacity: 0,
+			time: 600,
+		}, 'accel', 'fade');
+
+		// Heatwave
+		for (const defender of defenders) {
+			defender.delay(125);
+			defender.anim({
+				z: defender.behind(5),
+				time: 75,
+			}, 'swing');
+			defender.anim({
+				time: 75,
+			}, 'swing');
+			defender.anim({
+				z: defender.behind(5),
+				time: 75,
+			}, 'swing');
+			defender.anim({
+				time: 75,
+			}, 'swing');
+			defender.anim({
+				z: defender.behind(5),
+				time: 75,
+			}, 'swing');
+			defender.anim({
+				time: 75,
+			}, 'swing');
+			defender.anim({
+				z: defender.behind(5),
+				time: 75,
+			}, 'swing');
+			defender.anim({
+				time: 150,
+			}, 'swing');
+		}
+		const defender = defenders[1] || defenders[0];
+
+		scene.backgroundEffect('#CC3300', 900, 0.1);
+		scene.showEffect('flareball', {
+			x: attacker.x,
+			y: attacker.y,
+			z: attacker.z,
+			scale: 0,
+			opacity: 0.5,
+			time: 0,
+		}, {
+			x: defender.x,
+			y: defender.y,
+			z: defender.z,
+			scale: 2.5,
+			opacity: 0,
+			time: 400,
+		}, 'linear');
+		scene.showEffect('flareball', {
+			x: attacker.x,
+			y: attacker.y,
+			z: attacker.z,
+			scale: 0,
+			opacity: 0.5,
+			time: 150,
+		}, {
+			x: defender.x,
+			y: defender.y,
+			z: defender.z,
+			scale: 2.5,
+			opacity: 0,
+			time: 600,
+		}, 'linear');
+		scene.showEffect('flareball', {
+			x: attacker.x,
+			y: attacker.y,
+			z: attacker.z,
+			scale: 0,
+			opacity: 0.5,
+			time: 300,
+		}, {
+			x: defender.x,
+			y: defender.y,
+			z: defender.z,
+			scale: 2.5,
+			opacity: 0,
+			time: 800,
+		}, 'linear');
+	}
+};
