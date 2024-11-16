@@ -36059,3 +36059,102 @@ BattleMoveAnims['resentfulscreech'] = {
 		}, 'linear');
 	}
 };
+BattleMoveAnims['roaringbellow'] = { anim: BattleOtherAnims.sound.anim };
+BattleMoveAnims['steelspikes'] = { anim: BattleMoveAnims['spikes'].anim };
+BattleMoveAnims['eclipticpunishment'] = {
+	anim(scene, [attacker, defender]) {
+		// Starting of Moonlight
+		scene.backgroundEffect(`url('https://${Config.routes.client}/fx/bg-space.jpg)`, 800, 0.6);
+		scene.showEffect('moon', {
+			x: attacker.x,
+			y: attacker.y + 150,
+			z: attacker.z,
+			scale: 1,
+			opacity: 0,
+			time: 200,
+		}, {
+			opacity: 0.8,
+			time: 900,
+		}, 'accel', 'fade');
+		// Dark pulse
+		let xf = [1, -1, 1, -1];
+		let yf = [1, -1, -1, 1];
+		let xf2 = [1, 0, -1, 0];
+		let yf2 = [0, 1, 0, -1];
+		scene.backgroundEffect('#000000', 900, 0.3);
+		scene.showEffect('shadowball', {
+			x: attacker.x,
+			y: attacker.y - 50,
+			z: attacker.z,
+			scale: 1,
+			xscale: 5,
+			opacity: 0.8,
+			time: 0,
+		}, {
+			scale: 2,
+			xscale: 8,
+			opacity: 0.1,
+			time: 800
+		}, 'linear', 'fade');
+		scene.showEffect('shadowball', {
+			x: defender.x,
+			y: defender.y,
+			z: defender.z,
+			opacity: 0.3,
+			scale: 0,
+			time: 300,
+		}, {
+			x: defender.x,
+			y: defender.y,
+			z: defender.z,
+			scale: 2,
+			opacity: 0,
+			time: 600,
+		}, 'linear');
+		scene.showEffect('shadowball', {
+			x: defender.x,
+			y: defender.y,
+			z: defender.z,
+			opacity: 0.3,
+			scale: 0,
+			time: 500,
+		}, {
+			x: defender.x,
+			y: defender.y,
+			z: defender.z,
+			scale: 2,
+			opacity: 0,
+			time: 800,
+		}, 'linear');
+		for (let i = 0; i < 4; i++) {
+			scene.showEffect('poisonwisp', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.3,
+				opacity: 0.4,
+			}, {
+				x: attacker.x + 240 * xf[i],
+				y: attacker.y,
+				z: attacker.z + 137 * yf[i],
+				scale: 0.7,
+				opacity: 0.4,
+				time: 600,
+			}, 'accel', 'fade');
+			scene.showEffect('poisonwisp', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.2,
+				opacity: 0.4,
+			}, {
+				x: attacker.x + 339 * xf2[i],
+				y: attacker.y,
+				z: attacker.z + 194 * yf2[i],
+				scale: 0.5,
+				opacity: 0.4,
+				time: 600,
+			}, 'accel', 'fade');
+		}
+	}
+};
