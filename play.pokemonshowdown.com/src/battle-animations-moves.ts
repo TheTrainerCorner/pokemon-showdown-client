@@ -36001,3 +36001,61 @@ BattleMoveAnims['aquatickick'] = {
 		BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
 	},
 };
+BattleMoveAnims['resentfulscreech'] = {
+	anim(scene, [attacker, defender]) {
+		// Mean Look Anim
+		scene.backgroundEffect('#AA0000', 250, 0.3);
+		scene.backgroundEffect('#000000', 250, 0.2, 400);
+		scene.showEffect('stare', {
+			x: defender.x,
+			y: defender.y,
+			z: defender.z,
+			scale: 1,
+			yscale: 0,
+			opacity: 1,
+		}, {
+			yscale: 1,
+			time: 700,
+		}, 'decel', 'fade');
+		// Hyper Voice Anim
+		scene.showEffect('iceball', {
+			x: attacker.x,
+			y: attacker.y,
+			z: attacker.z,
+			scale: 0,
+			opacity: 0.5,
+			time: 0,
+		}, {
+			z: attacker.behind(-50),
+			scale: 7,
+			opacity: 0,
+			time: 400,
+		}, 'linear');
+		scene.showEffect('iceball', {
+			x: attacker.x,
+			y: attacker.y,
+			z: attacker.z,
+			scale: 0,
+			opacity: 0.5,
+			time: 150,
+		}, {
+			z: attacker.behind(-50),
+			scale: 7,
+			opacity: 0,
+			time: 600,
+		}, 'linear');
+		scene.showEffect('iceball', {
+			x: attacker.x,
+			y: attacker.y,
+			z: attacker.z,
+			scale: 0,
+			opacity: 0.5,
+			time: 300,
+		}, {
+			z: attacker.behind(-50),
+			scale: 7,
+			opacity: 0,
+			time: 800,
+		}, 'linear');
+	}
+};
