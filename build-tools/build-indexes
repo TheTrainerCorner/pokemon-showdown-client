@@ -13,9 +13,15 @@ if (!fs.existsSync('caches/pokemon-showdown')) {
 		cwd: 'caches',
 	});
 }
+if (!fs.existsSync('showdex')) {
+	child_process.execSync('git clone https://github.com/TheTrainerCorner/showdex.git', {
+		cwd: './',
+	});
+}
 
 process.stdout.write("Syncing data from Git repository...\n");
 child_process.execSync('git pull', {cwd: 'caches/pokemon-showdown'});
+child_process.execSync('git pull', {cwd: './showdex'});
 child_process.execSync('npm run build', {cwd: 'caches/pokemon-showdown'});
 
 // We don't need this any more since we are going to be pulling from github.
