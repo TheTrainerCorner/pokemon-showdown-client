@@ -127,7 +127,7 @@
 		<script src="js/search.js"></script>
 
 		<script src="data/aliases.js" async="async" onerror="loadRemoteData(this.src)"></script>
-		<!-- <script src="showdex/standalone/main.js"></script> -->
+		<!-- <script src="../showdex/standalone/main.js"></script> -->
 		<script>
 			window.onload = () => {
 				if (!window.app) {
@@ -135,7 +135,7 @@
 				}
 
 				const script = document.createElement('script');
-				script.src = "/showdex/standalone/main.js";
+				script.src = "../showdex/standalone/main.js";
 				document.body.appendChild(script);
 			}
 		</script>
