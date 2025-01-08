@@ -747,7 +747,11 @@ const Dex = new class implements ModdedDex {
 		let top = Math.floor(num / 12) * 30;
 		let left = (num % 12) * 40;
 		let fainted = ((pokemon as Pokemon | ServerPokemon)?.fainted ? `;opacity:.3;filter:grayscale(100%) brightness(.5)` : ``);
-		return `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-sheet.png?v17) no-repeat scroll -${left}px -${top}px${fainted}`;
+		let species = Dex.species.get(id);
+    	if (species.tags.includes("Fakemon")) {
+      		return `background:transparent url(https://raw.githubusercontent.com/TheTrainerCorner/fakemon-sprites/main/front/${id}.png) no-repeat scroll;background-size:contain;width:40px;background-position:center${fainted}`
+    	}
+		return `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-sheet.png?v16) no-repeat scroll -${left}px -${top}px${fainted}`;
 	}
 
 	getTeambuilderSpriteData(pokemon: any, gen: number = 0): TeambuilderSpriteData {
@@ -779,7 +783,7 @@ const Dex = new class implements ModdedDex {
 		let xydexExists = (!species.isNonstandard || species.isNonstandard === 'Past' || species.isNonstandard === 'CAP') || [
 			"pikachustarter", "eeveestarter", "meltan", "melmetal", "pokestarufo", "pokestarufo2", "pokestarbrycenman", "pokestarmt", "pokestarmt2", "pokestargiant", "pokestarhumanoid", "pokestarmonster", "pokestarf00", "pokestarf002", "pokestarspirit",
 		].includes(species.id);
-		if (species.gen >= 8 && species.isNonstandard !== 'CAP') xydexExists = false;
+		if (species.gen === 8 && species.isNonstandard !== 'CAP') xydexExists = false;
 		if ((!gen || gen >= 6) && xydexExists) {
 			if (species.gen >= 7) {
 				spriteData.x = -6;

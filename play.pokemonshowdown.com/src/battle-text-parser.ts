@@ -15,13 +15,9 @@ type KWArgs = {[kw: string]: string};
 type SideID = 'p1' | 'p2' | 'p3' | 'p4';
 
 class BattleTextParser {
-	/** escaped for string.replace */
 	p1 = "Player 1";
-	/** escaped for string.replace */
 	p2 = "Player 2";
-	/** escaped for string.replace */
 	p3 = "Player 3";
-	/** escaped for string.replace */
 	p4 = "Player 4";
 	perspective: SideID;
 	gen = 9;
@@ -247,20 +243,15 @@ class BattleTextParser {
 	static escapeRegExp(input: string) {
 		return input.replace(/[\\^$.*+?()[\]{}|]/g, '\\$&');
 	}
-	static escapeReplace(input: string) {
-		return input.replace(/\$/g, '$$$$');
-	}
 
-	/** Returns a pokemon name escaped for passing into the second argument of string.replace */
 	pokemonName = (pokemon: string) => {
 		if (!pokemon) return '';
 		if (!pokemon.startsWith('p')) return `???pokemon:${pokemon}???`;
-		if (pokemon.charAt(3) === ':') return BattleTextParser.escapeReplace(pokemon.slice(4).trim());
-		else if (pokemon.charAt(2) === ':') return BattleTextParser.escapeReplace(pokemon.slice(3).trim());
+		if (pokemon.charAt(3) === ':') return pokemon.slice(4).trim();
+		else if (pokemon.charAt(2) === ':') return pokemon.slice(3).trim();
 		return `???pokemon:${pokemon}???`;
 	};
 
-	/** Returns a string escaped for passing into the second argument of string.replace */
 	pokemon(pokemon: string) {
 		if (!pokemon) return '';
 		let side = pokemon.slice(0, 2);
@@ -268,10 +259,9 @@ class BattleTextParser {
 		const name = this.pokemonName(pokemon);
 		const isNear = side === this.perspective || side === BattleTextParser.allyID(side as SideID);
 		const template = BattleText.default[isNear ? 'pokemon' : 'opposingPokemon'];
-		return template.replace('[NICKNAME]', name).replace(/\$/g, '$$$$');
+		return template.replace('[NICKNAME]', name);
 	}
 
-	/** Returns a string escaped for passing into the second argument of string.replace */
 	pokemonFull(pokemon: string, details: string): [string, string] {
 		const nickname = this.pokemonName(pokemon);
 
@@ -444,13 +434,13 @@ class BattleTextParser {
 		case 'player': {
 			const [, side, name] = args;
 			if (side === 'p1' && name) {
-				this.p1 = BattleTextParser.escapeReplace(name);
+				this.p1 = name;
 			} else if (side === 'p2' && name) {
-				this.p2 = BattleTextParser.escapeReplace(name);
+				this.p2 = name;
 			} else if (side === 'p3' && name) {
-				this.p3 = BattleTextParser.escapeReplace(name);
+				this.p3 = name;
 			} else if (side === 'p4' && name) {
-				this.p4 = BattleTextParser.escapeReplace(name);
+				this.p4 = name;
 			}
 			return '';
 		}

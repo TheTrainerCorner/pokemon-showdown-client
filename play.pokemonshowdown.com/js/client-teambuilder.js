@@ -137,8 +137,6 @@
 		curFolder: '',
 		curFolderKeep: '',
 		curSearchVal: '',
-		// Debounce value for searching in the teambuilder
-		searchTimeout: null,
 
 		exportMode: false,
 		update: function () {
@@ -476,7 +474,7 @@
 					// support dragging and dropping buttons.
 					buf += '<li><div name="edit" data-value="' + i + '" class="team';
 					if (team.capacity === 24) buf += ' pc-box';
-					buf += '" draggable="true">' + BattleLog.escapeHTML(formatText) + '<strong>' + BattleLog.escapeHTML(team.name) + '</strong><br /><small>';
+					buf += '" draggable="true">' + formatText + '<strong>' + BattleLog.escapeHTML(team.name) + '</strong><br /><small>';
 					buf += Storage.getTeamIcons(team);
 					buf += '</small></div><button name="edit" value="' + i + '"><i class="fa fa-pencil" aria-label="Edit" title="Edit (you can also just click on the team)"></i></button><button name="duplicate" value="' + i + '" title="Duplicate" aria-label="Duplicate"><i class="fa fa-clone"></i></button><button name="delete" value="' + i + '"><i class="fa fa-trash"></i> Delete</button></li>';
 
@@ -3078,11 +3076,7 @@
 				}
 				break;
 			case 'move1': case 'move2': case 'move3': case 'move4':
-				if (id in BattlePokedex && format && format.endsWith("pokemoves")) {
-					val = BattlePokedex[id].name;
-				} else {
-					val = (id in BattleMovedex ? BattleMovedex[id].name : '');
-				}
+				val = (id in BattleMovedex ? BattleMovedex[id].name : '');
 				break;
 			}
 			if (!val) {
@@ -3094,24 +3088,11 @@
 			this.chartSet(val, selectNext);
 		},
 		searchChange: function (e) {
-			var DEBOUNCE_THRESHOLD_TEAMS = 500;
-			var searchVal = e.currentTarget.value;
-			var self = this;
-			function updateTeamList() {
-				// 91 for right CMD / 93 for left CMD / 17 for CTL
-				if (e.keyCode !== 91 && e.keyCode !== 93 && e.keyCode !== 17) {
-					self.curSearchVal = searchVal;
-				}
-				self.updateTeamList();
+			// 91 for right CMD / 93 for left CMD / 17 for CTL
+			if (e.keyCode !== 91 && e.keyCode !== 93 && e.keyCode !== 17) {
+				this.curSearchVal = e.currentTarget.value;
+				this.updateTeamList();
 			}
-
-			// If the user has a lot of teams, search is debounced to
-			// ensure this isn't called too frequently while typing
-			if (Storage.teams.length > DEBOUNCE_THRESHOLD_TEAMS) {
-				if (this.searchTimeout) clearTimeout(this.searchTimeout);
-				this.searchTimeout = setTimeout(updateTeamList, 400);
-			} else updateTeamList();
-
 		},
 		chartSetCustom: function (val) {
 			val = toID(val);

@@ -744,12 +744,7 @@
 
 				var shiftControls = '';
 				if (this.battle.gameType === 'triples' && pos !== 1) {
-					shiftControls = (
-						'<div class="shiftcontrols">' +
-						'<div class="shiftselect"><button name="chooseShift">Shift</button></div>' +
-						'<div class="switchmenu"><button name="chooseShift">Shift to Center</button><div style="clear:left"></div></div>' +
-						'</div>'
-					);
+					shiftControls += '<div class="shiftselect"><button name="chooseShift">Shift</button></div>';
 				}
 
 				var switchMenu = '';
@@ -1244,7 +1239,6 @@
 
 				var target = e.getAttribute('data-target');
 				var choosableTargets = {normal: 1, any: 1, adjacentAlly: 1, adjacentAllyOrSelf: 1, adjacentFoe: 1};
-				if (this.battle.gameType === 'freeforall') delete choosableTargets['adjacentAllyOrSelf'];
 
 				this.choice.choices.push('move ' + pos + (isMega ? ' mega' : '') + (isZMove ? ' zmove' : '') + (isUltraBurst ? ' ultra' : '') + (isDynamax ? ' dynamax' : '') + (isTerastal ? ' terastallize' : ''));
 				if (nearActive.length > 1 && target in choosableTargets) {

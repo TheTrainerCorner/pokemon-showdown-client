@@ -363,7 +363,12 @@ class PSServer {
 			type: 'staff',
 			order: 106,
 		},
-		// by default, unrecognized ranks go here, between driver and bot
+		'\u00a7': {
+			name: "Section Leader (\u00a7)",
+			type: 'staff',
+			order: 107,
+		},
+		// by default, unrecognized ranks go here, between section leader and bot
 		'*': {
 			name: "Bot (*)",
 			order: 109,
@@ -994,7 +999,7 @@ const PS = new class extends PSModel {
 		}
 		this.room.autoDismissNotifications();
 		this.update();
-		this.room.onParentEvent?.('focus', undefined);
+		if (this.room.onParentEvent) this.room.onParentEvent('focus', undefined);
 		return true;
 	}
 	focusLeftRoom() {

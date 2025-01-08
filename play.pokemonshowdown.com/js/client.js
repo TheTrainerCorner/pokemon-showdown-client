@@ -459,8 +459,7 @@ function toId() {
 					var settings = Dex.prefs('serversettings') || {};
 					if (Object.keys(settings).length) app.user.set('settings', settings);
 					// HTML5 history throws exceptions when running on file://
-					var useHistory = !Config.testclient && (location.pathname.slice(-5) !== '.html');
-					Backbone.history.start({pushState: useHistory});
+					Backbone.history.start({pushState: !Config.testclient});
 					app.ignore = app.loadIgnore();
 				});
 			}
@@ -696,11 +695,6 @@ function toId() {
 			// load custom colors from loginserver
 			$.get('/config/colors.json', {}, function (data) {
 				Object.assign(Config.customcolors, data);
-			});
-
-			// get coil values too
-			$.get('/config/coil.json', {}, function (data) {
-				Object.assign(LadderRoom.COIL_B, data);
 			});
 
 			this.initializeConnection();
@@ -1246,15 +1240,6 @@ function toId() {
 				document.location.reload(true);
 				break;
 
-			case 'openpage':
-				// main server only, side servers don't get this
-				if (Config.server.id !== 'showdown') break;
-				var uri = parts[1];
-				if (!BattleLog.interstice.isWhitelisted(uri)) {
-					uri = BattleLog.interstice.getURI(uri);
-				}
-				this.openInNewWindow(uri);
-				break;
 			case 'c':
 			case 'chat':
 				if (parts[1] === '~') {
@@ -1351,7 +1336,6 @@ function toId() {
 					var tournamentShow = true;
 					var partner = false;
 					var bestOfDefault = false;
-					var teraPreviewDefault = false;
 					var team = null;
 					var teambuilderLevel = null;
 					var lastCommaIndex = name.lastIndexOf(',');
@@ -1365,7 +1349,6 @@ function toId() {
 						if (code & 16) teambuilderLevel = 50;
 						if (code & 32) partner = true;
 						if (code & 64) bestOfDefault = true;
-						if (code & 128) teraPreviewDefault = true;
 					} else {
 						// Backwards compatibility: late 0.9.0 -> 0.10.0
 						if (name.substr(name.length - 2) === ',#') { // preset teams
@@ -1430,7 +1413,6 @@ function toId() {
 						challengeShow: challengeShow,
 						tournamentShow: tournamentShow,
 						bestOfDefault: bestOfDefault,
-						teraPreviewDefault: teraPreviewDefault,
 						rated: searchShow && id.substr(4, 7) !== 'unrated',
 						teambuilderLevel: teambuilderLevel,
 						partner: partner,
@@ -2676,6 +2658,11 @@ function toId() {
 			name: "Driver (%)",
 			type: 'staff',
 			order: 10006
+		},
+		'\u00a7': {
+			name: "Section Leader (\u00a7)",
+			type: 'staff',
+			order: 10007
 		},
 		'*': {
 			name: "Bot (*)",
