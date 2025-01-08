@@ -99,7 +99,7 @@ Storage.bg = {
 				break;
 			case 'waterfall':
 				hues = ["119.31034482758622,37.66233766233767%", "184.36363636363635,23.012552301255226%", "108.92307692307692,37.14285714285714%", "70.34482758620689,20.567375886524818%", "98.39999999999998,36.76470588235296%", "140,38.18181818181818%"];
-				attrib = '<a href="https://yilx.deviantart.com/art/Irie-372292729" target="_blank" class="subtle">"Irie" <small>background by Samuel Teo</small></a>';
+				attrib = '<a href="https://x.com/Yilxaevum" target="_blank" class="subtle">"Irie" <small>background by Samuel Teo</small></a>';
 				break;
 			case 'shaymin':
 				hues = ["39.000000000000064,21.7391304347826%", "170.00000000000003,2.380952380952378%", "157.5,11.88118811881188%", "174.78260869565216,12.041884816753928%", "185.00000000000003,12.76595744680851%", "20,5.660377358490567%"];
@@ -107,7 +107,7 @@ Storage.bg = {
 				break;
 			case 'charizards':
 				hues = ["37.159090909090914,74.57627118644066%", "10.874999999999998,70.79646017699115%", "179.51612903225808,52.10084033613446%", "20.833333333333336,36.73469387755102%", "192.3076923076923,80.41237113402063%", "210,29.629629629629633%"];
-				attrib = '<a href="https://seiryuuden.deviantart.com/art/The-Ultimate-Mega-Showdown-Charizards-414587079" target="_blank" class="subtle">"Charizards" <small>background by Jessica Valencia</small></a>';
+				attrib = '<a href="https://lit.link/en/seiryuuden" target="_blank" class="subtle">"Charizards" <small>background by Jessica Valencia</small></a>';
 				break;
 			case 'psday':
 				hues = ["24.705882352941174,25.37313432835821%", "260.4651162790697,59.44700460829492%", "165.3191489361702,46.07843137254901%", "16.363636363636367,42.63565891472869%", "259.04761904761904,34.05405405405405%", "24.705882352941174,25.37313432835821%"];
@@ -1107,7 +1107,7 @@ Storage.unpackTeam = function (buf) {
 			set.dynamaxLevel = (misc[4] ? Number(misc[4]) : 10);
 			set.teraType = misc[5];
 		}
-		if (j < 0) break;
+		if (j < 0 || buf.indexOf('|', j) < 0) break;
 		i = j + 1;
 	}
 

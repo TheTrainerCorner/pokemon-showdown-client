@@ -273,7 +273,7 @@ const PSBackground = new class extends PSStreamModel {
 				"140,38.18181818181818%",
 			];
 			attrib = {
-				url: 'https://yilx.deviantart.com/art/Irie-372292729',
+				url: 'https://x.com/Yilxaevum',
 				title: 'Irie',
 				artist: 'Samuel Teo',
 			};
@@ -303,7 +303,7 @@ const PSBackground = new class extends PSStreamModel {
 				"210,29.629629629629633%",
 			];
 			attrib = {
-				url: 'https://seiryuuden.deviantart.com/art/The-Ultimate-Mega-Showdown-Charizards-414587079',
+				url: 'https://lit.link/en/seiryuuden',
 				title: 'Charizards',
 				artist: 'Jessica Valencia',
 			};
