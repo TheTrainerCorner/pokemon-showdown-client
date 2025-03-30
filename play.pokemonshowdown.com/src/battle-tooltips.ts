@@ -1186,6 +1186,10 @@ class BattleTooltips {
 					// if (ability === 'waterveil') {
 					// 	stats.spd = Math.floor(stats.spd * 1.5);
 					// }
+					if (ability === 'raindish') {
+						stats.atk = Math.floor(stats.atk * 1.3);
+						stats.spa = Math.floor(stats.spa * 1.3);
+					}
 				}
 			}
 		}
