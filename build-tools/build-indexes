@@ -282,7 +282,6 @@ function requireNoCache(pathSpec) {
 	let BattleSearchIndexOffset = BattleSearchIndex.map((entry, i) => {
 		const id = entry[0];
 		let name = '';
-		console.log(id);
 		switch (entry[1]) {
 		case 'pokemon': name = Dex.species.get(id).name; break;
 		case 'move': name = Dex.moves.get(id).name; break;
