@@ -26,10 +26,14 @@ RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 COPY . .
 
 # Create caches directory (build-indexes uses it as cwd for git clone; it's gitignored so won't exist)
-RUN mkdir -p caches
+# Create data directory (gitignored but required by build-indexes and build-minidex to write output files)
+RUN mkdir -p caches play.pokemonshowdown.com/data
 
 # Install dependencies and run full build
 RUN npm install && npm run build-full
+
+# Create a placeholder testclient-key.js (gitignored, loaded unconditionally by index.html with no error handler)
+RUN touch play.pokemonshowdown.com/config/testclient-key.js
 
 # Resolve the config.js symlink into a real file so it survives the multi-stage copy.
 # play.pokemonshowdown.com/config/config.js is a symlink -> ../../config/config.js (gitignored),

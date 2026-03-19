@@ -26,6 +26,13 @@ Config.defaultserver = {
 	registered: true
 };
 
+Config.routes = {
+	root: 'pokemonshowdown.com',
+	client: 'play.thetrainercorner.net',
+	dex: 'dex.pokemonshowdown.com',
+	replays: 'replay.pokemonshowdown.com',
+};
+
 Config.roomsFirstOpenScript = function () {
 };
 
