@@ -128,22 +128,7 @@
 
 		<script src="data/aliases.js" async="async" onerror="loadRemoteData(this.src)"></script>
 		<!-- plop this in AFTER all of the <script> tags !! -->
-<script src="/showdex/main.js"></script>
-<!-- use this instead of the <script src="/showdex/main.js"> one above -->
-	<script>
-		window.onload = () => {
-		  // manually instantiate the Showdown client `App` in case it wasn't already
-		  // (which we'll know based on whether the `app` window global exists)
-		  if (!window.app) {
-			window.app = new App();
-		  }
-	  
-		  const script = document.createElement('script');
-	  
-		  script.src = '/showdex/main.js';
-		  document.body.appendChild(script);
-		};
-	  </script>
+		<script src="/showdex/main.js" defer></script>
 
 	</body>
 </html>
