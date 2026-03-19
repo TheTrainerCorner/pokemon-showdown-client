@@ -1,10 +1,16 @@
 # Stage 1: Build
-FROM node:18-alpine AS builder
+FROM node:18 AS builder
 
 WORKDIR /app
 
+# Install git (required by build-indexes to clone pokemon-showdown and showdex)
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
 # Copy everything
 COPY . .
+
+# Create caches directory (build-indexes uses it as cwd for git clone; it's gitignored so won't exist)
+RUN mkdir -p caches
 
 # Install dependencies and run full build
 RUN npm install && npm run build-full

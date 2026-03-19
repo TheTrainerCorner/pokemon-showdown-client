@@ -1,7 +1,6 @@
 .git
 .github
 node_modules
-caches
 *.log
 desktop
 test
