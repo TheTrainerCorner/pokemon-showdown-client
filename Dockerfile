@@ -25,9 +25,16 @@ RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 # Copy everything
 COPY . .
 
-# Create caches directory (build-indexes uses it as cwd for git clone; it's gitignored so won't exist)
-# Create data directory (gitignored but required by build-indexes and build-minidex to write output files)
+# Create caches and data directories (both gitignored so won't exist on a clean clone)
 RUN mkdir -p caches play.pokemonshowdown.com/data
+
+# Pre-seed caches/pokemon-showdown so build-indexes can build it successfully:
+#   - build-indexes skips cloning if the directory already exists
+#   - config/config.js is required at runtime by build-indexes (exports.ttcseason)
+#   - npm install is needed so `npm run build` (tsc) can succeed inside that directory
+RUN git clone https://github.com/Trial-Of-Wintabura/pokemon-showdown.git caches/pokemon-showdown \
+    && cp caches/pokemon-showdown/config/config-example.js caches/pokemon-showdown/config/config.js \
+    && cd caches/pokemon-showdown && npm install
 
 # Install dependencies and run full build
 RUN npm install && npm run build-full
