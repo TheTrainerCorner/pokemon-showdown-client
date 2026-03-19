@@ -32,6 +32,12 @@ RUN mkdir -p caches
 # Install dependencies and run full build
 RUN npm install && npm run build-full
 
+# Resolve the config.js symlink into a real file so it survives the multi-stage copy.
+# play.pokemonshowdown.com/config/config.js is a symlink -> ../../config/config.js (gitignored),
+# which becomes a dangling symlink in the nginx stage if not resolved here.
+RUN cp --dereference play.pokemonshowdown.com/config/config.js /tmp/psc-config.js \
+    && mv /tmp/psc-config.js play.pokemonshowdown.com/config/config.js
+
 # Copy Showdex standalone bundle into the client web root
 COPY --from=showdex-builder /showdex/dist/standalone /app/play.pokemonshowdown.com/showdex
 
