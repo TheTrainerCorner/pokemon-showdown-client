@@ -127,7 +127,18 @@
 		<script src="js/search.js"></script>
 
 		<script src="data/aliases.js" async="async" onerror="loadRemoteData(this.src)"></script>
-		<script src="showdex/main.js" defer></script>
+		<!-- plop this in AFTER all of the <script> tags !! -->
+		<script>
+			window.onload = () => {
+				if (!window.app) {
+					window.app = new App();
+				}
+
+				const script = document.createElement('script');
+				script.src = '/showdex/main.js';
+				document.body.appendChild(script);
+			};
+		</script>
 
 	</body>
 </html>
