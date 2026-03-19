@@ -40,7 +40,7 @@ RUN git clone https://github.com/Trial-Of-Wintabura/pokemon-showdown.git caches/
 RUN npm install && npm run build-full
 
 # Create a placeholder testclient-key.js (gitignored, loaded unconditionally by index.html with no error handler)
-RUN touch play.pokemonshowdown.com/config/testclient-key.js
+RUN echo "const POKEMON_SHOWDOWN_TESTCLIENT_KEY = 'sid';" > play.pokemonshowdown.com/config/testclient-key.js
 
 # Resolve the config.js symlink into a real file so it survives the multi-stage copy.
 # play.pokemonshowdown.com/config/config.js is a symlink -> ../../config/config.js (gitignored),
