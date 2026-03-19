@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /c/Users/korea/OneDrive/Documents/GitHub/TheTrainerCorner/pokemon-showdown-client -maxdepth 1 -name *.html -o -name tsconfig* -o -name .eslintrc*)"
+    ]
+  }
+}

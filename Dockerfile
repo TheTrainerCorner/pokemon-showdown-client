@@ -1,15 +1,23 @@
-#syntax=docker/dockerfile:1
+# Stage 1: Build
+FROM node:18-alpine AS builder
 
-FROM centos:7
-WORKDIR /
+WORKDIR /app
+
+# Copy everything
 COPY . .
 
-# ARG GIT_USER
-# ARG GIT_TOKEN
-# ARG GIT_COMMIT
-# ARG SW_VERSION
-RUN yum clean all && yum install -y git node npm
+# Install dependencies and run full build
+RUN npm install && npm run build-full
 
-RUN npm run build-full 
-CMD ["npx", "http-server"]
-EXPOSE 3000
+# Stage 2: Serve with nginx
+FROM nginx:alpine
+
+# Copy built client files to nginx web root
+COPY --from=builder /app/play.pokemonshowdown.com /usr/share/nginx/html
+
+# Copy nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
