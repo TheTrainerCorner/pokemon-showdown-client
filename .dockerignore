@@ -2,7 +2,6 @@
 .github
 node_modules
 dist
-build
 *.log
 desktop
 test
