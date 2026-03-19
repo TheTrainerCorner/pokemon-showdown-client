@@ -19,7 +19,7 @@ Config.whitelist = [
 // address bar is `Config.routes.client`.
 Config.defaultserver = {
 	id: 'showdown',
-	host: '34.125.114.43',
+	host: 'sim.thetrainercorner.net',
 	port: 443,
 	httpport: 8000,
 	altport: 80,
