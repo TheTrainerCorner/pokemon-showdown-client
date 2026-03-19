@@ -3,9 +3,8 @@ FROM node:18 AS showdex-builder
 
 WORKDIR /showdex
 
-# Install git and yarn
-RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/* \
-    && npm install -g yarn
+# Install git (yarn is pre-installed in node:18)
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 # Clone Showdex and install dependencies
 RUN git clone https://github.com/TheTrainerCorner/showdex.git .
